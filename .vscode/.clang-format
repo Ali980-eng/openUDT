@@ -1,0 +1,43 @@
+# --- Global Settings / Default C++ Style ---
+BasedOnStyle: Microsoft
+Language: Cpp
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ColumnLimit: 0
+
+# Do not add brackets { } to single-line sentences
+AllowShortIfStatementsOnASingleLine: true
+AllowShortLoopsOnASingleLine: true
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortBlocksOnASingleLine: false
+
+# Brace Wrapping Configuration
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterControlStatement: false
+  AfterFunction: false
+  AfterEnum: false
+  AfterStruct: false
+  SplitEmptyFunction: false
+
+# Other C++ Specifics
+AlignConsecutiveMacros: None
+AllowAllParametersOfDeclarationOnNextLine: false
+AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakTemplateDeclarations: MultiLine
+BinPackParameters: false
+BinPackArguments: false
+SpaceBeforeParens: ControlStatements
+SpaceInEmptyParentheses: false
+Cpp11BracedListStyle: true
+IncludeBlocks: Preserve
+SortIncludes: false
+AlignTrailingComments: true
+ReflowComments: false
+
+---
+# --- Specific Style for JSON (Optional) ---
+Language: Json
+IndentWidth: 4
+---

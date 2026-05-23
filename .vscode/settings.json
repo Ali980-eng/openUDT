@@ -1,0 +1,35 @@
+{
+    // --- General Editor Settings ---
+    "editor.tabSize": 4,
+    "editor.detectIndentation": false,
+    "editor.formatOnSave": true,
+    // --- C++ Configurations ---
+    "C_Cpp.clang_format_style": "file",
+    "C_Cpp.updateChannel": "Insiders",
+    "cmake.sourceDirectory": "E:/Projects/openUDT",
+    "files.associations": {
+        "*.tpp": "cpp",
+        "*.ipp": "cpp",
+        "iostream": "cpp",
+        "vector": "cpp",
+        "string": "cpp"
+    },
+    // --- Python Configurations ---
+    "python.terminal.executeInFileDir": true,
+    "python.analysis.typeCheckingMode": "basic",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.formatting.provider": "black",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        }
+    },
+    // --- File Cleanup in Explorer ---
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.vs": true
+    }
+}

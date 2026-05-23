@@ -1,0 +1,35 @@
+{
+    "configurations": [
+        {
+            // --- Windows GCC Configuration via MSYS64 ---
+            "name": "Windows",
+            "includePath": [
+                "E:/Projects/MetaCore",
+                "E:/Projects/openUDT",
+                "C:/msys64/ucrt64/include"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "C:/msys64/ucrt64/bin/g++.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++23",
+            "intelliSenseMode": "windows-gcc-x64",
+            "compilerArgs": [
+                "-g",
+                "-Wall",
+                "-Wextra",
+                "-pedantic"
+            ],
+            "browse": {
+                "path": [
+                    "C:/msys64/ucrt64/include"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
+        }
+    ],
+    "version": 4
+}
