@@ -1643,6 +1643,7 @@ namespace udt
                 temp = *d_char - *val.d_char;
             else
                 throw std::invalid_argument("Subtraction not allowed in to different types");
+            return temp;
         }
 
         /**

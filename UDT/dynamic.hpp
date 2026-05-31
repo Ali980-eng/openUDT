@@ -1819,4 +1819,5 @@ namespace udt
 
     constexpr void dynamic::operator^=(double value) noexcept { d_double = std::pow(d_double, value); }
 };
+
 #endif // OPENUDT___UDT_DYNAMIC_HPP

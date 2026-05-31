@@ -291,7 +291,7 @@ namespace udt
          * bool value = bfs[3]; // Get value of flag at position 3
          * @endcode
          */
-        bool operator[](int position) const noexcept
+        bool operator[](int position) const
         {
             if (position > 8 || position < 1)
                 std::cerr << "out of rang error\n";

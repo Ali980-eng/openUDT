@@ -1,5 +1,5 @@
-compile-test:
-	g++ -I. -IE:\Projects\metaCore _test/UDT/dynamic/dynamic_f.cpp -o _test/output/runTest
-
-run-test:
-	./_test/output/runTest
+check-udt:
+	cppcheck UDT/*.hpp
+check-cudt:
+	cppcheck CUDT/*.h
+check-all: check-udt check-cudt

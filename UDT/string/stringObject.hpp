@@ -835,13 +835,13 @@ namespace udt
         }
     }
 
-    void string::operator=(int s) noexcept { set(s); }
+    void string::operator=(int s) { set(s); }
 
-    void string::operator=(const char *str) noexcept { set(str); }
+    void string::operator=(const char *str) { set(str); }
 
-    void string::operator=(const string &other) noexcept { set(other); }
+    void string::operator=(const string &other) { set(other); }
 
-    void string::operator=(const std::string &str) noexcept { set(str); }
+    void string::operator=(const std::string &str) { set(str); }
 
     bool string::operator==(const string &other) noexcept
     {
@@ -1124,13 +1124,13 @@ namespace udt
         size = otherSize;
     }
 
-    void string_r::operator=(int s) noexcept { set(s); }
+    void string_r::operator=(int s) { set(s); }
 
-    void string_r::operator=(const char *str) noexcept { set(str); }
+    void string_r::operator=(const char *str) { set(str); }
 
-    void string_r::operator=(const string_r &other) noexcept { set(other); }
+    void string_r::operator=(const string_r &other) { set(other); }
 
-    void string_r::operator=(const std::string &str) noexcept { set(str); }
+    void string_r::operator=(const std::string &str) { set(str); }
 
     bool string_r::operator==(const char *str) const noexcept
     {

@@ -1,6 +1,3 @@
-#ifndef OPENUDT___CUDT___CSTRING_CSTRINGTYPE_H
-#define OPENUDT___CUDT___CSTRING_CSTRINGTYPE_H
-
 /**
  * @file CString.h
  * @brief cstring struct and related functions for C-style string manipulation.
@@ -16,14 +13,16 @@
 
 #include <string.h>
 #include <stdlib.h>
-#include <cctype>
+#include <ctype.h>
+#include "clite/micros.h"
 
-typedef struct
-{
-    char *data;
-    size_t length;
-    size_t capacity;
-} cstring;
+#ifndef OPENUDT___CUDT___CSTRING_CSTRINGTYPE_H
+#define OPENUDT___CUDT___CSTRING_CSTRINGTYPE_H
+
+cobject(cstring,
+        char *data;
+        size_t length;
+        size_t capacity;);
 
 /**
  * @brief Initialize a cstring object.
@@ -304,7 +303,7 @@ bool search(cstring source, cstring target)
  * @param count     If non‑NULL, receives the number of tokens produced.
  * @return Pointer to dynamically allocated array of cstring tokens.
  */
-cstring *split(cstring source, char delimiter = ' ', size_t *count = NULL)
+cstring *split(cstring source, char delimiter, size_t *count)
 {
     size_t capacity = 4;
     size_t length = 0;

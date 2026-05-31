@@ -4,8 +4,8 @@
             // --- Windows GCC Configuration via MSYS64 ---
             "name": "Windows",
             "includePath": [
-                "E:/Projects/MetaCore",
-                "E:/Projects/openUDT",
+                "C:/Users/User/OneDrive/Documents/GitHub/metaCore",
+                "C:/Users/User/OneDrive/Documents/GitHub/openUDT",
                 "C:/msys64/ucrt64/include"
             ],
             "defines": [

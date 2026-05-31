@@ -12,4 +12,5 @@ namespace udt
     {
     };
 }
+
 #endif // OPENUDT___UDT_ENCRYPTION_HPP

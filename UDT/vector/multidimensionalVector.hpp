@@ -35,7 +35,7 @@ namespace udt
     class vector
     {
     private:
-        int list_size = -1; // Default size to -1 to indicate uninitialized
+        size_t max_size = 0; // Default size to -1 to indicate uninitialized
         bool fixed_size = false;
         std::vector<T> list;
 
@@ -53,11 +53,11 @@ namespace udt
         {
             if (fixed_size)
             {
-                size_t num;
-                list_size = static_cast<size_t>(list.size());
-                if (list_size != -1)
+                size_t num = init.size();
+                max_size = list.size();
+                if (max_size != -1)
                 {
-                    if (list_size != num)
+                    if (max_size != num)
                     {
                         throw std::runtime_error(
                             "Dimension Error: Initializer list dimensions do not match fixed "
@@ -78,7 +78,7 @@ namespace udt
         {
             if (num < 0)
                 throw std::runtime_error("size can not be negative");
-            list_size = static_cast<size_t>(num);
+            max_size = static_cast<size_t>(num);
             fixed_size = true;
         }
 
@@ -90,11 +90,11 @@ namespace udt
          *
          * @param vec2d Input 2D vector used to initialize the object.
          * @param i Optional parameter (currently unused, defaults to 0).
-         * @throws std::length_error if vec2d.size() exceeds list_size when list_size != -1.
+         * @throws std::length_error if vec2d.size() exceeds max_size when max_size != -1.
          */
         vector(const std::vector<std::vector<T>> &vec2d, unsigned int i = 0)
         {
-            if (vec2d.size() > list_size && list_size != -1)
+            if (vec2d.size() > max_size && max_size != -1)
                 throw std::length_error("unmatched to the fixed size of the vector");
             list = vec2d;
         }
@@ -108,7 +108,7 @@ namespace udt
         {
             if (static_cast<int>(s) < 0)
                 throw std::invalid_argument("size can not be negative");
-            list_size = s;
+            max_size = s;
             fixed_size = true;
         }
 
@@ -124,14 +124,14 @@ namespace udt
          * @note The use of int for size parameters can lead to unexpected behavior if negative values are passed. Always ensure that the size parameter is non-negative when using this constructor.
          * @note The fixed_size flag is set to true when using this constructor, indicating that the size of the vector is fixed and cannot be changed after construction. This may affect the behavior of other member functions that modify the size of the vector.
          * @note If a negative value is passed to this constructor, a std::invalid_argument exception is thrown, indicating that the size cannot be negative. This ensures that the vector is always initialized with a valid size.
-         * @note The list_size member variable is set to the value of s, which represents the size of the vector. This value is used in other member functions to enforce the fixed size of the vector and to perform bounds checking when accessing elements.
+         * @note The max_size member variable is set to the value of s, which represents the size of the vector. This value is used in other member functions to enforce the fixed size of the vector and to perform bounds checking when accessing elements.
          * @note The use of int for size parameters is not recommended in modern C++ code due to potential issues with negative values and type safety. It is generally better to use size_t for size parameters to ensure that they are non-negative and to avoid potential overflow issues. Consider updating the code to use size_t for size parameters for improved safety and clarity.
          */
         vector(int s)
         {
             if (s < 0)
                 throw std::invalid_argument("size can not be negative");
-            list_size = static_cast<size_t>(s);
+            max_size = static_cast<size_t>(s);
             fixed_size = true;
         }
 
@@ -165,9 +165,9 @@ namespace udt
         {
             if (static_cast<int>(s) < 0)
                 throw std::runtime_error("size can not be negative");
-            if (list_size != -1 && list.size() > s)
+            if (max_size != -1 && list.size() > s)
                 throw std::runtime_error("New size is smaller than current list size");
-            list_size = s;
+            max_size = s;
             fixed_size = true;
         }
 
@@ -181,16 +181,16 @@ namespace udt
         {
             if (static_cast<int>(s) < 0)
                 throw std::runtime_error("size can not be negative");
-            if (list_size != -1 && list.size() > s)
+            if (max_size != -1 && list.size() > s)
             {
                 std::vector<T> temp = list;
                 list.clear();
                 for (size_t i = 0; i < s; i++)
                     list.push_back(temp[i]);
-                list_size = static_cast<int>(s);
+                max_size = static_cast<int>(s);
                 return;
             }
-            list_size = static_cast<int>(s);
+            max_size = static_cast<int>(s);
             list.resize(s);
             fixed_size = true;
         }
@@ -373,8 +373,8 @@ namespace udt
          */
         size_t size() const noexcept
         {
-            if (list_size != -1)
-                return list_size;
+            if (max_size != -1)
+                return max_size;
             return list.size();
         }
 
@@ -384,7 +384,7 @@ namespace udt
          */
         void push_front(T value)
         {
-            if (list_size != -1 && static_cast<int>(list.size()) >= list_size)
+            if (max_size != -1 && static_cast<int>(list.size()) >= max_size)
                 throw std::runtime_error("List size limit reached, cannot push front");
             std::vector<T> temp;
             temp.push_back(value);
@@ -404,7 +404,7 @@ namespace udt
          */
         void push_front(std::function<bool(T)> fx, T value)
         {
-            if (list_size != -1 && static_cast<int>(list.size()) >= list_size)
+            if (max_size != -1 && static_cast<int>(list.size()) >= max_size)
                 throw std::runtime_error("List size limit reached, cannot push front");
             const auto temp = list;
             list.clear();
@@ -448,9 +448,9 @@ namespace udt
          * @param value The element to push to the back
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        void push_back(T value) noexcept
+        void push_back(T value)
         {
-            if (list_size != -1 && static_cast<int>(list.size()) >= list_size)
+            if (max_size != -1 && static_cast<int>(list.size()) >= max_size)
                 throw std::runtime_error("List size limit reached, cannot push back");
             list.push_back(value);
         }
@@ -718,9 +718,9 @@ namespace udt
          * @post Replaces the current vector with the input vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        void operator=(const std::vector<T> &vec) noexcept
+        void operator=(const std::vector<T> &vec)
         {
-            if (vec.size() > list_size && list_size != -1)
+            if (vec.size() > max_size && max_size != -1)
                 throw std::runtime_error("List size limit reached, cannot assign vector");
             if (vec.empty())
                 list = {};
@@ -784,7 +784,7 @@ namespace udt
             }
             else if (temp.size() > vec.size())
             {
-                if (static_cast<int>(temp.size()) > list_size && list_size != -1)
+                if (static_cast<int>(temp.size()) > max_size && max_size != -1)
                     throw std::runtime_error("List size limit reached, cannot add vector");
                 for (size_t i = 0; i < vec.size(); i++)
                     list.push_back(temp[i] + vec[i]);
@@ -793,7 +793,7 @@ namespace udt
             }
             else
             {
-                if (static_cast<int>(vec.size()) > list_size && list_size != -1)
+                if (static_cast<int>(vec.size()) > max_size && max_size != -1)
                     throw std::runtime_error("List size limit reached, cannot add vector");
                 for (size_t i = 0; i < temp.size(); i++)
                     list.push_back(temp[i] + vec[i]);
@@ -837,7 +837,7 @@ namespace udt
             }
             else if (temp.size() > vec.size())
             {
-                if (static_cast<int>(temp.size()) > list_size && list_size != -1)
+                if (static_cast<int>(temp.size()) > max_size && max_size != -1)
                     throw std::runtime_error("List size limit reached, cannot subtract vector");
                 for (size_t i = 0; i < vec.size(); i++)
                     list.push_back(temp[i] - vec[i]);
@@ -846,7 +846,7 @@ namespace udt
             }
             else
             {
-                if (static_cast<int>(vec.size()) > list_size && list_size != -1)
+                if (static_cast<int>(vec.size()) > max_size && max_size != -1)
                     throw std::runtime_error("List size limit reached, cannot subtract vector");
                 for (size_t i = 0; i < temp.size(); i++)
                     list.push_back(temp[i] - vec[i]);
@@ -1713,7 +1713,7 @@ namespace udt
          * @warning This will not resize the internal 2D vector, only updates the size
          * attributes Use set_2dvec() to resize the internal vector if needed
          */
-        void set_size(int num) noexcept
+        void set_size(int num)
         {
             if (num <= 0)
                 throw std::invalid_argument("Size Error: the size have to be greater than zero");
@@ -1732,7 +1732,7 @@ namespace udt
          * @throws Error if either dimension ≤ 0
          * @note Does not automatically resize existing matrix data
          */
-        void set_size(size_t Nnum, size_t Mnum) noexcept
+        void set_size(size_t Nnum, size_t Mnum)
         {
             if (Nnum <= 0 || Mnum <= 0)
                 throw std::invalid_argument("Size Error: the size have to be greater than zero");
@@ -3248,7 +3248,7 @@ namespace udt
          *
          * @return Copy of the flatten member
          */
-        std::vector<std::vector<T>> get_copy_flatten() const noexcept { return flatten_2dvec(); }
+        std::vector<std::vector<T>> get_copy_flatten() const { return flatten_2dvec(); }
 
         /**
          * Returns a const reference to a row in the flattened 2D representation
@@ -3300,7 +3300,7 @@ namespace udt
          *
          * @return Vector of determinants for each 2D slice
          */
-        std::vector<long double> get_determinant_vec(const std::vector<std::vector<std::vector<T>>> &vec = {}) const noexcept { return determinant_vec(vec); }
+        std::vector<long double> get_determinant_vec(const std::vector<std::vector<std::vector<T>>> &vec = {}) const { return determinant_vec(vec); }
 
         /**
          * Accesses a specific determinant value

@@ -12,12 +12,13 @@
  * @date 2025/9/25
  */
 
-#pragma once
-#ifndef OPENUDT___UDT_TRIPLE_HPP
-#define OPENUDT___UDT_TRIPLE_HPP
 #include <iostream>
 #include <cmath>
 #include <stdexcept>
+
+#pragma once
+#ifndef OPENUDT___UDT_TRIPLE_HPP
+#define OPENUDT___UDT_TRIPLE_HPP
 
 namespace udt
 {
@@ -917,4 +918,5 @@ namespace udt
         }
     };
 }
+
 #endif // OPENUDT___UDT_TRIPLE_HPP

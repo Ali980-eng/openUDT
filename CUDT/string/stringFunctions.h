@@ -1,6 +1,3 @@
-#ifndef OPENUDT___CUDT_CSTRING_CSTRINGFUNCTIONS_H
-#define OPENUDT___CUDT_CSTRING_CSTRINGFUNCTIONS_H
-
 /**
  * @file CStringFunctions.h
  * @brief Common string manipulation functions for C-style strings.
@@ -14,7 +11,12 @@
  * @date 2024-06
  */
 
-#include <cstddef>
+#include <stddef.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+#ifndef OPENUDT___CUDT_CSTRING_CSTRINGFUNCTIONS_H
+#define OPENUDT___CUDT_CSTRING_CSTRINGFUNCTIONS_H
 
 size_t length(const char *str)
 {
@@ -100,10 +102,10 @@ size_t count(const char *str, const char *substr)
     return count;
 }
 
-int *locations(const char *str, char ch, size_t &out_count)
+int *locations(const char *str, char ch, size_t out_count)
 {
     size_t char_count = count(str, ch);
-    int *indices = new int[char_count];
+    int *indices = malloc(char_count);
     size_t index = 0;
     size_t found_index = 0;
     while (str[index] != '\0')
