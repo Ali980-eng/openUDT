@@ -13,22 +13,22 @@
 #include <stdlib.h>
 #include "dynamic.h"
 
-#ifndef OPENUDT___CUDT_CDQ_H
-#define OPENUDT___CUDT_CDQ_H
+#ifndef OPENUDT___CUDT_QUEUE_H
+#define OPENUDT___CUDT_QUEUE_H
 
 cobject(cqueue,
         size_t size;
         size_t capacity;
         cdynamic * data;);
 
-void cqueue_init(cqueue *queue)
+static inline void cqueue_init(cqueue *queue)
 {
     queue->size = 0;
     queue->capacity = 4;
     queue->data = (cdynamic *)malloc(queue->capacity * sizeof(cdynamic));
 }
 
-void cqueue_free(cqueue *queue)
+static inline void cqueue_free(cqueue *queue)
 {
     free(queue->data);
     queue->data = NULL;
@@ -36,7 +36,7 @@ void cqueue_free(cqueue *queue)
     queue->capacity = 0;
 }
 
-void set(cqueue *queue, cqueue *other)
+static inline void set(cqueue *queue, cqueue *other)
 {
     queue->size = other->size;
     queue->capacity = other->capacity;
@@ -45,8 +45,8 @@ void set(cqueue *queue, cqueue *other)
         queue->data[i] = other->data[i];
 }
 
-#ifdef OPENUDT___CUDT_CDA_H
-void set(cqueue *queue, DArray *other)
+#ifdef OPENUDT___CUDT_ARRAY_H
+static inline void set(cqueue *queue, DArray *other)
 {
     queue->size = other->size;
     queue->capacity = other->capacity;
@@ -54,9 +54,9 @@ void set(cqueue *queue, DArray *other)
     for (size_t i = 0; i < queue->size; i++)
         queue->data[i] = other->data[i];
 }
-#endif // OPENUDT___CUDT_CDA_H
+#endif // OPENUDT___CUDT_ARRAY_H
 
-void enqueue(cqueue *queue, cdynamic value)
+static inline void enqueue(cqueue *queue, cdynamic value)
 {
     if (queue->size >= queue->capacity)
     {
@@ -66,7 +66,7 @@ void enqueue(cqueue *queue, cdynamic value)
     queue->data[queue->size++] = value;
 }
 
-void dequeue(cqueue *queue)
+static inline void dequeue(cqueue *queue)
 {
     if (queue->size == 0)
         return; // Queue is empty, nothing to dequeue
@@ -77,14 +77,14 @@ void dequeue(cqueue *queue)
     queue->size--;
 }
 
-size_t size(cqueue *queue)
+static inline size_t size(cqueue *queue)
 {
     return queue->size;
 }
 
-size_t capacity(cqueue *queue)
+static inline size_t capacity(cqueue *queue)
 {
     return queue->capacity;
 }
 
-#endif // OPENUDT___CUDT_CDQ_H
+#endif // OPENUDT___CUDT_QUEUE_H

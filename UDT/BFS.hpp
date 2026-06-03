@@ -14,10 +14,8 @@
 #pragma once
 #ifndef OPENUDT___UDT_BFS_HPP
 #define OPENUDT___UDT_BFS_HPP
-
 #include "BFS/BFS_8.hpp"
 #include "BFS/BFS_16.hpp"
 #include "BFS/BFS_32.hpp"
 #include "BFS/BFS_64.hpp"
-
 #endif // OPENUDT___UDT_BFS_HPP

@@ -1,14 +1,14 @@
-#ifndef OPENUDT___CUDT_CRANDOM_H
-#define OPENUDT___CUDT_CRANDOM_H
+#ifndef OPENUDT___CUDT_RANDOM_H
+#define OPENUDT___CUDT_RANDOM_H
 
 /**
- * @file crandom.h
- * @brief crandom struct and related functions for simple random number generation.
- * @details This module defines the crandom struct, which holds a core integer and a state double for
+ * @file random.h
+ * @brief random struct and related functions for simple random number generation.
+ * @details This module defines the random struct, which holds a core integer and a state double for
  * a simple linear congruential generator (LCG).  It provides functions to set the core value and
  * update the core and state according to the LCG algorithm.  Users can call set_core
  * to initialize the generator and update_core to advance the state.  The current state can be
- * accessed via the state field of the crandom struct.
+ * accessed via the state field of the random struct.
  * @author Ali Lafi
  * @date 2024-06
  */
@@ -33,4 +33,4 @@ void update_core(crandom *self)
 
 void update_state();
 
-#endif // OPENUDT___CUDT_CRANDOM_H
+#endif // OPENUDT___CUDT_RANDOM_H

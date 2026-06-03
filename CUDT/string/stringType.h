@@ -16,8 +16,8 @@
 #include <ctype.h>
 #include "clite/micros.h"
 
-#ifndef OPENUDT___CUDT___CSTRING_CSTRINGTYPE_H
-#define OPENUDT___CUDT___CSTRING_CSTRINGTYPE_H
+#ifndef OPENUDT___CUDT___STRING_STRINGTYPE_H
+#define OPENUDT___CUDT___STRING_STRINGTYPE_H
 
 cobject(cstring,
         char *data;
@@ -51,7 +51,7 @@ void cstring_init(cstring *str)
  * @param dest Pointer to the target cstring.
  * @param src  Null‑terminated source string to append.
  */
-void cstring_append(cstring *dest, const char *src)
+static inline void cstring_append(cstring *dest, const char *src)
 {
     size_t src_len = strlen(src);
 
@@ -73,7 +73,7 @@ void cstring_append(cstring *dest, const char *src)
  *
  * @param str Pointer to the cstring to free.
  */
-void cstring_free(cstring *str)
+static inline void cstring_free(cstring *str)
 {
     free(str->data);
 }
@@ -89,7 +89,7 @@ void cstring_free(cstring *str)
  * @param destination Copy of the destination cstring structure.
  * @param source      Null‑terminated C string to assign.
  */
-inline void set(cstring destination, char *source)
+static inline void set(cstring destination, char *source)
 {
     destination.data = source;
     destination.length = strlen(destination.data);
@@ -104,7 +104,7 @@ inline void set(cstring destination, char *source)
  * @param destination Copy of the destination cstring.
  * @param source      Source cstring to copy from.
  */
-inline void set(cstring destination, cstring source)
+static inline void set(cstring destination, cstring source)
 {
     destination.data = source.data;
     destination.length = source.length;
@@ -121,7 +121,7 @@ inline void set(cstring destination, cstring source)
  * @param str     cstring structure to resize (copied).
  * @param NLength New desired length (not including terminating null).
  */
-void resize(cstring str, size_t NLength)
+static inline void resize(cstring str, size_t NLength)
 {
     if (NLength + 1 > str.capacity)
     {
@@ -141,7 +141,7 @@ void resize(cstring str, size_t NLength)
  * @param destination Buffer where data will be stored.
  * @param source      Source cstring to copy from.
  */
-inline void copy(char *destination, cstring source) { strcpy(destination, source.data); }
+static inline void copy(char *destination, cstring source) { strcpy(destination, source.data); }
 
 /**
  * @brief Return the length of a cstring.
@@ -149,7 +149,7 @@ inline void copy(char *destination, cstring source) { strcpy(destination, source
  * @param source cstring whose length is queried.
  * @return Number of characters in the string (excluding null).
  */
-size_t length(cstring source) { return source.length; }
+static inline size_t length(cstring source) { return source.length; }
 
 /**
  * @brief Create a lowercase copy of a cstring.
@@ -161,7 +161,7 @@ size_t length(cstring source) { return source.length; }
  * @param source Input string to convert.
  * @return New cstring containing lowercase text.
  */
-cstring lower(cstring source)
+static cstring lower(cstring source)
 {
     cstring result;
     result.data = (char *)malloc(source.length + 1);
@@ -179,7 +179,7 @@ cstring lower(cstring source)
  * @param source Input string to convert.
  * @return New cstring containing uppercase text.
  */
-cstring upper(cstring source)
+static cstring upper(cstring source)
 {
     cstring result;
     result.data = (char *)malloc(source.length + 1);
@@ -199,7 +199,7 @@ cstring upper(cstring source)
  * @param source      Second operand to append.
  * @return Newly allocated cstring with combined text.
  */
-cstring append(cstring destination, cstring source)
+static cstring append(cstring destination, cstring source)
 {
     cstring result;
     result.data = (char *)malloc(destination.length + source.length + 1);
@@ -219,7 +219,7 @@ cstring append(cstring destination, cstring source)
  * @param source      Null‑terminated C string to append.
  * @return New cstring containing the concatenation.
  */
-cstring append(cstring destination, char *source)
+static cstring append(cstring destination, char *source)
 {
     cstring result;
     result.data = (char *)malloc(destination.length + strlen(source) + 1);
@@ -239,7 +239,7 @@ cstring append(cstring destination, char *source)
  * @param source      Character to append.
  * @return New cstring containing the result.
  */
-cstring add(cstring destination, char source)
+static cstring add(cstring destination, char source)
 {
     cstring result;
     result.data = (char *)malloc(destination.length + 2);
@@ -257,7 +257,7 @@ cstring add(cstring destination, char source)
  * @param target Character to look for.
  * @return true if @p target appears anywhere, false otherwise.
  */
-bool search(cstring source, char target)
+static inline bool search(cstring source, char target)
 {
     for (size_t i = 0; i < source.length; i++)
     {
@@ -274,7 +274,7 @@ bool search(cstring source, char target)
  * @param target Null‑terminated substring to find.
  * @return true if @p target is found, false otherwise.
  */
-bool search(cstring source, char *target)
+static inline bool search(cstring source, char *target)
 {
     return strstr(source.data, target) != NULL;
 }
@@ -286,7 +286,7 @@ bool search(cstring source, char *target)
  * @param target cstring to search for.
  * @return true if @p target is a substring of @p source.
  */
-bool search(cstring source, cstring target)
+static inline bool search(cstring source, cstring target)
 {
     return strstr(source.data, target.data) != NULL;
 }
@@ -303,7 +303,7 @@ bool search(cstring source, cstring target)
  * @param count     If non‑NULL, receives the number of tokens produced.
  * @return Pointer to dynamically allocated array of cstring tokens.
  */
-cstring *split(cstring source, char delimiter, size_t *count)
+static cstring *split(cstring source, char delimiter, size_t *count)
 {
     size_t capacity = 4;
     size_t length = 0;
@@ -337,7 +337,7 @@ cstring *split(cstring source, char delimiter, size_t *count)
  * @param length Number of characters to include.
  * @return New cstring with the requested slice.
  */
-cstring substring(cstring source, size_t start, size_t length)
+static cstring substring(cstring source, size_t start, size_t length)
 {
     cstring result;
     result.data = (char *)malloc(length + 1);
@@ -355,7 +355,7 @@ cstring substring(cstring source, size_t start, size_t length)
  * @param source String to reverse.
  * @return Reversed copy of @p source.
  */
-cstring reverse(cstring source)
+static cstring reverse(cstring source)
 {
     cstring result;
     result.data = (char *)malloc(source.length + 1);
@@ -379,7 +379,7 @@ cstring reverse(cstring source)
  * @param substring Null‑terminated substring to insert.
  * @param position  Insertion index (0 = beginning).
  */
-void insertBE(cstring *source, char *substring, size_t position)
+static void insertBE(cstring *source, char *substring, size_t position)
 {
     if (position > source->length)
         position = source->length;
@@ -406,7 +406,7 @@ void insertBE(cstring *source, char *substring, size_t position)
  * @param source    Pointer to the string to modify.
  * @param substring Null‑terminated substring to insert.
  */
-void insertB(cstring *source, char *substring)
+static inline void insertB(cstring *source, char *substring)
 {
     insertBE(source, substring, 0);
 }
@@ -422,12 +422,12 @@ void insertB(cstring *source, char *substring)
  * @param source    Pointer to the string to modify.
  * @param substring Null‑terminated substring to insert.
  */
-void insertE(cstring *source, char *substring)
+static inline void insertE(cstring *source, char *substring)
 {
     insertBE(source, substring, source->length);
 }
 
-size_t where(cstring str, char ch)
+static inline size_t where(cstring str, char ch)
 {
     for (size_t index = 0; index < str.length; index++)
     {
@@ -439,7 +439,7 @@ size_t where(cstring str, char ch)
     return -1; // Not found
 }
 
-bool exist(cstring str, char ch)
+static inline bool exist(cstring str, char ch)
 {
     for (size_t index = 0; index < str.length; index++)
     {
@@ -451,14 +451,14 @@ bool exist(cstring str, char ch)
     return false; // Not found
 }
 
-bool exist(cstring str, char *substr)
+static inline bool exist(cstring str, char *substr)
 {
     return strstr(str.data, substr) != NULL;
 }
 
-bool exist(cstring str, cstring substr)
+static inline bool exist(cstring str, cstring substr)
 {
     return strstr(str.data, substr.data) != NULL;
 }
 
-#endif // OPENUDT___CUDT___CSTRING_CSTRINGTYPE_H
+#endif // OPENUDT___CUDT___STRING_STRINGTYPE_H

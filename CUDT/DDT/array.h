@@ -11,8 +11,8 @@
 #include <stdlib.h>
 #include "dynamic.h"
 
-#ifndef OPENUDT___CUDT_CDA_H
-#define OPENUDT___CUDT_CDA_H
+#ifndef OPENUDT___CUDT_ARRAY_H
+#define OPENUDT___CUDT_ARRAY_H
 
 cobject(carray,
         size_t size;
@@ -313,4 +313,4 @@ void carray_free(carray *arr)
     arr->capacity = 0;
 }
 
-#endif // OPENUDT___CUDT_CDA_H
+#endif // OPENUDT___CUDT_ARRAY_H

@@ -15,10 +15,10 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#ifndef OPENUDT___CUDT_CSTRING_CSTRINGFUNCTIONS_H
-#define OPENUDT___CUDT_CSTRING_CSTRINGFUNCTIONS_H
+#ifndef OPENUDT___CUDT_STRING_STRINGFUNCTIONS_H
+#define OPENUDT___CUDT_STRING_STRINGFUNCTIONS_H
 
-size_t length(const char *str)
+static inline size_t length(const char *str)
 {
     size_t len = 0;
     while (str[len] != '\0')
@@ -28,7 +28,7 @@ size_t length(const char *str)
     return len;
 }
 
-size_t find(const char *str, char ch)
+static inline size_t find(const char *str, char ch)
 {
     size_t index = 0;
     while (str[index] != '\0')
@@ -42,7 +42,7 @@ size_t find(const char *str, char ch)
     return -1; // Not found
 }
 
-bool compare(const char *str1, const char *str2)
+static inline bool compare(const char *str1, const char *str2)
 {
     size_t index = 0;
     while (str1[index] != '\0' && str2[index] != '\0')
@@ -56,7 +56,7 @@ bool compare(const char *str1, const char *str2)
     return str1[index] == '\0' && str2[index] == '\0'; // Both should end at the same time
 }
 
-void copy(char *destination, const char *source)
+static inline void copy(char *destination, const char *source)
 {
     size_t index = 0;
     while (source[index] != '\0')
@@ -67,7 +67,7 @@ void copy(char *destination, const char *source)
     destination[index] = '\0'; // Null-terminate the destination string
 }
 
-size_t count(const char *str, char ch)
+static inline size_t count_char(const char *str, char ch)
 {
     size_t count = 0;
     size_t index = 0;
@@ -82,7 +82,7 @@ size_t count(const char *str, char ch)
     return count;
 }
 
-size_t count(const char *str, const char *substr)
+static size_t count_substr(const char *str, const char *substr)
 {
     size_t count = 0;
     size_t index = 0;
@@ -102,10 +102,10 @@ size_t count(const char *str, const char *substr)
     return count;
 }
 
-int *locations(const char *str, char ch, size_t out_count)
+static int *locations(const char *str, char ch, size_t out_count)
 {
-    size_t char_count = count(str, ch);
-    int *indices = malloc(char_count);
+    size_t char_count = count_char(str, ch);
+    int *indices = (int *)malloc(char_count * sizeof(int));
     size_t index = 0;
     size_t found_index = 0;
     while (str[index] != '\0')
@@ -120,4 +120,4 @@ int *locations(const char *str, char ch, size_t out_count)
     return indices;
 }
 
-#endif // OPENUDT___CUDT_CSTRING_CSTRINGFUNCTIONS_H
+#endif // OPENUDT___CUDT_STRING_STRINGFUNCTIONS_H

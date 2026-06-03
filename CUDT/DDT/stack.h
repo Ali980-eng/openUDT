@@ -12,22 +12,22 @@
 #include <stdlib.h>
 #include "dynamic.h"
 
-#ifndef OPENUDT___CUDT_CDS_H
-#define OPENUDT___CUDT_CDS_H
+#ifndef OPENUDT___CUDT_STACK_H
+#define OPENUDT___CUDT_STACK_H
 
 cobject(cstack,
         size_t size;
         size_t capacity;
         cdynamic * data;);
 
-void cstack_init(cstack *stack)
+static inline void cstack_init(cstack *stack)
 {
     stack->size = 0;
     stack->capacity = 4;
     stack->data = (cdynamic *)malloc(stack->capacity * sizeof(cdynamic));
 }
 
-void cstack_free(cstack *stack)
+static inline void cstack_free(cstack *stack)
 {
     free(stack->data);
     stack->data = NULL;
@@ -35,7 +35,7 @@ void cstack_free(cstack *stack)
     stack->capacity = 0;
 }
 
-void push(cstack *stack, cdynamic value)
+static inline void push(cstack *stack, cdynamic value)
 {
     if (stack->size >= stack->capacity)
     {
@@ -45,7 +45,7 @@ void push(cstack *stack, cdynamic value)
     stack->data[stack->size++] = value;
 }
 
-cdynamic pop(cstack *stack)
+static inline cdynamic pop(cstack *stack)
 {
     if (stack->size == 0)
         return (cdynamic){}; // Stack is empty, return default value
@@ -53,7 +53,7 @@ cdynamic pop(cstack *stack)
     return stack->data[--stack->size];
 }
 
-cdynamic peek(cstack *stack)
+static inline cdynamic peek(cstack *stack)
 {
     if (stack->size == 0)
         return (cdynamic){}; // Stack is empty, return default value
@@ -61,14 +61,14 @@ cdynamic peek(cstack *stack)
     return stack->data[stack->size - 1];
 }
 
-size_t size(cstack *stack)
+static inline size_t size(cstack *stack)
 {
     return stack->size;
 }
 
-size_t capacity(cstack *stack)
+static inline size_t capacity(cstack *stack)
 {
     return stack->capacity;
 }
 
-#endif // OPENUDT___CUDT_CDS_H
+#endif // OPENUDT___CUDT_STACK_H

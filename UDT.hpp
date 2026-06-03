@@ -2,15 +2,15 @@
 #ifndef OPENUDT___UDT_HPP
 #define OPENUDT___UDT_HPP
 
-#include "UDT/BFS.hpp"
-#include "UDT/dynamic.hpp"
-#include "UDT/encryption.hpp"
-#include "UDT/int.hpp"
-#include "UDT/pair.hpp"
-#include "UDT/ternary.hpp"
-#include "UDT/triple.hpp"
-#include "UDT/virtual.hpp"
-#include "UDT/vector.hpp"
-#include "UDT/string.hpp"
+#include "udt/BFS.hpp"
+#include "udt/dynamic.hpp"
+#include "udt/encryption.hpp"
+#include "udt/int.hpp"
+#include "udt/pair.hpp"
+#include "udt/ternary.hpp"
+#include "udt/triple.hpp"
+#include "udt/virtual.hpp"
+#include "udt/vector.hpp"
+#include "udt/string.hpp"
 
 #endif // OPENUDT___UDT_HPP

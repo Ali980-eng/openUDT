@@ -13,8 +13,8 @@
 #include <stdbool.h>
 #include <limits.h>
 
-#ifndef OPENUDT___CUDT_cdynamic_H
-#define OPENUDT___CUDT_cdynamic_H
+#ifndef OPENUDT___CUDT_DYNAMIC_H
+#define OPENUDT___CUDT_DYNAMIC_H
 
 cenum{
     _NULL_,
@@ -28,7 +28,13 @@ cenum{
 
 cobject(cdynamic, dynamic_index id; double value;);
 
-cdynamic cdynamic_new() { return cdynamic{_NULL_, 0.0}; }
+static inline cdynamic cdynamic_new()
+{
+    cdynamic obj;
+    obj.id = _NULL_;
+    obj.value = 0.0;
+    return obj;
+}
 
 /**
  * @brief Initialize a dynamic object to null state.
@@ -36,7 +42,7 @@ cdynamic cdynamic_new() { return cdynamic{_NULL_, 0.0}; }
  * be called before using the object.
  * @param self Pointer to cdynamic instance.
  */
-void cdynamic_self(cdynamic *self)
+static inline void cdynamic_self(cdynamic *self)
 {
     self->id = _NULL_;
     self->value = 0.0;
@@ -47,48 +53,90 @@ void cdynamic_self(cdynamic *self)
  * Stores the value as 1.0 or 0.0 and sets the type tag accordingly.
  * @param value Boolean value to assign.
  */
-cdynamic cdynamic_bool(bool value) { return cdynamic{BOOL, (value ? 1.0 : 0.0)}; }
+static inline cdynamic cdynamic_bool(bool value)
+{
+    cdynamic obj;
+    obj.id = BOOL;
+    obj.value = (value ? 1.0 : 0.0);
+    return obj;
+}
 
 /**
  * @brief Initialize cdynamic from a char value.
  * The character is converted to double and the type tag is set to CHAR.
  * @param value Character to store.
  */
-cdynamic cdynamic_char(char value) { return cdynamic{CHAR, (double)value}; }
+static inline cdynamic cdynamic_char(char value)
+{
+    cdynamic obj;
+    obj.id = CHAR;
+    obj.value = (double)value;
+    return obj;
+}
 
 /**
  * @brief Initialize cdynamic from a short integer.
  * Converts to double internally.
  * @param value Short integer to store.
  */
-cdynamic cdynamic_short(short value) { return cdynamic{SHORT, (double)value}; }
+static inline cdynamic cdynamic_short(short value)
+{
+    cdynamic obj;
+    obj.id = SHORT;
+    obj.value = (double)value;
+    return obj;
+}
 
 /**
  * @brief Initialize cdynamic from an int.
  * Stored as double.
  * @param value Integer value.
  */
-cdynamic cdynamic_int(int value) { return cdynamic{INT, (double)value}; }
+static inline cdynamic cdynamic_int(int value)
+{
+    cdynamic obj;
+    obj.id = INT;
+    obj.value = (double)value;
+    return obj;
+}
 
 /**
  * @brief Initialize cdynamic from a float.
  * The float is promoted to double.
  * @param value Float value to store.
  */
-cdynamic cdynamic_float(float value) { return cdynamic{FLOAT, (double)value}; }
+static inline cdynamic cdynamic_float(float value)
+{
+    cdynamic obj;
+    obj.id = FLOAT;
+    obj.value = (double)value;
+    return obj;
+}
 
 /**
  * @brief Initialize cdynamic from a double.
  * @param value Double value to store.
  */
-cdynamic cdynamic_double(double value) { return cdynamic{DOUBLE, value}; }
+static inline cdynamic cdynamic_double(double value)
+{
+    cdynamic obj;
+    obj.id = DOUBLE;
+    obj.value = value;
+    return obj;
+}
 
 /**
  * @brief Copy initialize from another cdynamic.
  * Performs a shallow copy of the tag and value.
  * @param other Source cdynamic to copy.
  */
-cdynamic cdynamic_copy(cdynamic other) { return cdynamic{other.id, other.value}; }
+static inline cdynamic cdynamic_copy(cdynamic other)
+{
+    cdynamic obj;
+    obj.id = other.id;
+    obj.value = other.value;
+    return obj;
+}
 
 /**
  * @brief Retrieve the textual name of the stored type.
@@ -96,7 +144,7 @@ cdynamic cdynamic_copy(cdynamic other) { return cdynamic{other.id, other.value};
  * @param self Pointer to cdynamic instance.
  * @return String literal representing the current type tag.
  */
-const cstrptr type_name(cdynamic self)
+static inline const cstrptr type_name(cdynamic self)
 {
     switch (self.id)
     {
@@ -121,7 +169,7 @@ const cstrptr type_name(cdynamic self)
     }
 }
 
-bool get_bool(cdynamic self)
+static inline bool get_bool(cdynamic self)
 {
     switch (self.id)
     {
@@ -139,7 +187,7 @@ bool get_bool(cdynamic self)
     return false;
 }
 
-char get_char(cdynamic self)
+static inline char get_char(cdynamic self)
 {
     switch (self.id)
     {
@@ -164,7 +212,7 @@ char get_char(cdynamic self)
     return '\0';
 }
 
-short get_short(cdynamic self)
+static inline short get_short(cdynamic self)
 {
     switch (self.id)
     {
@@ -188,7 +236,7 @@ short get_short(cdynamic self)
     return (short)0;
 }
 
-int get_int(cdynamic self)
+static inline int get_int(cdynamic self)
 {
     switch (self.id)
     {
@@ -211,7 +259,7 @@ int get_int(cdynamic self)
     }
 }
 
-float get_float(cdynamic self)
+static inline float get_float(cdynamic self)
 {
     switch (self.id)
     {
@@ -230,7 +278,7 @@ float get_float(cdynamic self)
     return 0.0f;
 }
 
-double get_double(cdynamic self)
+static inline double get_double(cdynamic self)
 {
     switch (self.id)
     {
@@ -248,7 +296,7 @@ double get_double(cdynamic self)
     }
 }
 
-cdynamic cast2bool(cdynamic self)
+static inline cdynamic cast2bool(cdynamic self)
 {
     if (self.id == BOOL)
     {
@@ -257,7 +305,7 @@ cdynamic cast2bool(cdynamic self)
     return cdynamic_bool(self.value != 0.0);
 }
 
-cdynamic cast2char(cdynamic self)
+static inline cdynamic cast2char(cdynamic self)
 {
     if (self.id == CHAR)
     {
@@ -271,7 +319,7 @@ cdynamic cast2char(cdynamic self)
     return cdynamic_char(self.value);
 }
 
-cdynamic cast2short(cdynamic self)
+static inline cdynamic cast2short(cdynamic self)
 {
     if (self.id == SHORT)
     {
@@ -285,7 +333,7 @@ cdynamic cast2short(cdynamic self)
     return cdynamic_short(self.value);
 }
 
-cdynamic cast2int(cdynamic self)
+static inline cdynamic cast2int(cdynamic self)
 {
     if (self.id == INT)
     {
@@ -299,7 +347,7 @@ cdynamic cast2int(cdynamic self)
     return cdynamic_int(self.value);
 }
 
-cdynamic cast2float(cdynamic self)
+static inline cdynamic cast2float(cdynamic self)
 {
     if (self.id == FLOAT)
     {
@@ -308,7 +356,7 @@ cdynamic cast2float(cdynamic self)
     return cdynamic_float(self.value);
 }
 
-cdynamic cast2double(cdynamic self)
+static inline cdynamic cast2double(cdynamic self)
 {
     if (self.id == DOUBLE)
     {
@@ -328,7 +376,7 @@ cdynamic cast2double(cdynamic self)
  * @param target_type Desired dynamic_index value.
  * @return New cdynamic holding the converted value.
  */
-cdynamic convert_to(cdynamic self, dynamic_index target_type)
+static inline cdynamic convert_to(cdynamic self, dynamic_index target_type)
 {
     switch (target_type)
     {
@@ -358,7 +406,7 @@ cdynamic convert_to(cdynamic self, dynamic_index target_type)
  * @param self Pointer to cdynamic instance.
  * @return Underlying double value.
  */
-double get_value(cdynamic self) { return self.value; }
+static inline double get_value(cdynamic self) { return self.value; }
 
 /**
  * @brief Get the type tag of the dynamic object.
@@ -366,22 +414,22 @@ double get_value(cdynamic self) { return self.value; }
  * @param self Pointer to cdynamic instance.
  * @return The current dynamic_index id.
  */
-dynamic_index get_id(cdynamic self) { return self.id; }
+static inline dynamic_index get_id(cdynamic self) { return self.id; }
 
-bool is_null(cdynamic self) { return self.id == _NULL_; }
+static inline bool is_null(cdynamic self) { return self.id == _NULL_; }
 
-bool is_bool(cdynamic self) { return self.id == BOOL; }
+static inline bool is_bool(cdynamic self) { return self.id == BOOL; }
 
-bool is_char(cdynamic self) { return self.id == CHAR; }
+static inline bool is_char(cdynamic self) { return self.id == CHAR; }
 
-bool is_short(cdynamic self) { return self.id == SHORT; }
+static inline bool is_short(cdynamic self) { return self.id == SHORT; }
 
-bool is_int(cdynamic self) { return self.id == INT; }
+static inline bool is_int(cdynamic self) { return self.id == INT; }
 
-bool is_long(cdynamic self) { return self.id == LONG; }
+static inline bool is_long(cdynamic self) { return self.id == LONG; }
 
-bool is_float(cdynamic self) { return self.id == FLOAT; }
+static inline bool is_float(cdynamic self) { return self.id == FLOAT; }
 
-bool is_double(cdynamic self) { return self.id == DOUBLE; }
+static inline bool is_double(cdynamic self) { return self.id == DOUBLE; }
 
-#endif // OPENUDT___CUDT_cdynamic_H
+#endif // OPENUDT___CUDT_DYNAMIC_H
