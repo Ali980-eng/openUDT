@@ -6,7 +6,7 @@ namespace udt
 {
 
     template <typename T>
-    class queue_arr
+    class array_queue
     {
     private:
         size_t rear;
@@ -16,7 +16,7 @@ namespace udt
         int maxSize;
 
     public:
-        queue_arr(int ArrSize)
+        array_queue(int ArrSize)
         {
             if (ArrSize < 0)
                 throw invalid_argument("the size have to be bigger then zero");
@@ -26,7 +26,7 @@ namespace udt
             rear = maxSize - 1;
             length = 0;
         }
-        queue_arr(initializer_list<T> &vec) : arr(vec) {};
+        array_queue(initializer_list<T> &vec) : arr(vec) {};
         constexpr bool empty() const noexcept
         {
             return length == 0;
@@ -121,7 +121,7 @@ namespace udt
             else
                 io::println_error("Empty Error");
         }
-        void operator=(const queue_arr &other) noexcept
+        void operator=(const array_queue &other) noexcept
         {
             if (this != &other)
             {
@@ -153,7 +153,7 @@ namespace udt
             addQueue(element);
             return element;
         }
-        ~queue_arr() = default;
+        ~array_queue() = default;
     };
 
 }
