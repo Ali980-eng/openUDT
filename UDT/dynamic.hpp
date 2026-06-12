@@ -15,7 +15,7 @@
 #include <vector>
 #include <ostream>
 #include <cmath>
-#include "BFS.hpp"
+#include "bfs.hpp"
 
 #include "dynamic/dynamic_f.hpp"
 #include "dynamic/dynamic_r.hpp"
@@ -50,7 +50,7 @@ namespace udt
          * float values will take the flag: 6
          * long double values will take the flag: 7
          */
-        BFS_8 flag;
+        bfs_8 flag;
         double d_double;
 
     public:

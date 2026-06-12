@@ -1,5 +1,5 @@
-#ifndef OPENUDT___CUDT_RANDOM_H
-#define OPENUDT___CUDT_RANDOM_H
+#ifndef OPENUDT___RYM_RANDOM_H
+#define OPENUDT___RYM_RANDOM_H
 
 /**
  * @file random.h
@@ -13,11 +13,14 @@
  * @date 2024-06
  */
 
-#include "clite/micros.h"
+#include "cgen/micros/structure.h"
 
-cobject(crandom,
-        int core;
-        double state;);
+cobject
+{
+    int core;
+    double state;
+}
+crandom;
 
 void set_core(crandom *self, int core)
 {
@@ -33,4 +36,4 @@ void update_core(crandom *self)
 
 void update_state();
 
-#endif // OPENUDT___CUDT_RANDOM_H
+#endif // OPENUDT___RYM_RANDOM_H

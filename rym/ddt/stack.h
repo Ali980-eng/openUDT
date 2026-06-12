@@ -12,13 +12,16 @@
 #include <stdlib.h>
 #include "dynamic.h"
 
-#ifndef OPENUDT___CUDT_STACK_H
-#define OPENUDT___CUDT_STACK_H
+#ifndef OPENUDT___RYM_DDT_STACK_H
+#define OPENUDT___RYM_DDT_STACK_H
 
-cobject(cstack,
-        size_t size;
-        size_t capacity;
-        cdynamic * data;);
+cobject
+{
+    size_t size;
+    size_t capacity;
+    cdynamic *data;
+}
+cstack;
 
 static inline void cstack_init(cstack *stack)
 {
@@ -71,4 +74,4 @@ static inline size_t capacity(cstack *stack)
     return stack->capacity;
 }
 
-#endif // OPENUDT___CUDT_STACK_H
+#endif // OPENUDT___RYM_DDT_STACK_H

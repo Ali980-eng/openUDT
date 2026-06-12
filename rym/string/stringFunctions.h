@@ -1,5 +1,5 @@
 /**
- * @file CStringFunctions.h
+ * @file stringFunctions.h
  * @brief Common string manipulation functions for C-style strings.
  * @details This module provides a set of functions for working with null-terminated C strings,
  * including length calculation, character searching, string comparison, copying, counting occurrences,
@@ -14,26 +14,27 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include "cgen/micros/string.h"
 
-#ifndef OPENUDT___CUDT_STRING_STRINGFUNCTIONS_H
-#define OPENUDT___CUDT_STRING_STRINGFUNCTIONS_H
+#ifndef OPENUDT___RYM_STRING_STRINGFUNCTIONS_H
+#define OPENUDT___RYM_STRING_STRINGFUNCTIONS_H
 
-static inline size_t length(const char *str)
+static inline size_t length(const cstrptr _str_)
 {
     size_t len = 0;
-    while (str[len] != '\0')
+    while (_str_[len] != '\0')
     {
         len++;
     }
     return len;
 }
 
-static inline size_t find(const char *str, char ch)
+static inline size_t find(const cstrptr _str_, char ch)
 {
     size_t index = 0;
-    while (str[index] != '\0')
+    while (_str_[index] != '\0')
     {
-        if (str[index] == ch)
+        if (_str_[index] == ch)
         {
             return index;
         }
@@ -42,21 +43,21 @@ static inline size_t find(const char *str, char ch)
     return -1; // Not found
 }
 
-static inline bool compare(const char *str1, const char *str2)
+static inline bool compare(const cstrptr _str_1, const cstrptr _str_2)
 {
     size_t index = 0;
-    while (str1[index] != '\0' && str2[index] != '\0')
+    while (_str_1[index] != '\0' && _str_2[index] != '\0')
     {
-        if (str1[index] != str2[index])
+        if (_str_1[index] != _str_2[index])
         {
             return false;
         }
         index++;
     }
-    return str1[index] == '\0' && str2[index] == '\0'; // Both should end at the same time
+    return _str_1[index] == '\0' && _str_2[index] == '\0'; // Both should end at the same time
 }
 
-static inline void copy(char *destination, const char *source)
+static inline void copy(cstrptr destination, const cstrptr source)
 {
     size_t index = 0;
     while (source[index] != '\0')
@@ -64,16 +65,16 @@ static inline void copy(char *destination, const char *source)
         destination[index] = source[index];
         index++;
     }
-    destination[index] = '\0'; // Null-terminate the destination string
+    destination[index] = '\0'; // Null-terminate the destination _str_ing
 }
 
-static inline size_t count_char(const char *str, char ch)
+static inline size_t count_char(const cstrptr _str_, char ch)
 {
     size_t count = 0;
     size_t index = 0;
-    while (str[index] != '\0')
+    while (_str_[index] != '\0')
     {
-        if (str[index] == ch)
+        if (_str_[index] == ch)
         {
             count++;
         }
@@ -82,17 +83,17 @@ static inline size_t count_char(const char *str, char ch)
     return count;
 }
 
-static size_t count_substr(const char *str, const char *substr)
+static size_t count_sub_str_(const cstrptr _str_, const cstrptr sub_str_)
 {
     size_t count = 0;
     size_t index = 0;
-    size_t substr_len = length(substr);
-    while (str[index] != '\0')
+    size_t sub_str__len = length(sub_str_);
+    while (_str_[index] != '\0')
     {
-        if (compare(str + index, substr))
+        if (compare(_str_ + index, sub_str_))
         {
             count++;
-            index += substr_len; // Move past the found substring
+            index += sub_str__len; // Move past the found sub_str_ing
         }
         else
         {
@@ -102,15 +103,15 @@ static size_t count_substr(const char *str, const char *substr)
     return count;
 }
 
-static int *locations(const char *str, char ch, size_t out_count)
+static int *locations(const cstrptr _str_, char ch, size_t out_count)
 {
-    size_t char_count = count_char(str, ch);
+    size_t char_count = count_char(_str_, ch);
     int *indices = (int *)malloc(char_count * sizeof(int));
     size_t index = 0;
     size_t found_index = 0;
-    while (str[index] != '\0')
+    while (_str_[index] != '\0')
     {
-        if (str[index] == ch)
+        if (_str_[index] == ch)
         {
             indices[found_index++] = index;
         }
@@ -120,4 +121,4 @@ static int *locations(const char *str, char ch, size_t out_count)
     return indices;
 }
 
-#endif // OPENUDT___CUDT_STRING_STRINGFUNCTIONS_H
+#endif // OPENUDT___RYM_STRING_STRINGFUNCTIONS_H

@@ -15,9 +15,11 @@
 #pragma once
 #ifndef OPENUDT___UDT_VIRTUAL_HPP
 #define OPENUDT___UDT_VIRTUAL_HPP
+
 #include "virtual/ptr_8.hpp"
 #include "virtual/ptr_16.hpp"
 #include "virtual/ptr_32.hpp"
 #include "virtual/ptr_64.hpp"
 #include "virtual/machine.hpp"
+
 #endif // OPENUDT___UDT_VIRTUAL_HPP

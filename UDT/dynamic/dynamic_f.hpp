@@ -1,4 +1,4 @@
-#include "UDT/BFS/BFS_8.hpp"
+#include "udt/bfs/bfs_8.hpp"
 #include <cmath>
 
 #pragma once
@@ -27,7 +27,7 @@ namespace udt
          * float values will take the flag: 6
          * long double values will take the flag: 7
          */
-        udt::BFS_8 flag;
+        udt::bfs_8 flag;
         float d_float;
 
     public:

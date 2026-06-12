@@ -9,6 +9,7 @@
 
 namespace udt
 {
+
     class index
     {
     private:
@@ -17,13 +18,13 @@ namespace udt
 
     public:
         index() = default;
-        
+
         ~index() = default;
-        
+
         index(size_t index) : index_(index), is_valid(true) {}
-        
+
         index(const index &other) = default;
-        
+
         index &operator=(const index &other) = default;
 
         void make_valid(size_t index) noexcept
@@ -537,5 +538,7 @@ namespace udt
 
     template <typename T>
     index cast2index(const T &value) { return index(static_cast<size_t>(value)); }
+
 }
+
 #endif // OPENUDT___UDT_INDEX_HPP

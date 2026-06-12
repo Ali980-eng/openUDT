@@ -15,11 +15,12 @@
 #include <algorithm>
 
 #pragma once
-#ifndef OPENUDT___UDT_VECTOR_VECTORFUNCTION_HPP
-#define OPENUDT___UDT_VECTOR_VECTORFUNCTION_HPP
+#ifndef OPENUDT___UDT_VECTOR_FUNCTION_HPP
+#define OPENUDT___UDT_VECTOR_FUNCTION_HPP
 
 namespace udt
 {
+
     /**
      * Reverses a vector of any type.
      * @param dynvec: The input vector to reverse.
@@ -409,5 +410,74 @@ namespace udt
         }
         return false;
     }
+
+        /**
+     * @brief Performs Gauss-Jordan elimination on a given augmented matrix.
+     *
+     * This function transforms the input augmented matrix `mat` into its reduced
+     * row echelon form (RREF). It is typically used to solve systems of linear
+     * equations.
+     *
+     * @param mat The augmented matrix represented as a vector of vectors of
+     * doubles. Each row should have n+1 elements for a system of n equations (n
+     * variables + 1 constant).
+     * @param status Reference to an integer that will be set to indicate the result
+     * of the elimination:
+     *        - 0: Successful elimination, unique solution found.
+     *        - 1: Matrix is singular (no unique solution).
+     *        - 2: Infinite solutions exist.
+     *        - 3: No solution exists.
+     *
+     * @return The matrix in reduced row echelon form after elimination.
+     *
+     * @throws invalid_argument if the input matrix is empty.
+     *
+     * @note The input matrix is modified and returned in its transformed state.
+     */
+    std::vector<std::vector<double>> gauss_jordan(std::vector<std::vector<double>> mat, int &status)
+    {
+        if (mat.empty())
+            throw std::invalid_argument("Empty matrix");
+        int n = static_cast<int>(mat.size());
+        status = 0;
+        for (int i = 0; i < n; i++)
+        {
+            if (mat[i][i] == 0)
+            {
+                int c = 1;
+                while ((i + c) < n && mat[i + c][i] == 0)
+                    c++;
+                if ((i + c) == n)
+                {
+                    status = 1;
+                    break;
+                }
+                std::swap(mat[i], mat[i + c]);
+            }
+            for (int j = 0; j < n; j++)
+            {
+                if (i != j)
+                {
+                    double pro = mat[j][i] / mat[i][i];
+                    for (int k = 0; k <= n; k++)
+                        mat[j][k] -= mat[i][k] * pro;
+                }
+            }
+        }
+        if (status == 1)
+        {
+            status = 3;
+            for (int i = 0; i < n; i++)
+            {
+                double sum = 0;
+                for (int j = 0; j < n; j++)
+                    sum += mat[i][j];
+                if (sum == mat[i][n])
+                    status = 2;
+            }
+        }
+        return mat;
+    }
 }
-#endif // OPENUDT___UDT_VECTOR_VECTORFUNCTION_HPP
+
+#endif // OPENUDT___UDT_VECTOR_FUNCTION_HPP

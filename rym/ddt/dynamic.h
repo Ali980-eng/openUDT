@@ -8,13 +8,13 @@
  * @date 2024-06
  */
 
-#include "clite/micros.h"
+#include "cgen/micros.h"
 #include <stdexcpt.h>
 #include <stdbool.h>
 #include <limits.h>
 
-#ifndef OPENUDT___CUDT_DYNAMIC_H
-#define OPENUDT___CUDT_DYNAMIC_H
+#ifndef OPENUDT___RYM_DDT_DYNAMIC_H
+#define OPENUDT___RYM_DDT_DYNAMIC_H
 
 cenum{
     _NULL_,
@@ -26,7 +26,12 @@ cenum{
     LONG,
     DOUBLE} dynamic_index;
 
-cobject(cdynamic, dynamic_index id; double value;);
+cobject
+{
+    dynamic_index id;
+    double value;
+}
+cdynamic;
 
 static inline cdynamic cdynamic_new()
 {
@@ -432,4 +437,4 @@ static inline bool is_float(cdynamic self) { return self.id == FLOAT; }
 
 static inline bool is_double(cdynamic self) { return self.id == DOUBLE; }
 
-#endif // OPENUDT___CUDT_DYNAMIC_H
+#endif // OPENUDT___RYM_DDT_DYNAMIC_H

@@ -13,13 +13,16 @@
 #include <stdlib.h>
 #include "dynamic.h"
 
-#ifndef OPENUDT___CUDT_QUEUE_H
-#define OPENUDT___CUDT_QUEUE_H
+#ifndef OPENUDT___RYM_DDT_QUEUE_H
+#define OPENUDT___RYM_DDT_QUEUE_H
 
-cobject(cqueue,
-        size_t size;
-        size_t capacity;
-        cdynamic * data;);
+cobject
+{
+    size_t size;
+    size_t capacity;
+    cdynamic *data;
+}
+cqueue;
 
 static inline void cqueue_init(cqueue *queue)
 {
@@ -87,4 +90,4 @@ static inline size_t capacity(cqueue *queue)
     return queue->capacity;
 }
 
-#endif // OPENUDT___CUDT_QUEUE_H
+#endif // OPENUDT___RYM_DDT_QUEUE_H

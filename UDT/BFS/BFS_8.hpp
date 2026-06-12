@@ -10,22 +10,22 @@
 namespace udt
 {
     /// @brief A class to manage an 8-bit binary flag container.
-    class BFS_8
+    class bfs_8
     {
     private:
         uint8_t flag_container;
 
     public:
         /// @brief Default constructor initializes all flags to 0.
-        BFS_8() noexcept { flag_container = 0; }
+        bfs_8() noexcept { flag_container = 0; }
 
         /// @brief Constructor that initializes all flags to a specified value.
         /// @param initial_value The initial value for the flag container.
-        BFS_8(uint8_t initial_value) noexcept { flag_container = initial_value; }
+        bfs_8(uint8_t initial_value) noexcept { flag_container = initial_value; }
 
         /// @brief Copy constructor.
-        /// @param other The BFS_8 object to copy from.
-        BFS_8(const BFS_8 &other) noexcept { flag_container = other.flag_container; }
+        /// @param other The bfs_8 object to copy from.
+        bfs_8(const bfs_8 &other) noexcept { flag_container = other.flag_container; }
 
         /**
          * @brief Sets the flag at position 1 to 1.
@@ -33,7 +33,7 @@ namespace udt
          * @exception This method does not throw any exceptions.
          * @note This is a constexpr function and can be evaluated at compile time.
          * @code
-         * BFS_8 bfs;
+         * bfs_8 bfs;
          * bfs.set_flag1(); // Set bit 1 to 1
          * @endcode
          */
@@ -96,12 +96,12 @@ namespace udt
         constexpr void set_flag8() noexcept { flag_container |= 128; }
 
         /**
-         * @brief Sets all flags in the BFS_8 container to 1.
+         * @brief Sets all flags in the bfs_8 container to 1.
          * This method sets all 8 bits in the flag container to 1, resulting in a value of 0xFF.
          * @exception This method does not throw any exceptions.
          * @note This is a constexpr function and can be evaluated at compile time.
          * @code
-         * BFS_8 bfs;
+         * bfs_8 bfs;
          * bfs.set_all(); // Set all flags to 1
          * std::cout << std::hex << bfs.get(); // Output: FF
          * @endcode
@@ -123,7 +123,7 @@ namespace udt
          * @exception This method does not throw any exceptions.
          * @note This is a constexpr function and can be evaluated at compile time.
          * @code
-         * BFS_8 bfs;
+         * bfs_8 bfs;
          * bfs.set(5); // Set bit 5 to 1
          * @endcode
          */
@@ -177,7 +177,7 @@ namespace udt
          * @exception This method does not throw any exceptions.
          * @note This is a constexpr function and can be evaluated at compile time.
          * @code
-         * BFS_8 bfs(0xFF);
+         * bfs_8 bfs(0xFF);
          * bfs.reset_all(); // Reset all flags to 0
          * std::cout << std::hex << bfs.get(); // Output: 0
          * @endcode
@@ -255,7 +255,7 @@ namespace udt
          * @exception This method does not throw any exceptions.
          * @note This is a constexpr function and can be evaluated at compile time.
          * @code
-         * BFS_8 bfs(0xFF);
+         * bfs_8 bfs(0xFF);
          * bfs.reset(5); // Reset bit 5 to 0
          * @endcode
          */
@@ -287,7 +287,7 @@ namespace udt
          * @param position the position of the flag to get (1-8).
          * @return the value of the specified flag (0 or 1).
          * @code
-         * BFS_8 bfs(0x0F);
+         * bfs_8 bfs(0x0F);
          * bool value = bfs[3]; // Get value of flag at position 3
          * @endcode
          */
@@ -304,7 +304,7 @@ namespace udt
          * @param value the value to set the flag container to.
          * @exception This operator does not throw any exceptions.
          * @code
-         * BFS_8 bfs;
+         * bfs_8 bfs;
          * bfs = 0xAB; // Set all flags to 0xAB
          * @endcode
          */
@@ -312,11 +312,11 @@ namespace udt
 
         /**
          * @brief Copy assignment operator.
-         * This operator copies the flag container value from another BFS_8 object.
-         * @param other the BFS_8 object to copy from.
+         * This operator copies the flag container value from another bfs_8 object.
+         * @param other the bfs_8 object to copy from.
          * @exception This operator does not throw any exceptions.
          */
-        constexpr void operator=(const BFS_8 &other) noexcept { flag_container = other.flag_container; }
+        constexpr void operator=(const bfs_8 &other) noexcept { flag_container = other.flag_container; }
 
         /**
          * @brief Inequality comparison with uint8_t value.
@@ -324,45 +324,45 @@ namespace udt
          * @param value the value to compare against.
          * @return true if the flag container is not equal to the value, false otherwise.
          * @code
-         * BFS_8 bfs(0x42);
+         * bfs_8 bfs(0x42);
          * if (bfs != 0x42) {  handle inequality }
          * @endcode
          */
         constexpr bool operator!=(const uint8_t &value) const noexcept { return flag_container != value; }
 
         /**
-         * @brief Inequality comparison with another BFS_8 object.
-         * Compares two BFS_8 flag containers.
-         * @param other the BFS_8 object to compare against.
+         * @brief Inequality comparison with another bfs_8 object.
+         * Compares two bfs_8 flag containers.
+         * @param other the bfs_8 object to compare against.
          * @return true if the flag containers are not equal, false otherwise.
          */
-        constexpr bool operator!=(const BFS_8 &other) const noexcept { return flag_container != other.flag_container; }
+        constexpr bool operator!=(const bfs_8 &other) const noexcept { return flag_container != other.flag_container; }
         /**
          * @brief Equality comparison with uint8_t value.
          * Compares the flag container with a uint8_t value.
          * @param value the value to compare against.
          * @return true if the flag container is equal to the value, false otherwise.
          * @code
-         * BFS_8 bfs(0x42);
+         * bfs_8 bfs(0x42);
          * if (bfs == 0x42) { handle equality }
          * @endcode
          */
         constexpr bool operator==(const uint8_t &value) const noexcept { return flag_container == value; }
 
         /**
-         * @brief Equality comparison with another BFS_8 object.
-         * Compares two BFS_8 flag containers.
-         * @param other the BFS_8 object to compare against.
+         * @brief Equality comparison with another bfs_8 object.
+         * Compares two bfs_8 flag containers.
+         * @param other the bfs_8 object to compare against.
          * @return true if the flag containers are equal, false otherwise.
          */
-        constexpr bool operator==(const BFS_8 &other) const noexcept { return flag_container == other.flag_container; }
+        constexpr bool operator==(const bfs_8 &other) const noexcept { return flag_container == other.flag_container; }
 
         /**
-         * @brief Destructor for BFS_8.
-         * This is a trivial destructor as BFS_8 contains only a single uint8_t value.
+         * @brief Destructor for bfs_8.
+         * This is a trivial destructor as bfs_8 contains only a single uint8_t value.
          * No explicit cleanup is required.
          */
-        ~BFS_8() = default;
+        ~bfs_8() = default;
     };
 
 } // namespace udt

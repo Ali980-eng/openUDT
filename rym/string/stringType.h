@@ -14,15 +14,19 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include "clite/micros.h"
+#include <stdbool.h>
+#include "cgen/micros/structure.h"
 
-#ifndef OPENUDT___CUDT___STRING_STRINGTYPE_H
-#define OPENUDT___CUDT___STRING_STRINGTYPE_H
+#ifndef OPENUDT___RYM_STRING_STRINGTYPE_H
+#define OPENUDT___RYM_STRING_STRINGTYPE_H
 
-cobject(cstring,
-        char *data;
-        size_t length;
-        size_t capacity;);
+cobject
+{
+    char *data;
+    size_t length;
+    size_t capacity;
+}
+cstring;
 
 /**
  * @brief Initialize a cstring object.
@@ -33,12 +37,12 @@ cobject(cstring,
  *
  * @param str Pointer to the cstring structure to initialize.
  */
-void cstring_init(cstring *str)
+void cstring_init(cstring *_str)
 {
-    str->capacity = 16;
-    str->length = 0;
-    str->data = (char *)malloc(str->capacity);
-    str->data[0] = '\0';
+    _str->capacity = 16;
+    _str->length = 0;
+    _str->data = (char *)malloc(_str->capacity);
+    _str->data[0] = '\0';
 }
 
 /**
@@ -73,9 +77,9 @@ static inline void cstring_append(cstring *dest, const char *src)
  *
  * @param str Pointer to the cstring to free.
  */
-static inline void cstring_free(cstring *str)
+static inline void cstring_free(cstring *_str)
 {
-    free(str->data);
+    free(_str->data);
 }
 
 /**
@@ -121,15 +125,15 @@ static inline void set(cstring destination, cstring source)
  * @param str     cstring structure to resize (copied).
  * @param NLength New desired length (not including terminating null).
  */
-static inline void resize(cstring str, size_t NLength)
+static inline void resize(cstring _str, size_t NLength)
 {
-    if (NLength + 1 > str.capacity)
+    if (NLength + 1 > _str.capacity)
     {
-        str.capacity = (NLength + 1) * 2;
-        str.data = (char *)realloc(str.data, str.capacity);
+        _str.capacity = (NLength + 1) * 2;
+        _str.data = (char *)realloc(_str.data, _str.capacity);
     }
-    str.length = NLength;
-    str.data[NLength] = '\0';
+    _str.length = NLength;
+    _str.data[NLength] = '\0';
 }
 
 /**
@@ -427,11 +431,11 @@ static inline void insertE(cstring *source, char *substring)
     insertBE(source, substring, source->length);
 }
 
-static inline size_t where(cstring str, char ch)
+static inline size_t where(cstring _str, char ch)
 {
-    for (size_t index = 0; index < str.length; index++)
+    for (size_t index = 0; index < _str.length; index++)
     {
-        if (str.data[index] == ch)
+        if (_str.data[index] == ch)
         {
             return index;
         }
@@ -439,11 +443,11 @@ static inline size_t where(cstring str, char ch)
     return -1; // Not found
 }
 
-static inline bool exist(cstring str, char ch)
+static inline bool exist(cstring _str, char ch)
 {
-    for (size_t index = 0; index < str.length; index++)
+    for (size_t index = 0; index < _str.length; index++)
     {
-        if (str.data[index] == ch)
+        if (_str.data[index] == ch)
         {
             return true;
         }
@@ -451,14 +455,14 @@ static inline bool exist(cstring str, char ch)
     return false; // Not found
 }
 
-static inline bool exist(cstring str, char *substr)
+static inline bool exist(cstring _str, char *substr)
 {
-    return strstr(str.data, substr) != NULL;
+    return strstr(_str.data, substr) != NULL;
 }
 
-static inline bool exist(cstring str, cstring substr)
+static inline bool exist(cstring _str, cstring substr)
 {
-    return strstr(str.data, substr.data) != NULL;
+    return strstr(_str.data, substr.data) != NULL;
 }
 
-#endif // OPENUDT___CUDT___STRING_STRINGTYPE_H
+#endif // OPENUDT___RYM_STRING_STRINGTYPE_H
