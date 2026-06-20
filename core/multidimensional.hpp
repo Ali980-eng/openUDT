@@ -11,11 +11,11 @@
  */
 
 #pragma once
-#ifndef OPENUDT___CORE_MULTIDIMENSIONALVECTOR_HPP
-#define OPENUDT___CORE_MULTIDIMENSIONALVECTOR_HPP
+#ifndef OPENUDT___CORE___MULTIDIMENSIONAL_HPP
+#define OPENUDT___CORE___MULTIDIMENSIONAL_HPP
 
 #include "multidimensional/vector.hpp"
 #include "multidimensional/vector_2d.hpp"
 #include "multidimensional/vector_3d.hpp"
 
-#endif // OPENUDT___CORE_MULTIDIMENSIONALVECTOR_HPP
+#endif // OPENUDT___CORE___MULTIDIMENSIONAL_HPP

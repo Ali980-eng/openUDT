@@ -1,14 +1,15 @@
-#include "lite.hpp"
-#include "UDT/dynamic/dynamic_v2d.hpp"
+#include "metaCore/lite/stream.hpp"
+#include "core/dynamic/dynamic_v2d.hpp"
+
 bool utest_1()
 {
     udt::dynamic_v2d d(5);
-    return lite::test::basic<size_t>(d.size(), 5);
+    return meta::lite::test::basic<size_t>(d.size(), 5);
 }
 bool utest_2()
 {
     udt::dynamic_v2d d(3, 4);
-    return lite::test::basic<size_t>(d.size(), 3);
+    return meta::lite::test::basic<size_t>(d.size(), 3);
 }
 bool utest_3()
 {
@@ -17,7 +18,7 @@ bool utest_3()
         {true, false, 9},
         {'o', false, 88}};
     udt::dynamic_v2d d = vvd;
-    return lite::test::basic<bool>(d == vvd, true);
+    return meta::lite::test::basic<bool>(d == vvd, true);
 }
 bool utest_4()
 {
@@ -25,12 +26,12 @@ bool utest_4()
         {true, 'i', 99},
         {'o', 99.4f, false}};
     udt::dynamic_v2d vvd2 = vvd1;
-    return lite::test::basic<bool>(vvd1 == vvd2, true);
+    return meta::lite::test::basic<bool>(vvd1 == vvd2, true);
 }
 // bool utest_5() {}
 int main()
 {
-    lite::io::NewLines();
+    meta::lite::io::NewLines();
 
     return 0;
 }

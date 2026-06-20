@@ -6,8 +6,8 @@
 #include "metaCore/adva/function.hpp"
 
 #pragma once
-#ifndef OPENUDT___CORE_PAIR_PAIR_V_HPP
-#define OPENUDT___CORE_PAIR_PAIR_V_HPP
+#ifndef OPENUDT___CORE___PAIR_PAIR_V_HPP
+#define OPENUDT___CORE___PAIR_PAIR_V_HPP
 
 namespace udt
 {
@@ -839,4 +839,4 @@ namespace udt
 
 }
 
-#endif // OPENUDT___CORE_PAIR_PAIR_V_HPP
+#endif // OPENUDT___CORE___PAIR_PAIR_V_HPP

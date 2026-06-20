@@ -4,8 +4,8 @@
 #include <ostream>
 
 #pragma once
-#ifndef OPENUDT___CORE_DYNAMIC__DYANMIC_V3D__HPP
-#define OPENUDT___CORE_DYNAMIC__DYANMIC_V3D__HPP
+#ifndef OPENUDT___CORE___DYNAMIC__DYANMIC_V3D__HPP
+#define OPENUDT___CORE___DYNAMIC__DYANMIC_V3D__HPP
 
 namespace udt
 {
@@ -1201,4 +1201,4 @@ namespace udt
     };
 }
 
-#endif // OPENUDT___CORE_DYNAMIC__DYANMIC_V3D__HPP
+#endif // OPENUDT___CORE___DYNAMIC__DYANMIC_V3D__HPP

@@ -12,12 +12,12 @@
  */
 
 #pragma once
-#ifndef OPENUDT___CORE_BFS_HPP
-#define OPENUDT___CORE_BFS_HPP
+#ifndef OPENUDT___CORE___BFS_HPP
+#define OPENUDT___CORE___BFS_HPP
 
 #include "bfs/bfs_8.hpp"
 #include "bfs/bfs_16.hpp"
 #include "bfs/bfs_32.hpp"
 #include "bfs/bfs_64.hpp"
 
-#endif // OPENUDT___CORE_BFS_HPP
+#endif // OPENUDT___CORE___BFS_HPP

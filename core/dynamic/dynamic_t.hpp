@@ -2,8 +2,8 @@
 #include <cmath>
 
 #pragma once
-#ifndef OPENUDT___CORE_DYNAMIC__DYANMIC_T__HPP
-#define OPENUDT___CORE_DYNAMIC__DYANMIC_T__HPP
+#ifndef OPENUDT___CORE___DYNAMIC__DYANMIC_T__HPP
+#define OPENUDT___CORE___DYNAMIC__DYANMIC_T__HPP
 
 namespace udt
 {
@@ -885,4 +885,4 @@ namespace udt
     constexpr void dynamic_t::operator%=(int value) noexcept { d_int %= value; }
 }
 
-#endif // OPENUDT___CORE_DYNAMIC__DYANMIC_T__HPP
+#endif // OPENUDT___CORE___DYNAMIC__DYANMIC_T__HPP

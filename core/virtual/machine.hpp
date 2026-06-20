@@ -8,8 +8,8 @@
 #include <unordered_map>
 
 #pragma once
-#ifndef OPENUDT___CORE_VIRTUAL_MACHINE_HPP
-#define OPENUDT___CORE_VIRTUAL_MACHINE_HPP
+#ifndef OPENUDT___CORE___VIRTUAL_MACHINE_HPP
+#define OPENUDT___CORE___VIRTUAL_MACHINE_HPP
 
 namespace udt
 {
@@ -47,4 +47,4 @@ namespace udt
     }
 }
 
-#endif // OPENUDT___CORE_VIRTUAL_MACHINE_HPP
+#endif // OPENUDT___CORE___VIRTUAL_MACHINE_HPP

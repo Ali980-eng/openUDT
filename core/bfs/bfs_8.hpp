@@ -4,8 +4,8 @@
 #include <string>
 
 #pragma once
-#ifndef OPENUDT___CORE_BFS_BFS8_HPP
-#define OPENUDT___CORE_BFS_BFS8_HPP
+#ifndef OPENUDT___CORE___BFS_BFS8_HPP
+#define OPENUDT___CORE___BFS_BFS8_HPP
 
 namespace udt
 {
@@ -367,4 +367,4 @@ namespace udt
 
 } // namespace udt
 
-#endif // OPENUDT___CORE_BFS_BFS8_HPP
+#endif // OPENUDT___CORE___BFS_BFS8_HPP

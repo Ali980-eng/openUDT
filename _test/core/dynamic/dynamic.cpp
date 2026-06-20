@@ -1,9 +1,10 @@
-#include "lite.hpp"
-#include "UDT/dynamic.hpp"
+#include "metaCore/lite/stream.hpp"
+#include "core/dynamic.hpp"
+
 bool utest_1()
 {
     udt::dynamic d;
-    return lite::test::basic<bool>(
+    return meta::lite::test::basic<bool>(
         d.get_double() == 0.0 &&
             d.type() == "double",
         true);
@@ -11,7 +12,7 @@ bool utest_1()
 bool utest_2()
 {
     udt::dynamic d(true);
-    return lite::test::basic<bool>(
+    return meta::lite::test::basic<bool>(
         d.get_bool() == true &&
             d.type() == "bool",
         true);
@@ -19,7 +20,7 @@ bool utest_2()
 bool utest_3()
 {
     udt::dynamic d('/');
-    return lite::test::basic<bool>(
+    return meta::lite::test::basic<bool>(
         d.get_char() == '/' &&
             d.type() == "char",
         true);
@@ -27,7 +28,7 @@ bool utest_3()
 bool utest_4()
 {
     udt::dynamic d(2.3f);
-    return lite::test::basic<bool>(
+    return meta::lite::test::basic<bool>(
         d.get_float() &&
             d.type() == "float",
         true);
@@ -35,7 +36,7 @@ bool utest_4()
 bool utest_5()
 {
     udt::dynamic d(9.3);
-    return lite::test::basic<bool>(
+    return meta::lite::test::basic<bool>(
         d.get_double() == 9.3 &&
             d.type() == "double",
         true);
@@ -44,7 +45,7 @@ bool utest_6()
 {
     udt::dynamic d1 = 77;
     udt::dynamic d2 = d1;
-    return lite::test::basic<bool>(
+    return meta::lite::test::basic<bool>(
         d1.get_int() == d2.get_int() &&
             d1.type() == d2.type(),
         true);
@@ -53,394 +54,394 @@ bool utest_7()
 {
     udt::dynamic d;
     d.set(true);
-    return lite::test::basic<bool>(d.get_bool(), true);
+    return meta::lite::test::basic<bool>(d.get_bool(), true);
 }
 bool utest_8()
 {
     udt::dynamic d;
     d.set('O');
-    return lite::test::basic<char>(d.get_char(), 'O');
+    return meta::lite::test::basic<char>(d.get_char(), 'O');
 }
 bool utest_9()
 {
     udt::dynamic d;
     d.set(88);
-    return lite::test::basic<int>(d.get_int(), 88);
+    return meta::lite::test::basic<int>(d.get_int(), 88);
 }
 bool utest_10()
 {
     udt::dynamic d;
     d.set(88.7f);
-    return lite::test::basic<float>(d.get_float(), 88.7f);
+    return meta::lite::test::basic<float>(d.get_float(), 88.7f);
 }
 bool utest_11()
 {
     udt::dynamic d;
     d.set(8.3);
-    return lite::test::basic<double>(d.get_double(), 8.3);
+    return meta::lite::test::basic<double>(d.get_double(), 8.3);
 }
 bool utest_12()
 {
     udt::dynamic d = 99;
     d.reset();
-    return lite::test::basic<double>(d.get_double(), 0.0);
+    return meta::lite::test::basic<double>(d.get_double(), 0.0);
 }
 bool utest_13()
 {
     udt::dynamic d = true;
-    return lite::test::basic<bool>(d == true, true);
+    return meta::lite::test::basic<bool>(d == true, true);
 }
 bool utest_14()
 {
     udt::dynamic d = true;
-    return lite::test::basic<bool>(d != true, false);
+    return meta::lite::test::basic<bool>(d != true, false);
 }
 bool utest_15()
 {
     udt::dynamic d = true;
-    return lite::test::basic<bool>(d == false, false);
+    return meta::lite::test::basic<bool>(d == false, false);
 }
 bool utest_16()
 {
     udt::dynamic d = true;
-    return lite::test::basic<bool>(d != false, true);
+    return meta::lite::test::basic<bool>(d != false, true);
 }
 bool utest_17()
 {
     udt::dynamic d = 'P';
-    return lite::test::basic<bool>(d == 'P', true);
+    return meta::lite::test::basic<bool>(d == 'P', true);
 }
 bool utest_18()
 {
     udt::dynamic d = 'P';
-    return lite::test::basic<bool>(d == 'O', false);
+    return meta::lite::test::basic<bool>(d == 'O', false);
 }
 bool utest_19()
 {
     udt::dynamic d = 'P';
-    return lite::test::basic<bool>(d != 'O', true);
+    return meta::lite::test::basic<bool>(d != 'O', true);
 }
 bool utest_20()
 {
     udt::dynamic d = 'P';
-    return lite::test::basic<bool>(d != 'P', false);
+    return meta::lite::test::basic<bool>(d != 'P', false);
 }
 bool utest_21()
 {
     udt::dynamic d = 9938;
-    return lite::test::basic<bool>(d == 9938, true);
+    return meta::lite::test::basic<bool>(d == 9938, true);
 }
 bool utest_22()
 {
     udt::dynamic d = 9938;
-    return lite::test::basic<bool>(d == 9838, false);
+    return meta::lite::test::basic<bool>(d == 9838, false);
 }
 bool utest_23()
 {
     udt::dynamic d = 9938;
-    return lite::test::basic<bool>(d != 9938, false);
+    return meta::lite::test::basic<bool>(d != 9938, false);
 }
 bool utest_24()
 {
     udt::dynamic d = 9938;
-    return lite::test::basic<bool>(d != 9838, true);
+    return meta::lite::test::basic<bool>(d != 9838, true);
 }
 bool utest_25()
 {
     udt::dynamic d = 9.4f;
-    return lite::test::basic<bool>(d == 9.4f, true);
+    return meta::lite::test::basic<bool>(d == 9.4f, true);
 }
 bool utest_26()
 {
     udt::dynamic d = 9.4f;
-    return lite::test::basic<bool>(d == 8.7f, false);
+    return meta::lite::test::basic<bool>(d == 8.7f, false);
 }
 bool utest_27()
 {
     udt::dynamic d = 9.4f;
-    return lite::test::basic<bool>(d != 9.4f, false);
+    return meta::lite::test::basic<bool>(d != 9.4f, false);
 }
 bool utest_28()
 {
     udt::dynamic d = 9.4f;
-    return lite::test::basic<bool>(d != 8.7f, true);
+    return meta::lite::test::basic<bool>(d != 8.7f, true);
 }
 bool utest_29()
 {
     udt::dynamic d = 2.2;
-    return lite::test::basic<bool>(d == 2.2, true);
+    return meta::lite::test::basic<bool>(d == 2.2, true);
 }
 bool utest_30()
 {
     udt::dynamic d = 2.2;
-    return lite::test::basic<bool>(d == 3.5, false);
+    return meta::lite::test::basic<bool>(d == 3.5, false);
 }
 bool utest_31()
 {
     udt::dynamic d = 2.2;
-    return lite::test::basic<bool>(d != 2.2, false);
+    return meta::lite::test::basic<bool>(d != 2.2, false);
 }
 bool utest_32()
 {
     udt::dynamic d = 2.2;
-    return lite::test::basic<bool>(d != 3.3, true);
+    return meta::lite::test::basic<bool>(d != 3.3, true);
 }
 bool utest_33()
 {
     udt::dynamic d = 99;
     ++d;
-    return lite::test::basic<int>(d.get_int(), 100);
+    return meta::lite::test::basic<int>(d.get_int(), 100);
 }
 bool utest_34()
 {
     udt::dynamic d = 38;
     --d;
-    return lite::test::basic<int>(d.get_int(), 37);
+    return meta::lite::test::basic<int>(d.get_int(), 37);
 }
 bool utest_35()
 {
     udt::dynamic d = true;
-    return lite::test::basic<bool>(d && true, true);
+    return meta::lite::test::basic<bool>(d && true, true);
 }
 bool utest_36()
 {
     udt::dynamic d = true;
-    return lite::test::basic<bool>(d && false, false);
+    return meta::lite::test::basic<bool>(d && false, false);
 }
 bool utest_37()
 {
     udt::dynamic d = false;
-    return lite::test::basic<bool>(d && true, false);
+    return meta::lite::test::basic<bool>(d && true, false);
 }
 bool utest_38()
 {
     udt::dynamic d = false;
-    return lite::test::basic<bool>(d && false, false);
+    return meta::lite::test::basic<bool>(d && false, false);
 }
 bool utest_39()
 {
     udt::dynamic d = true;
-    return lite::test::basic<bool>(d || true, true);
+    return meta::lite::test::basic<bool>(d || true, true);
 }
 bool utest_40()
 {
     udt::dynamic d = true;
-    return lite::test::basic<bool>(d || false, true);
+    return meta::lite::test::basic<bool>(d || false, true);
 }
 bool utest_41()
 {
     udt::dynamic d = false;
-    return lite::test::basic<bool>(d || true, true);
+    return meta::lite::test::basic<bool>(d || true, true);
 }
 bool utest_42()
 {
     udt::dynamic d = false;
-    return lite::test::basic<bool>(d || false, false);
+    return meta::lite::test::basic<bool>(d || false, false);
 }
 bool utest_43()
 {
     udt::dynamic d = true;
-    return lite::test::basic<bool>(d ^ true, false);
+    return meta::lite::test::basic<bool>(d ^ true, false);
 }
 bool utest_44()
 {
     udt::dynamic d = true;
-    return lite::test::basic<bool>(d ^ false, true);
+    return meta::lite::test::basic<bool>(d ^ false, true);
 }
 bool utest_45()
 {
     udt::dynamic d = false;
-    return lite::test::basic<bool>(d ^ true, true);
+    return meta::lite::test::basic<bool>(d ^ true, true);
 }
 bool utest_46()
 {
     udt::dynamic d = false;
-    return lite::test::basic<bool>(d ^ false, false);
+    return meta::lite::test::basic<bool>(d ^ false, false);
 }
 bool utest_47()
 {
     udt::dynamic d = true;
-    return lite::test::basic<bool>(!d, false);
+    return meta::lite::test::basic<bool>(!d, false);
 }
 bool utest_48()
 {
     udt::dynamic d = false;
-    return lite::test::basic<bool>(!d, true);
+    return meta::lite::test::basic<bool>(!d, true);
 }
 bool utest_49()
 {
     udt::dynamic d = true;
     d &= true;
-    return lite::test::basic<bool>(d.get_bool(), true);
+    return meta::lite::test::basic<bool>(d.get_bool(), true);
 }
 bool utest_50()
 {
     udt::dynamic d = true;
     d &= false;
-    return lite::test::basic<bool>(d.get_bool(), false);
+    return meta::lite::test::basic<bool>(d.get_bool(), false);
 }
 bool utest_51()
 {
     udt::dynamic d = false;
     d &= true;
-    return lite::test::basic<bool>(d.get_bool(), false);
+    return meta::lite::test::basic<bool>(d.get_bool(), false);
 }
 bool utest_52()
 {
     udt::dynamic d = false;
     d &= false;
-    return lite::test::basic<bool>(d.get_bool(), false);
+    return meta::lite::test::basic<bool>(d.get_bool(), false);
 }
 bool utest_53()
 {
     udt::dynamic d = true;
     d |= true;
-    return lite::test::basic<bool>(d.get_bool(), true);
+    return meta::lite::test::basic<bool>(d.get_bool(), true);
 }
 bool utest_54()
 {
     udt::dynamic d = true;
     d |= false;
-    return lite::test::basic<bool>(d.get_bool(), true);
+    return meta::lite::test::basic<bool>(d.get_bool(), true);
 }
 bool utest_55()
 {
     udt::dynamic d = false;
     d |= true;
-    return lite::test::basic<bool>(d.get_bool(), true);
+    return meta::lite::test::basic<bool>(d.get_bool(), true);
 }
 bool utest_56()
 {
     udt::dynamic d = false;
     d |= false;
-    return lite::test::basic<bool>(d.get_bool(), false);
+    return meta::lite::test::basic<bool>(d.get_bool(), false);
 }
 bool utest_57()
 {
     udt::dynamic d = 77;
     d += ' ';
-    return lite::test::basic<int>(d.get_int(), 109);
+    return meta::lite::test::basic<int>(d.get_int(), 109);
 }
 bool utest_58()
 {
     udt::dynamic d = 88;
     d += 12;
-    return lite::test::basic<int>(d.get_int(), 100);
+    return meta::lite::test::basic<int>(d.get_int(), 100);
 }
 bool utest_59()
 {
     udt::dynamic d = 9983;
     d += 16.9f;
-    return lite::test::basic<int>(d.get_int(), 9999);
+    return meta::lite::test::basic<int>(d.get_int(), 9999);
 }
 bool utest_60()
 {
     udt::dynamic d = 88.9;
     d += 1.1;
-    return lite::test::basic<double>(d.get_double(), 90.0);
+    return meta::lite::test::basic<double>(d.get_double(), 90.0);
 }
 bool utest_61()
 {
     udt::dynamic d = 250;
     d -= '|';
-    return lite::test::basic<int>(d.get_int(), 126);
+    return meta::lite::test::basic<int>(d.get_int(), 126);
 }
 bool utest_62()
 {
     udt::dynamic d = 200;
     d -= 100;
-    return lite::test::basic<int>(d.get_int(), 100);
+    return meta::lite::test::basic<int>(d.get_int(), 100);
 }
 bool utest_63()
 {
     udt::dynamic d = 9.5f;
     d -= 1.3f;
-    return lite::test::basic<float>(d.get_float(), 8.2f);
+    return meta::lite::test::basic<float>(d.get_float(), 8.2f);
 }
 bool utest_64()
 {
     udt::dynamic d = 8.8;
     d -= 4.4;
-    return lite::test::basic<double>(d.get_double(), 4.4);
+    return meta::lite::test::basic<double>(d.get_double(), 4.4);
 }
 bool utest_65()
 {
     udt::dynamic d = 18;
     d *= '~';
-    return lite::test::basic<int>(d.get_int(), 2268);
+    return meta::lite::test::basic<int>(d.get_int(), 2268);
 }
 bool utest_66()
 {
     udt::dynamic d = 24;
     d *= 22;
-    return lite::test::basic<int>(d.get_int(), 528);
+    return meta::lite::test::basic<int>(d.get_int(), 528);
 }
 bool utest_67()
 {
     udt::dynamic d = 100;
     d *= 2.8f;
-    return lite::test::basic<int>(d.get_int(), 279);
+    return meta::lite::test::basic<int>(d.get_int(), 279);
 }
 bool utest_68()
 {
     udt::dynamic d = 1000;
     d *= 0.525;
-    return lite::test::basic<int>(d.get_int(), 525);
+    return meta::lite::test::basic<int>(d.get_int(), 525);
 }
 bool utest_69()
 {
     udt::dynamic d = 80;
     d /= '\n';
-    return lite::test::basic<int>(d.get_int(), 8);
+    return meta::lite::test::basic<int>(d.get_int(), 8);
 }
 bool utest_70()
 {
     udt::dynamic d = 160;
     d /= 8;
-    return lite::test::basic<int>(d.get_int(), 20);
+    return meta::lite::test::basic<int>(d.get_int(), 20);
 }
 bool utest_71()
 {
     udt::dynamic d = 7;
     d /= 1.2f;
-    return lite::test::basic<int>(d.get_int(), 5);
+    return meta::lite::test::basic<int>(d.get_int(), 5);
 }
 bool utest_72()
 {
     udt::dynamic d = 22.8;
     d /= 2.0;
-    return lite::test::basic<double>(d.get_double(), 11.4);
+    return meta::lite::test::basic<double>(d.get_double(), 11.4);
 }
 bool utest_73()
 {
     udt::dynamic d = 2;
     d ^= '\n';
-    return lite::test::basic<int>(d.get_int(), 1024);
+    return meta::lite::test::basic<int>(d.get_int(), 1024);
 }
 bool utest_74()
 {
     udt::dynamic d = 1.01f;
     d ^= 365;
-    return lite::test::basic<int>(100 * d.get_float(), 3778);
+    return meta::lite::test::basic<int>(100 * d.get_float(), 3778);
 }
 bool utest_75()
 {
     udt::dynamic d = 77;
     d ^= 1.5f;
-    return lite::test::basic<int>(d.get_int(), 675);
+    return meta::lite::test::basic<int>(d.get_int(), 675);
 }
 bool utest_76()
 {
     udt::dynamic d = 65;
     d ^= 1.1;
-    return lite::test::basic<int>(d.get_int(), 98);
+    return meta::lite::test::basic<int>(d.get_int(), 98);
 }
 int main()
 {
-    lite::io::NewLines(5);
+    meta::lite::io::NewLines(5);
     bool bresult;
     float fresult;
-    lite::function::test_stream UTS;
+    meta::lite::test_stream UTS;
     UTS << utest_1;
     UTS << utest_2;
     UTS << utest_3;
@@ -518,12 +519,12 @@ int main()
     UTS << utest_75;
     UTS << utest_76;
     UTS >> bresult;
-    lite::io::print<std::string>("All test result: ");
-    lite::io::println(lite::test::test_message(bresult));
+    meta::lite::io::print<std::string>("All test result: ");
+    meta::lite::io::println(meta::lite::test::test_message(bresult));
     udt::dynamic d;
-    lite::io::print("The size of the dynamic data type in bytes: ");
-    lite::io::println(lite::benchmark::mata_data(d));
-    lite::function::benchmark_stream<false> UTB = 6;
+    meta::lite::io::print("The size of the dynamic data type in bytes: ");
+    meta::lite::io::println(meta::lite::benchmark::mata_data(d));
+    meta::lite::benchmark_stream<false> UTB = 6;
     UTB << utest_1;
     UTB << utest_2;
     UTB << utest_3;
@@ -601,7 +602,7 @@ int main()
     UTB << utest_75;
     UTB << utest_76;
     UTB >> fresult;
-    lite::io::print<std::string>(
+    meta::lite::io::print<std::string>(
         "The average time for all unit test: " +
         std::to_string(fresult) + " us");
     return 0;

@@ -1,24 +1,24 @@
 #include <iostream>
 
 #pragma once
-#ifndef OPENUDT___BASIC___FIXED_STACK_HPP
-#define OPENUDT___BASIC___FIXED_STACK_HPP
+#ifndef OPENUDT___BASIC___stack_f_F_HPP
+#define OPENUDT___BASIC___stack_f_F_HPP
 
 namespace udt
 {
 
     template <typename T, size_t MaxSize>
-    class Stack
+    class stack_f
     {
         int top;
         T item[MaxSize]; // T can be int, double, string, etc.
     public:
-        Stack() : top(-1) {}
+        stack_f() : top(-1) {}
         void push(T element)
         {
             if (top == MaxSize - 1)
             {
-                std::cerr << "Stack full on push" << endl;
+                std::cerr << "stack_f full on push" << endl;
                 return;
             }
             item[++top] = element;
@@ -31,7 +31,7 @@ namespace udt
         {
             if (isEmpty())
             {
-                std::cerr << "Stack empty on pop" << endl;
+                std::cerr << "stack_f empty on pop" << endl;
                 return;
             }
             top--;
@@ -39,16 +39,16 @@ namespace udt
         void pop(T &element)
         {
             if (isEmpty())
-                std::cerr << "Stack empty on pop" << endl;
+                std::cerr << "stack_f empty on pop" << endl;
             else
                 element = item[top--];
         }
-        void getTop(T &stackTop)
+        void getTop(T &stack_fTop)
         {
             if (isEmpty())
-                std::cerr << "Stack empty on get top" << endl;
+                std::cerr << "stack_f empty on get top" << endl;
             else
-                stackTop = item[top];
+                stack_fTop = item[top];
         }
         void print()
         {
@@ -66,4 +66,4 @@ namespace udt
 
 }
 
-#endif // OPENUDT___BASIC___FIXED_STACK_HPP
+#endif // OPENUDT___BASIC___stack_f_F_HPP

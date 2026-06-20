@@ -4,14 +4,14 @@
 #include <string>
 
 #pragma once
-#ifndef OPENUDT___BASIC___ARRAY_LIST_HPP
-#define OPENUDT___BASIC___ARRAY_LIST_HPP
+#ifndef OPENUDT___BASIC___LIST_HPP
+#define OPENUDT___BASIC___LIST_HPP
 
 namespace udt
 {
 
     template <typename T>
-    class array_list
+    class list
     {
     private:
         T *arr;
@@ -20,14 +20,14 @@ namespace udt
         size_t length;
 
     public:
-        array_list()
+        list()
         {
             max_size = -1;
             length = 0;
             size_set = false;
         }
 
-        array_list(size_t s)
+        list(size_t s)
         {
             max_size = s;
             length = 0;
@@ -35,7 +35,7 @@ namespace udt
             size_set = false;
         }
 
-        array_list(int s)
+        list(int s)
         {
             if (s < 0)
             {
@@ -47,7 +47,7 @@ namespace udt
             arr = new T[max_size];
         }
 
-        array_list(const std::vector<T> &v) noexcept
+        list(const std::vector<T> &v) noexcept
         {
             arr = new T[v.size()];
             max_size = v.size();
@@ -57,7 +57,7 @@ namespace udt
                 *(arr + i) = v[i];
         }
 
-        array_list(std::initializer_list<T> &&list) noexcept
+        list(std::initializer_list<T> &&list) noexcept
         {
             arr = new T[list.size()];
             max_size = list.size();
@@ -195,9 +195,9 @@ namespace udt
 
         inline constexpr void clear() noexcept { length = 0; }
 
-        ~array_list() noexcept { delete[] arr; }
+        ~LIST() noexcept { delete[] arr; }
     };
 
 }
 
-#endif // OPENUDT___BASIC___ARRAY_LIST_HPP
+#endif // OPENUDT___BASIC___LIST_HPP

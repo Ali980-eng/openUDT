@@ -1,8 +1,8 @@
 #include "bfs_16.hpp"
 
 #pragma once
-#ifndef OPENUDT___CORE_BFS_BFS32_HPP
-#define OPENUDT___CORE_BFS_BFS32_HPP
+#ifndef OPENUDT___CORE___BFS_BFS32_HPP
+#define OPENUDT___CORE___BFS_BFS32_HPP
 
 namespace udt
 {
@@ -746,4 +746,4 @@ namespace udt
     }
 } // namespace udt
 
-#endif // OPENUDT___CORE_BFS_BFS16_HPP
+#endif // OPENUDT___CORE___BFS_BFS16_HPP

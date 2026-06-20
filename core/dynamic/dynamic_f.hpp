@@ -2,8 +2,8 @@
 #include <cmath>
 
 #pragma once
-#ifndef OPENUDT___CORE_DYNAMIC__DYANMIC_F__HPP
-#define OPENUDT___CORE_DYNAMIC__DYANMIC_F__HPP
+#ifndef OPENUDT___CORE___DYNAMIC__DYANMIC_F__HPP
+#define OPENUDT___CORE___DYNAMIC__DYANMIC_F__HPP
 
 namespace udt
 {
@@ -1706,4 +1706,4 @@ namespace udt
     constexpr void dynamic_f::operator^=(double value) noexcept { d_float = std::pow(d_float, value); }
 }
 
-#endif // OPENUDT___CORE_DYNAMIC__DYANMIC_F__HPP
+#endif // OPENUDT___CORE___DYNAMIC__DYANMIC_F__HPP

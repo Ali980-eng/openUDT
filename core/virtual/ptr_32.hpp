@@ -4,8 +4,8 @@
 #include <sstream>
 
 #pragma once
-#ifndef OPENUDT___CORE_VIRTUAL_PTR_32_HPP
-#define OPENUDT___CORE_VIRTUAL_PTR_32_HPP
+#ifndef OPENUDT___CORE___VIRTUAL_PTR_32_HPP
+#define OPENUDT___CORE___VIRTUAL_PTR_32_HPP
 
 namespace udt
 {
@@ -206,4 +206,4 @@ namespace udt
     }
 }
 
-#endif // OPENUDT___CORE_VIRTUAL_PTR_32_HPP
+#endif // OPENUDT___CORE___VIRTUAL_PTR_32_HPP

@@ -3,8 +3,8 @@
 #include <cmath>
 
 #pragma once
-#ifndef OPENUDT___CORE_DYNAMIC__DYANMIC_U__HPP
-#define OPENUDT___CORE_DYNAMIC__DYANMIC_U__HPP
+#ifndef OPENUDT___CORE___DYNAMIC__DYANMIC_U__HPP
+#define OPENUDT___CORE___DYNAMIC__DYANMIC_U__HPP
 
 namespace udt
 {
@@ -2698,4 +2698,4 @@ namespace udt
     };
 }
 
-#endif // OPENUDT___CORE_DYNAMIC__DYANMIC_R__HPP
+#endif // OPENUDT___CORE___DYNAMIC__DYANMIC_R__HPP

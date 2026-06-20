@@ -26,8 +26,8 @@
 #include "dynamic/dynamic_v3d.hpp"
 
 #pragma once
-#ifndef OPENUDT___CORE_DYNAMIC_HPP
-#define OPENUDT___CORE_DYNAMIC_HPP
+#ifndef OPENUDT___CORE___DYNAMIC_HPP
+#define OPENUDT___CORE___DYNAMIC_HPP
 
 namespace udt
 {
@@ -1820,4 +1820,4 @@ namespace udt
     constexpr void dynamic::operator^=(double value) noexcept { d_double = std::pow(d_double, value); }
 };
 
-#endif // OPENUDT___CORE_DYNAMIC_HPP
+#endif // OPENUDT___CORE___DYNAMIC_HPP

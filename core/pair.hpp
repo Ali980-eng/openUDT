@@ -14,12 +14,12 @@
  */
 
 #pragma once
-#ifndef OPENUDT___CORE_PAIR_HPP
-#define OPENUDT___CORE_PAIR_HPP
+#ifndef OPENUDT___CORE___PAIR_HPP
+#define OPENUDT___CORE___PAIR_HPP
 
 #include "pair/pair_t.hpp"
 #include "pair/pair_v.hpp"
 #include "pair/pair__t.hpp"
 #include "pair/pair__v.hpp"
 
-#endif // OPENUDT___CORE_PAIR_HPP
+#endif // OPENUDT___CORE___PAIR_HPP

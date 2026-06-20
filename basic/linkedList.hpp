@@ -4,14 +4,14 @@
 #include <string>
 
 #pragma once
-#ifndef OPENUDT___BASIC___DOUBLE_LINKED_LIST_HPP
-#define OPENUDT___BASIC___DOUBLE_LINKED_LIST_HPP
+#ifndef OPENUDT___BASIC___LINKEDLIST_HPP
+#define OPENUDT___BASIC___LINKEDLIST_HPP
 
 namespace udt
 {
 
     template <typename T>
-    class double_linked_list
+    class linkedList
     {
     private:
         struct node

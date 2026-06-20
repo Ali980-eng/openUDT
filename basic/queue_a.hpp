@@ -1,14 +1,14 @@
 #include "metaCore/lite/io.hpp"
 
 #pragma once
-#ifndef OPENUDT___BASIC___ARRAY_QUEUE_HPP
-#define OPENUDT___BASIC___ARRAY_QUEUE_HPP
+#ifndef OPENUDT___BASIC___QUEUE_A_HPP
+#define OPENUDT___BASIC___QUEUE_A_HPP
 
 namespace udt
 {
 
     template <typename T>
-    class array_queue
+    class queue_a
     {
     private:
         size_t rear;
@@ -18,7 +18,7 @@ namespace udt
         int maxSize;
 
     public:
-        array_queue(int ArrSize)
+        queue_a(int ArrSize)
         {
             if (ArrSize < 0)
                 throw invalid_argument("the size have to be bigger then zero");
@@ -29,7 +29,7 @@ namespace udt
             length = 0;
         }
 
-        array_queue(initializer_list<T> &vec) noexcept : arr(vec) {};
+        queue_a(initializer_list<T> &vec) noexcept : arr(vec) {};
 
         inline constexpr bool empty() const noexcept { return length == 0; }
 
@@ -129,7 +129,7 @@ namespace udt
                 io::println_error("Empty Error");
         }
 
-        void operator=(const array_queue &other) noexcept
+        void operator=(const queue_a &other) noexcept
         {
             if (this != &other)
             {
@@ -164,9 +164,9 @@ namespace udt
             return element;
         }
 
-        ~array_queue() = default;
+        ~QUEUE_A() = default;
     };
 
 }
 
-#endif // OPENUDT___BASIC___ARRAY_QUEUE_HPP
+#endif // OPENUDT___BASIC___QUEUE_A_HPP

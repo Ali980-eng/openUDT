@@ -2,8 +2,8 @@
 #include <cmath>
 
 #pragma once
-#ifndef OPENUDT___CORE_INT_INT128_HPP
-#define OPENUDT___CORE_INT_INT128_HPP
+#ifndef OPENUDT___CORE___INT_INT128_HPP
+#define OPENUDT___CORE___INT_INT128_HPP
 
 namespace udt
 {
@@ -1049,4 +1049,4 @@ namespace udt
     };
 }
 
-#endif // OPENUDT___CORE_INT_INT128_HPP
+#endif // OPENUDT___CORE___INT_INT128_HPP

@@ -11,10 +11,10 @@
  */
 
 #pragma once
-#ifndef OPENUDT___CORE_INT_HPP
-#define OPENUDT___CORE_INT_HPP
+#ifndef OPENUDT___CORE___INT_HPP
+#define OPENUDT___CORE___INT_HPP
 
 #include "int/int128_t.hpp"
 #include "int/uint128_t.hpp"
 
-#endif // OPENUDT___CORE_INT_HPP
+#endif // OPENUDT___CORE___INT_HPP

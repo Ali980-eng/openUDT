@@ -4,8 +4,8 @@
 #include <stdexcept>
 
 #pragma once
-#ifndef OPENUDT___CORE_INT_UINT128_HPP
-#define OPENUDT___CORE_INT_UINT128_HPP
+#ifndef OPENUDT___CORE___INT_UINT128_HPP
+#define OPENUDT___CORE___INT_UINT128_HPP
 
 namespace udt
 {
@@ -852,4 +852,4 @@ namespace udt
     };
 }
 
-#endif // OPENUDT___CORE_INT_UINT128_HPP
+#endif // OPENUDT___CORE___INT_UINT128_HPP

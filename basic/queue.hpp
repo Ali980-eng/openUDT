@@ -4,14 +4,14 @@
 #include <initializer_list>
 
 #pragma once
-#ifndef OPENUDT___BASIC___LINKED_QUEUE_HPP
-#define OPENUDT___BASIC___LINKED_QUEUE_HPP
+#ifndef OPENUDT___BASIC___queue_HPP
+#define OPENUDT___BASIC___queue_HPP
 
 namespace udt
 {
 
     template <typename T>
-    class linked_queue
+    class queue
     {
     private:
         struct node
@@ -24,13 +24,13 @@ namespace udt
         int length;
 
     public:
-        linked_queue()
+        queue()
         {
             front_ptr = rear_ptr = nullptr;
             length = 0;
         }
 
-        linked_queue(T element)
+        queue(T element)
         {
             front_ptr = new node;
             front_ptr->item = element;
@@ -39,7 +39,7 @@ namespace udt
             length++;
         }
 
-        linked_queue(std::initializer_list<T> list)
+        queue(std::initializer_list<T> list)
         {
             for (T element : list)
                 enqueue(element);
@@ -170,8 +170,8 @@ namespace udt
             dequeue();
         }
 
-        ~linked_queue() { clear(); }
+        ~queue() { clear(); }
     };
 }
 
-#endif // OPENUDT___BASIC___LINKED_QUEUE_HPP
+#endif // OPENUDT___BASIC___queue_HPP

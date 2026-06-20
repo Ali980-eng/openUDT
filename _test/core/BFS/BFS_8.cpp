@@ -1,196 +1,224 @@
-#include "lite.hpp"
-#include "UDT/BFS/BFS_8.hpp"
+#include "metaCore/lite.hpp"
+#include "openUDT/core/bfs/bfs_8.hpp"
 
 bool utest_1()
 {
-    udt::BFS_8 value;
+    udt::bfs_8 value;
     value.set_flag1();
-    return lite::test::basic<bool>(value[1], true);
+    return meta::lite::test::basic<bool>(value[1], true);
 }
 
 bool utest_2()
 {
-    udt::BFS_8 value;
+    udt::bfs_8 value;
     value.set_flag2();
-    return lite::test::basic<bool>(value[2], true);
+    return meta::lite::test::basic<bool>(value[2], true);
 }
 
 bool utest_3()
 {
-    udt::BFS_8 value;
+    udt::bfs_8 value;
     value.set_flag3();
-    return lite::test::basic<bool>(value[3], true);
+    return meta::lite::test::basic<bool>(value[3], true);
 }
+
 bool utest_4()
 {
-    udt::BFS_8 value;
+    udt::bfs_8 value;
     value.set_flag4();
-    return lite::test::basic<bool>(value[4], true);
+    return meta::lite::test::basic<bool>(value[4], true);
 }
+
 bool utest_5()
 {
-    udt::BFS_8 value;
+    udt::bfs_8 value;
     value.set_flag5();
-    return lite::test::basic<bool>(value[5], true);
+    return meta::lite::test::basic<bool>(value[5], true);
 }
+
 bool utest_6()
 {
-    udt::BFS_8 value;
+    udt::bfs_8 value;
     value.set_flag6();
-    return lite::test::basic<bool>(value[6], true);
+    return meta::lite::test::basic<bool>(value[6], true);
 }
+
 bool utest_7()
 {
-    udt::BFS_8 value;
+    udt::bfs_8 value;
     value.set_flag7();
-    return lite::test::basic<bool>(value[7], true);
+    return meta::lite::test::basic<bool>(value[7], true);
 }
+
 bool utest_8()
 {
-    udt::BFS_8 value;
+    udt::bfs_8 value;
     value.set_flag8();
-    return lite::test::basic<bool>(value[8], true);
+    return meta::lite::test::basic<bool>(value[8], true);
 }
+
 bool utest_9()
 {
-    udt::BFS_8 value = 255;
+    udt::bfs_8 value = 255;
     value.reset_all();
-    return lite::test::basic<uint8_t>(value.get(), 0);
+    return meta::lite::test::basic<uint8_t>(value.get(), 0);
 }
+
 bool utest_10()
 {
-    udt::BFS_8 value = 255;
+    udt::bfs_8 value = 255;
     value.reset_flag1();
-    return lite::test::basic<bool>(value[1], false);
+    return meta::lite::test::basic<bool>(value[1], false);
 }
+
 bool utest_11()
 {
-    udt::BFS_8 value = 255;
+    udt::bfs_8 value = 255;
     value.reset_flag2();
-    return lite::test::basic<bool>(value[2], false);
+    return meta::lite::test::basic<bool>(value[2], false);
 }
+
 bool utest_12()
 {
-    udt::BFS_8 value = 255;
+    udt::bfs_8 value = 255;
     value.reset_flag3();
-    return lite::test::basic<bool>(value[3], false);
+    return meta::lite::test::basic<bool>(value[3], false);
 }
+
 bool utest_13()
 {
-    udt::BFS_8 value = 255;
+    udt::bfs_8 value = 255;
     value.reset_flag4();
-    return lite::test::basic<bool>(value[4], false);
+    return meta::lite::test::basic<bool>(value[4], false);
 }
+
 bool utest_14()
 {
-    udt::BFS_8 value = 255;
+    udt::bfs_8 value = 255;
     value.reset_flag5();
-    return lite::test::basic<bool>(value[5], false);
+    return meta::lite::test::basic<bool>(value[5], false);
 }
+
 bool utest_15()
 {
-    udt::BFS_8 value = 255;
+    udt::bfs_8 value = 255;
     value.reset_flag6();
-    return lite::test::basic<bool>(value[6], false);
+    return meta::lite::test::basic<bool>(value[6], false);
 }
+
 bool utest_16()
 {
-    udt::BFS_8 value = 255;
+    udt::bfs_8 value = 255;
     value.reset_flag7();
-    return lite::test::basic<bool>(value[7], false);
+    return meta::lite::test::basic<bool>(value[7], false);
 }
+
 bool utest_17()
 {
-    udt::BFS_8 value = 255;
+    udt::bfs_8 value = 255;
     value.reset_flag8();
-    return lite::test::basic<bool>(value[8], false);
+    return meta::lite::test::basic<bool>(value[8], false);
 }
+
 bool utest_18()
 {
-    udt::BFS_8 value;
+    udt::bfs_8 value;
     value.set_all();
-    return lite::test::basic<uint8_t>(value.get(), 255);
+    return meta::lite::test::basic<uint8_t>(value.get(), 255);
 }
+
 bool utest_19()
 {
-    udt::BFS_8 value;
+    udt::bfs_8 value;
     value.set(5);
-    return lite::test::basic<bool>(value.get(5), true);
+    return meta::lite::test::basic<bool>(value.get(5), true);
 }
+
 bool utest_20()
 {
-    udt::BFS_8 value;
+    udt::bfs_8 value;
     value.set_all();
     value.reset(3);
-    return lite::test::basic<bool>(value.get(3), false);
+    return meta::lite::test::basic<bool>(value.get(3), false);
 }
+
 bool utest_21()
 {
-    udt::BFS_8 value1 = 200;
+    udt::bfs_8 value1 = 200;
     uint8_t value2 = 200;
-    return lite::test::basic<bool>(value1 == value2, true);
+    return meta::lite::test::basic<bool>(value1 == value2, true);
 }
+
 bool utest_22()
 {
-    udt::BFS_8 value1 = 200;
+    udt::bfs_8 value1 = 200;
     uint8_t value2 = 120;
-    return lite::test::basic<bool>(value1 == value2, false);
+    return meta::lite::test::basic<bool>(value1 == value2, false);
 }
+
 bool utest_23()
 {
-    udt::BFS_8 value1 = 200;
+    udt::bfs_8 value1 = 200;
     uint8_t value2 = 200;
-    return lite::test::basic<bool>(value1 != value2, false);
+    return meta::lite::test::basic<bool>(value1 != value2, false);
 }
+
 bool utest_24()
 {
-    udt::BFS_8 value1 = 200;
+    udt::bfs_8 value1 = 200;
     uint8_t value2 = 100;
-    return lite::test::basic<bool>(value1 != value2, true);
+    return meta::lite::test::basic<bool>(value1 != value2, true);
 }
+
 bool utest_25()
 {
-    udt::BFS_8 value1 = 200;
-    udt::BFS_8 value2 = 200;
-    return lite::test::basic<bool>(value1 == value2, true);
+    udt::bfs_8 value1 = 200;
+    udt::bfs_8 value2 = 200;
+    return meta::lite::test::basic<bool>(value1 == value2, true);
 }
+
 bool utest_26()
 {
-    udt::BFS_8 value1 = 200;
-    udt::BFS_8 value2 = 120;
-    return lite::test::basic<bool>(value1 == value2, false);
+    udt::bfs_8 value1 = 200;
+    udt::bfs_8 value2 = 120;
+    return meta::lite::test::basic<bool>(value1 == value2, false);
 }
+
 bool utest_27()
 {
-    udt::BFS_8 value1 = 200;
-    udt::BFS_8 value2 = 200;
-    return lite::test::basic<bool>(value1 != value2, false);
+    udt::bfs_8 value1 = 200;
+    udt::bfs_8 value2 = 200;
+    return meta::lite::test::basic<bool>(value1 != value2, false);
 }
+
 bool utest_28()
 {
-    udt::BFS_8 value1 = 200;
-    udt::BFS_8 value2 = 100;
-    return lite::test::basic<bool>(value1 != value2, true);
+    udt::bfs_8 value1 = 200;
+    udt::bfs_8 value2 = 100;
+    return meta::lite::test::basic<bool>(value1 != value2, true);
 }
+
 bool utest_29()
 {
-    udt::BFS_8 value1 = 222;
-    udt::BFS_8 value2 = value1;
-    return lite::test::basic<bool>(value1 == value2, true);
+    udt::bfs_8 value1 = 222;
+    udt::bfs_8 value2 = value1;
+    return meta::lite::test::basic<bool>(value1 == value2, true);
 }
+
 bool utest_30()
 {
-    udt::BFS_8 value1 = 223;
-    udt::BFS_8 value2;
+    udt::bfs_8 value1 = 223;
+    udt::bfs_8 value2;
     value2 = value1;
-    return lite::test::basic<bool>(value1 == value2, true);
+    return meta::lite::test::basic<bool>(value1 == value2, true);
 }
+
 int main()
 {
-    lite::io::NewLines();
+    meta::lite::io::NewLines();
     bool bresult;
     float fresult;
-    lite::function::test_stream UTS;
+    meta::lite::test_stream UTS;
     UTS << utest_1;
     UTS << utest_2;
     UTS << utest_3;
@@ -222,11 +250,11 @@ int main()
     UTS << utest_29;
     UTS << utest_30;
     UTS >> bresult;
-    lite::io::print<std::string>("All test result: ");
-    lite::io::println(lite::test::test_message(bresult));
-    udt::BFS_8 value;
-    lite::io::print("The size of the type BFS_8: ", lite::benchmark::mata_data(value), " Byte\n");
-    lite::function::benchmark_stream<false> UTB = 9;
+    meta::lite::io::print<std::string>("All test result: ");
+    meta::lite::io::println(meta::lite::test::test_message(bresult));
+    udt::bfs_8 value;
+    meta::lite::io::print("The size of the type BFS_8: ", meta::lite::benchmark::mata_data(value), " Byte\n");
+    meta::lite::benchmark_stream<false> UTB = 9;
     UTB << utest_1;
     UTB << utest_2;
     UTB << utest_3;
@@ -257,7 +285,7 @@ int main()
     UTB << utest_28;
     UTB << utest_29;
     UTB << utest_30;
-    lite::io::print<std::string>(
+    meta::lite::io::print<std::string>(
         "The average time for all unit test: " +
         std::to_string(fresult) + " ns");
     return 0;

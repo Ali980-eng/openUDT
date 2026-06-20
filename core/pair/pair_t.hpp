@@ -1,6 +1,6 @@
 #pragma once
-#ifndef OPENUDT___CORE_PAIR_PAIR_T_HPP
-#define OPENUDT___CORE_PAIR_PAIR_T_HPP
+#ifndef OPENUDT___CORE___PAIR_PAIR_T_HPP
+#define OPENUDT___CORE___PAIR_PAIR_T_HPP
 
 namespace udt
 {
@@ -168,4 +168,4 @@ namespace udt
 
 }
 
-#endif // OPENUDT___CORE_PAIR_PAIRs_T_HPP
+#endif // OPENUDT___CORE___PAIR_PAIRs_T_HPP

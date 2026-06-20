@@ -13,8 +13,8 @@
  */
 
 #pragma once
-#ifndef OPENUDT___CORE_VIRTUAL_HPP
-#define OPENUDT___CORE_VIRTUAL_HPP
+#ifndef OPENUDT___CORE___VIRTUAL_HPP
+#define OPENUDT___CORE___VIRTUAL_HPP
 
 #include "virtual/ptr_8.hpp"
 #include "virtual/ptr_16.hpp"
@@ -22,4 +22,4 @@
 #include "virtual/ptr_64.hpp"
 #include "virtual/machine.hpp"
 
-#endif // OPENUDT___CORE_VIRTUAL_HPP
+#endif // OPENUDT___CORE___VIRTUAL_HPP
