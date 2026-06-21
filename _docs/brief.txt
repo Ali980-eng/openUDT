@@ -1,0 +1,12 @@
+Open Unique Data Types
+
+openUDT is a large-scale C++ library collection consisting of approximately 37 KLOC (thousand lines of code). It provides a broad range of unique, general-purpose data types designed to be reusable across various software domains.
+
+The project follows an STL-like philosophy, emphasizing familiar interfaces, generic usability, performance, and ease of integration into modern C++ applications.
+
+The {++} logo represents the core identity of the project:
+
+++ is inspired by C++, the programming language in which the library is written.
+{} symbolizes objects and encapsulation, reflecting the object-oriented nature of the provided data types.
+
+openUDT aims to go beyond the conventional data structures offered by standard libraries by introducing a rich collection of specialized and uncommon data types while preserving the simplicity and elegance expected from modern C++ libraries.

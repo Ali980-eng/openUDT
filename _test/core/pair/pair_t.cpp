@@ -54,17 +54,12 @@ bool utest_8()
 
 int main()
 {
-    meta::lite::io::NewLines();
-    bool bresult;
-    float fresult;
     meta::lite::test_stream UTS;
     UTS << utest_1;
     UTS << utest_2;
     UTS << utest_3;
     UTS << utest_4;
     UTS << utest_5;
-    UTS >> bresult;
-    meta::lite::io::print<std::string>("All test result: ");
-    meta::lite::io::println(meta::lite::test::test_message(bresult));
+    UTS.print_summary();
     return 0;
 }

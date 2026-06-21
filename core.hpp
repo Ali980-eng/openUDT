@@ -5,9 +5,10 @@
 #include "core/bfs.hpp"
 #include "core/dynamic.hpp"
 #include "core/int.hpp"
+#include "core/multidimensional.hpp"
 #include "core/pair.hpp"
+#include "core/tree.hpp"
 #include "core/triple.hpp"
 #include "core/virtual.hpp"
-#include "core/multidimensional.hpp"
 
 #endif // OPENUDT___UDT_HPP

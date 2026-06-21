@@ -1,5 +1,6 @@
 #include "metaCore/lite.hpp"
 #include "core/triple/triple_3t.hpp"
+
 /// @brief This function test the empty constructor and the function get_third in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_1()
@@ -7,6 +8,7 @@ bool utest_1()
     udt::triple_t3<int, char, bool> tt;
     return meta::lite::test::basic<bool>(tt.get_third(), bool());
 }
+
 /// @brief This function test the constructor {T, T, T} and the function get_first in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_2()
@@ -14,6 +16,7 @@ bool utest_2()
     udt::triple_t3<short, double, char> tt = {188, 2.38, 'c'};
     return meta::lite::test::basic<char>(tt.get_first(), 188);
 }
+
 /// @brief This function test the operator = triple_t3 and the function get_second in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_3()
@@ -22,6 +25,7 @@ bool utest_3()
     udt::triple_t3<short, double, char> tt2 = tt1;
     return meta::lite::test::basic<double>(tt2.get_second(), 2.38);
 }
+
 /// @brief This function test the functions set_first and set_second and set_third in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_4()
@@ -32,6 +36,7 @@ bool utest_4()
     tt.set_third(true);
     return meta::lite::test::basic<bool>(tt.get_second(), '|');
 }
+
 /// @brief This function test the function set in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_5()
@@ -40,6 +45,7 @@ bool utest_5()
     tt.set(77, '<', false);
     return meta::lite::test::basic<char>(tt.get_second(), '<');
 }
+
 /// @brief This function test the operator == in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_6()
@@ -48,6 +54,7 @@ bool utest_6()
     udt::triple_t3<short, int, char> tt2 = {12000, 1933330, 'i'};
     return meta::lite::test::basic<bool>(tt1 == tt2, true);
 }
+
 /// @brief This function test the operator == in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_7()
@@ -56,6 +63,7 @@ bool utest_7()
     udt::triple_t3<short, int, char> tt2 = {2897, 5266330, 'c'};
     return meta::lite::test::basic<bool>(tt1 == tt2, false);
 }
+
 /// @brief This function test the operator != in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_8()
@@ -64,6 +72,7 @@ bool utest_8()
     udt::triple_t3<short, int, char> tt2 = {12000, 1933330, 'i'};
     return meta::lite::test::basic<bool>(tt1 != tt2, false);
 }
+
 /// @brief This function test the operator != in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_9()
@@ -72,6 +81,7 @@ bool utest_9()
     udt::triple_t3<short, int, char> tt2 = {2897, 5266330, 'c'};
     return meta::lite::test::basic<bool>(tt1 != tt2, true);
 }
+
 /// @brief This function test the function swap in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_10()
@@ -82,6 +92,7 @@ bool utest_10()
     tt1.swap(tt2);
     return meta::lite::test::basic<short>(tt2.get_first(), 12000);
 }
+
 /// @brief This function test the function sarch in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_11()
@@ -89,6 +100,7 @@ bool utest_11()
     udt::triple_t3<int, char, bool> tt = {188, 'o', false};
     return meta::lite::test::basic<bool>(tt.sarch('o'), true);
 }
+
 /// @brief This function test the operator += int in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_12()
@@ -97,6 +109,7 @@ bool utest_12()
     tt += 30;
     return meta::lite::test::basic<int>(tt.get_first(), 130);
 }
+
 /// @brief This function test the operator += float in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_13()
@@ -105,6 +118,7 @@ bool utest_13()
     tt += 66.6f;
     return meta::lite::test::basic<int>(tt.get_second(), 69);
 }
+
 /// @brief This function test the operator += double in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_14()
@@ -113,6 +127,7 @@ bool utest_14()
     tt += 1.7;
     return meta::lite::test::basic<double>(tt.get_third(), 10.0);
 }
+
 /// @brief This function test the operator += triple_t3 in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_15()
@@ -123,6 +138,7 @@ bool utest_15()
     tt1 += tt2;
     return meta::lite::test::basic<int>(tt1 == tt3, true);
 }
+
 /// @brief This function test the operator ++ in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_16()
@@ -132,6 +148,7 @@ bool utest_16()
     ++tt;
     return meta::lite::test::basic<bool>(tt == t, true);
 }
+
 /// @brief This function test the operator -= int in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_17()
@@ -141,6 +158,7 @@ bool utest_17()
     tt -= 18;
     return meta::lite::test::basic<bool>(tt == t, true);
 }
+
 /// @brief This function test the operator -= char in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_18()
@@ -150,6 +168,7 @@ bool utest_18()
     tt -= ' ';
     return meta::lite::test::basic<bool>(tt == t, true);
 }
+
 /// @brief This function test the operator -= int in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_19()
@@ -159,6 +178,7 @@ bool utest_19()
     tt -= 22;
     return meta::lite::test::basic<bool>(tt == t, true);
 }
+
 /// @brief This function test the operator -= triple_t3 in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_20()
@@ -169,6 +189,7 @@ bool utest_20()
     tt1 -= tt2;
     return meta::lite::test::basic<bool>(tt1 == tt3, true);
 }
+
 /// @brief This function test the operator -- in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_21()
@@ -178,6 +199,7 @@ bool utest_21()
     --tt1;
     return meta::lite::test::basic<bool>(tt1 == tt2, true);
 }
+
 /// @brief This function test the operator *= int in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_22()
@@ -187,6 +209,7 @@ bool utest_22()
     tt1 *= 2;
     return meta::lite::test::basic<bool>(tt1 == tt2, true);
 }
+
 /// @brief This function test the operator *= float in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_23()
@@ -196,6 +219,7 @@ bool utest_23()
     tt1 *= 2.3f;
     return meta::lite::test::basic<bool>(tt1 == tt2, true);
 }
+
 /// @brief This function test the operator *= double in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_24()
@@ -205,6 +229,7 @@ bool utest_24()
     tt1 *= 5.5;
     return meta::lite::test::basic<bool>(tt1 == tt2, true);
 }
+
 /// @brief This function test the operator *= triple_t3 in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_25()
@@ -217,6 +242,7 @@ bool utest_25()
            meta::lite::test::basic<int>(tt1.get_second(), tt3.get_second()) &&
            meta::lite::test::basic<int>(tt1.get_third(), tt3.get_third());
 }
+
 /// @brief This function test the operator /= int in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_26()
@@ -226,6 +252,7 @@ bool utest_26()
     tt1 /= 2;
     return meta::lite::test::basic<bool>(tt1 == tt2, true);
 }
+
 /// @brief This function test the operator /= float in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_27()
@@ -235,6 +262,7 @@ bool utest_27()
     tt1 /= 2.3f;
     return meta::lite::test::basic<bool>(tt1 == tt2, true);
 }
+
 /// @brief This function test the operator /= double in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_28()
@@ -244,7 +272,8 @@ bool utest_28()
     tt1 /= 2.0;
     return meta::lite::test::basic<bool>(tt1 == tt2, true);
 }
-// @brief This function test the operator ^= int in the object triple_t3.
+
+/// @brief This function test the operator ^= int in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_29()
 {
@@ -253,7 +282,8 @@ bool utest_29()
     tt1 ^= 2;
     return meta::lite::test::basic<bool>(tt1 == tt2, true);
 }
-// @brief This function test the operator ^= float in the object triple_t3.
+
+/// @brief This function test the operator ^= float in the object triple_t3.
 /// @return The basic test value (should be true).
 bool utest_30()
 {
@@ -262,11 +292,9 @@ bool utest_30()
     tt1 ^= 2.0f;
     return meta::lite::test::basic<bool>(tt1 == tt2, true);
 }
+
 int main()
 {
-    meta::lite::io::NewLines();
-    float fresult;
-    bool result = true;
     meta::lite::test_stream UTS;
     UTS << utest_1;
     UTS << utest_2;
@@ -298,12 +326,11 @@ int main()
     UTS << utest_28;
     UTS << utest_29;
     UTS << utest_30;
-    UTS >> result;
-    meta::lite::io::print<std::string>("All test result: ");
-    meta::lite::io::println(meta::lite::test::test_message(result));
+    UTS.print_summary();
     udt::triple_t3<long, double, char> d;
-    meta::lite::io::print("The size of the dynamic data type in bytes: ");
-    meta::lite::io::println(meta::lite::benchmark::mata_data(d));
+    meta::lite::io::println(
+        "The size of the dynamic data type in bytes: ",
+        meta::lite::benchmark::mata_data(d));
     meta::lite::benchmark_stream<false> UTB = 6;
     // UTB: unit test benchmark
     UTB << utest_1;
@@ -336,9 +363,6 @@ int main()
     UTB << utest_28;
     UTB << utest_29;
     UTB << utest_30;
-    UTB >> fresult;
-    meta::lite::io::print<std::string>(
-        "The average time for all unit test: " +
-        std::to_string(fresult) + " us");
+    UTB.print_summary();
     return 0;
 }

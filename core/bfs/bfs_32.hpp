@@ -36,11 +36,8 @@ namespace udt
          * @endcode
          * @warning Ensure that the uint32_t value being used for initialization is within the valid
          */
-        bfs_32(const uint32_t &value) noexcept
-        {
-            lower = static_cast<uint16_t>(value & 0x0000FFFF);
-            upper = static_cast<uint16_t>((value >> 16) & 0x0000FFFF);
-        }
+        bfs_32(const uint32_t &value) noexcept : lower(static_cast<uint16_t>(value & 0x0000FFFF)),
+                                                 upper(static_cast<uint16_t>((value >> 16) & 0x0000FFFF)) {}
 
         /**
          * @brief Constructor that initializes the bfs_32 object with two uint16_t values.
@@ -57,11 +54,9 @@ namespace udt
          * @endcode
          * @warning Ensure that the uint16_t values being used for initialization are within the valid range (0-65535) to avoid unexpected behavior.
          */
-        bfs_32(const uint16_t &upper_v, const uint16_t &lower_v) noexcept
-        {
-            upper = upper_v;
-            lower = lower_v;
-        }
+        bfs_32(const uint16_t &upper_v,
+               const uint16_t &lower_v) noexcept : upper(upper_v),
+                                                   lower(lower_v) {}
 
         /**
          * @brief Constructor that initializes the bfs_32 object with four uint8_t values.
@@ -81,11 +76,8 @@ namespace udt
          * @warning Ensure that the uint8_t values being used for initialization are within the valid range (0-255) to avoid unexpected behavior.
          */
         bfs_32(const uint8_t &uuv, const uint8_t &ulv,
-               const uint8_t &luv, const uint8_t &llv) noexcept
-        {
-            upper = {uuv, ulv};
-            lower = {luv, llv};
-        }
+               const uint8_t &luv, const uint8_t &llv) noexcept : upper(bfs_16{uuv, ulv}),
+                                                                  lower(bfs_16{luv, llv}) {}
 
         /**
          * @brief Constructor that initializes the bfs_32 object with four bfs_8 objects.
@@ -105,11 +97,8 @@ namespace udt
          * @warning Ensure that the bfs_8 objects being used for initialization contain valid 8-bit values (0-255) to avoid unexpected behavior.
          */
         bfs_32(const bfs_8 &uuv, const bfs_8 &ulv,
-               const bfs_8 &luv, const bfs_8 &llv) noexcept
-        {
-            upper = {uuv, ulv};
-            lower = {luv, llv};
-        }
+               const bfs_8 &luv, const bfs_8 &llv) noexcept : upper(bfs_16{uuv, ulv}),
+                                                              lower(bfs_16{luv, llv}) {}
 
         /**
          * @brief Constructor that initializes the bfs_32 object with two bfs_16 objects.
@@ -127,11 +116,9 @@ namespace udt
          * @endcode
          * @warning Ensure that the bfs_16 objects being used for initialization contain valid 16-bit values (0-65535) to avoid unexpected behavior.
          */
-        bfs_32(const bfs_16 &upper_v, const bfs_16 &lower_v) noexcept
-        {
-            upper = upper_v;
-            lower = lower_v;
-        }
+        bfs_32(const bfs_16 &upper_v,
+               const bfs_16 &lower_v) noexcept : upper(upper_v),
+                                                 lower(lower_v) {}
 
         /**
          * @brief Constructor that initializes the bfs_32 object with a bfs_8 object and a position.
@@ -151,11 +138,11 @@ namespace udt
          * @endcode
          * @warning Ensure that the bfs_8 object being used for initialization contains a valid
          */
-        bfs_32(int position)
+        bfs_32(size_t position)
         {
-            if (position < 1 || position > 32)
+            if (position > 32)
                 throw std::out_of_range("Position out of range");
-            if (position >= 1 && position <= 16)
+            if (position <= 16)
                 lower.set(position);
             else
                 upper.set(position - 16);
@@ -228,11 +215,8 @@ namespace udt
          * @endcode
          * @warning Ensure that the bfs_32 object being copied from is properly initialized to avoid copying uninitialized data.
          */
-        bfs_32(const bfs_32 &other) noexcept
-        {
-            lower = other.lower;
-            upper = other.upper;
-        }
+        bfs_32(const bfs_32 &other) noexcept : lower(other.lower),
+                                               upper(other.upper) {}
 
         /**
          * @brief Sets all flags in the bfs_32 object to 1.
@@ -283,7 +267,7 @@ namespace udt
          * }
          * @endcode
          */
-        void set(int position);
+        void set(size_t position);
 
         /**
          * @brief Resets all flags to 0.
@@ -321,7 +305,7 @@ namespace udt
          * }
          * @endcode
          */
-        void reset(int position);
+        void reset(size_t position);
 
         /**
          * @brief Gets the value of the lower 16 bits.
@@ -369,7 +353,7 @@ namespace udt
          * }
          * @endcode
          */
-        bool get(int position) const;
+        bool get(size_t position) const;
 
         /**
          * @brief Gets the value of the flag at the specified position using array-like syntax.
@@ -623,9 +607,9 @@ namespace udt
         upper.set_all();
     }
 
-    void bfs_32::set(int position)
+    void bfs_32::set(size_t position)
     {
-        if (position < 1 || position > 32)
+        if (position > 32)
             throw std::out_of_range("Position out of range");
         if (position >= 1 && position <= 16)
             lower.set(position);
@@ -645,9 +629,9 @@ namespace udt
         upper.reset_all();
     }
 
-    void bfs_32::reset(int position)
+    void bfs_32::reset(size_t position)
     {
-        if (position < 1 || position > 32)
+        if (position > 32)
             throw std::out_of_range("Position out of range");
         if (position >= 1 && position <= 16)
             lower.reset(position);
@@ -661,9 +645,9 @@ namespace udt
 
     uint32_t bfs_32::get() const noexcept { return (static_cast<uint32_t>(upper.get()) << 16) | lower.get(); }
 
-    bool bfs_32::get(int position) const
+    bool bfs_32::get(size_t position) const
     {
-        if (position < 1 || position > 32)
+        if (position > 32)
             throw std::out_of_range("Position out of range");
         if (position >= 1 && position <= 16)
             return lower.get(position);

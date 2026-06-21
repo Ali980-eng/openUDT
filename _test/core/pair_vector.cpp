@@ -18,6 +18,7 @@ bool utest_1()
     result &= meta::lite::test::vector<int>(pv1.get_vec2(), v2);
     return result;
 }
+
 bool utest_2()
 {
     bool result = true;
@@ -39,6 +40,7 @@ bool utest_2()
     result &= meta::lite::test::basic<bool>(pv2.empty_v2(), false);
     return result;
 }
+
 bool utest_3()
 {
     bool result = true;
@@ -53,6 +55,7 @@ bool utest_3()
     result &= meta::lite::test::basic<bool>(pv3.empty(), true);
     return result;
 }
+
 bool utest_4()
 {
     bool result = true;
@@ -66,6 +69,7 @@ bool utest_4()
     result &= meta::lite::test::basic<char>(pv4.empty(), true);
     return result;
 }
+
 bool utest_5()
 {
     bool result = true;
@@ -82,6 +86,7 @@ bool utest_5()
     result &= meta::lite::test::basic<int>(pv5.average_v2(), 3.975);
     return result;
 }
+
 bool utest_6()
 {
     bool result = true;
@@ -97,6 +102,7 @@ bool utest_6()
     result &= meta::lite::test::vector<char>(pv6.get_vec2(), v.get(1));
     return result;
 }
+
 bool utest_7()
 {
     bool result = true;
@@ -112,6 +118,7 @@ bool utest_7()
     result &= meta::lite::test::vector<int>(pv7.get_vec2(), vs[1]);
     return result;
 }
+
 bool utest_8()
 {
     bool result = true;
@@ -126,6 +133,7 @@ bool utest_8()
     result &= meta::lite::test::vector<short>(pv8.get_vec2(), v[1]);
     return result;
 }
+
 bool utest_9()
 {
     bool result = true;
@@ -141,6 +149,7 @@ bool utest_9()
     result &= meta::lite::test::vector<int>(pv9.get_vec2(), vs[1]);
     return result;
 }
+
 bool utest_10()
 {
     bool result = true;
@@ -155,6 +164,7 @@ bool utest_10()
     result &= meta::lite::test::vector<int>(pv10.get_vec2(), vs[1]);
     return result;
 }
+
 bool utest_11()
 {
     bool result = true;
@@ -169,6 +179,7 @@ bool utest_11()
     result &= meta::lite::test::vector<int>(pv11.get_vec2(), vs[1]);
     return result;
 }
+
 bool utest_12()
 {
     bool result = true;
@@ -180,6 +191,7 @@ bool utest_12()
     result &= meta::lite::test::basic<int>(pv12.at_v2(1), 88);
     return result = true;
 }
+
 bool utest_13()
 {
     bool result = true;
@@ -190,6 +202,7 @@ bool utest_13()
     result &= meta::lite::test::basic<size_t>(pv13.size_v2(), 4);
     return result;
 }
+
 bool utest_14()
 {
     bool result = true;
@@ -202,6 +215,7 @@ bool utest_14()
     result &= meta::lite::test::basic<int>(pv14.Divi_v2(std::pow(10, 3)), 28.73);
     return result;
 }
+
 bool utest_15()
 {
     bool result = true;
@@ -216,6 +230,7 @@ bool utest_15()
     result &= meta::lite::test::basic<bool>(pv15.empty(), true);
     return result;
 }
+
 bool utest_16()
 {
     bool result = true;
@@ -238,6 +253,7 @@ bool utest_16()
     result &= meta::lite::test::basic<bool>(pv16.empty(), true);
     return result;
 }
+
 bool utest_17()
 {
     bool result = true;
@@ -248,6 +264,7 @@ bool utest_17()
     result &= meta::lite::test::basic<int>(static_cast<int>(pv17.average_v2()), 44);
     return result;
 }
+
 bool utest_18()
 {
     bool result = true;
@@ -258,6 +275,7 @@ bool utest_18()
     result &= meta::lite::test::vector<char>(pv18.get_vec2(), v2);
     return result;
 }
+
 bool utest_19()
 {
     bool result = true;
@@ -269,6 +287,7 @@ bool utest_19()
     result &= meta::lite::test::vector<char>(pv18.get_vec2(), v2);
     return result;
 }
+
 bool utest_20()
 {
     bool result = true;
@@ -283,6 +302,7 @@ bool utest_20()
     result &= meta::lite::test::vector<int>(pv20.get_vec2(), v2);
     return result;
 }
+
 bool utest_21()
 {
     bool result = true;
@@ -297,6 +317,7 @@ bool utest_21()
     result &= meta::lite::test::vector<int>(pv21.get_vec2(), v2);
     return result;
 }
+
 bool utest_22()
 {
     bool result = true;
@@ -309,6 +330,7 @@ bool utest_22()
     result &= meta::lite::test::vector<short>(pv22.get_vec2(), v2);
     return result;
 }
+
 bool utest_23()
 {
     bool result = true;
@@ -321,6 +343,7 @@ bool utest_23()
     result &= meta::lite::test::vector<char>(pv23.get_vec2(), v2);
     return result;
 }
+
 bool utest_24()
 {
     bool result = true;
@@ -335,6 +358,7 @@ bool utest_24()
     result &= meta::lite::test::vector<char>(pv24.get_vec2(), v4);
     return result;
 }
+
 bool utest_25()
 {
     bool result = true;
@@ -350,12 +374,9 @@ bool utest_25()
     result &= meta::lite::test::vector<double>(pv25.get_vec2(), v4);
     return result;
 }
+
 int main()
 {
-    meta::lite::io::NewLines(5);
-    meta::lite::io::NewLines(5);
-    bool bresult;
-    float fresult;
     meta::lite::test_stream UTS;
     UTS << utest_1;
     UTS << utest_2;
@@ -382,15 +403,15 @@ int main()
     UTS << utest_23;
     UTS << utest_24;
     UTS << utest_25;
-    UTS >> bresult;
-    meta::lite::io::print<std::string>("All test result: ");
-    meta::lite::io::println(meta::lite::test::test_message(bresult));
+    UTS.print_summary();
     udt::pair_v<int> v1 = {{77, 49, 388}, {392, 389, 209}};
     udt::pair__v<int, char> v2 = {{88, 92, 39}, {'i', ',', '.'}};
-    meta::lite::io::print("The size of the pair_v data type in bytes: ");
-    meta::lite::io::println(meta::lite::benchmark::mata_data(v1));
-    meta::lite::io::print("The size of the pair__v data type in bytes: ");
-    meta::lite::io::println(meta::lite::benchmark::mata_data(v2));
+    meta::lite::io::println(
+        "The size of the pair_v data type in bytes: ",
+        meta::lite::benchmark::mata_data(v1));
+    meta::lite::io::println(
+        "The size of the pair__v data type in bytes: ",
+        meta::lite::benchmark::mata_data(v2));
     meta::lite::benchmark_stream<false> UTB = 6;
     UTB << utest_1;
     UTB << utest_2;
@@ -417,9 +438,6 @@ int main()
     UTB << utest_23;
     UTB << utest_24;
     UTB << utest_25;
-    UTB >> fresult;
-    meta::lite::io::print<std::string>(
-        "The average time for all unit test: " +
-        std::to_string(fresult) + " us");
+    UTB.print_summary();
     return 0;
 }

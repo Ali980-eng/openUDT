@@ -60,49 +60,49 @@ bool utest_10()
 {
     udt::dynamic_f d;
     d.set(true);
-    return meta::lite::test::basic<bool>(d.type(), "bool");
+    return meta::lite::test::basic<std::string>(d.type(), "bool");
 }
 
 bool utest_11()
 {
     udt::dynamic_f d;
     d.set('Z');
-    return meta::lite::test::basic<bool>(d.type(), "char");
+    return meta::lite::test::basic<std::string>(d.type(), "char");
 }
 
 bool utest_12()
 {
     udt::dynamic_f d;
     d.set(short(456));
-    return meta::lite::test::basic<bool>(d.type(), "short");
+    return meta::lite::test::basic<std::string>(d.type(), "short");
 }
 
 bool utest_13()
 {
     udt::dynamic_f d;
     d.set(7890);
-    return meta::lite::test::basic<bool>(d.type(), "int");
+    return meta::lite::test::basic<std::string>(d.type(), "int");
 }
 
 bool utest_14()
 {
     udt::dynamic_f d;
     d.set(1234567890L);
-    return meta::lite::test::basic<bool>(d.type(), "long");
+    return meta::lite::test::basic<std::string>(d.type(), "long");
 }
 
 bool utest_15()
 {
     udt::dynamic_f d;
     d.set(2.71f);
-    return meta::lite::test::basic<bool>(d.type(), "float");
+    return meta::lite::test::basic<std::string>(d.type(), "float");
 }
 
 bool utest_16()
 {
     udt::dynamic_f d;
     d.set(1.6180339887);
-    return meta::lite::test::basic<bool>(d.type(), "double");
+    return meta::lite::test::basic<std::string>(d.type(), "double");
 }
 
 bool utest_17()
@@ -120,7 +120,7 @@ bool utest_18()
 bool utest_19()
 {
     udt::dynamic_f d(short(321));
-    return meta::lite::test::basic<bool>(d.get_short(), short(321));
+    return meta::lite::test::basic<short>(d.get_short(), short(321));
 }
 
 bool utest_20()
@@ -132,7 +132,7 @@ bool utest_20()
 bool utest_21()
 {
     udt::dynamic_f d(9876543210L);
-    return meta::lite::test::basic<bool>(d.get_long(), 9876543210L);
+    return meta::lite::test::basic<long>(d.get_long(), 9876543210L);
 }
 
 bool utest_22()
@@ -324,8 +324,4 @@ bool utest_52()
     return meta::lite::test::basic<bool>(d1 != d2, false);
 }
 
-int main()
-{
-    meta::lite::io::NewLines();
-    return 0;
-}
+int main() { return 0; }

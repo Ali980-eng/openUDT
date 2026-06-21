@@ -859,7 +859,8 @@ namespace udt
         {
             if (index >= transpose(v2d).size())
                 throw std::out_of_range("Index is out of range.");
-            return transpose(v2d)[index];
+            auto temp = transpose(v2d);
+            return temp[index];
         }
 
         /**

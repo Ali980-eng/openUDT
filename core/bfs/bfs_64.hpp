@@ -35,11 +35,8 @@ namespace udt
          * std::cout << std::hex << bfs.get(); // Output: 123456789ABCDEF0
          * @endcode
          */
-        bfs_64(const uint64_t &value) noexcept
-        {
-            lower = static_cast<uint32_t>(value & 0x00000000FFFFFFFF);
-            upper = static_cast<uint32_t>((value >> 32) & 0x00000000FFFFFFFF);
-        }
+        bfs_64(const uint64_t &value) noexcept : lower(static_cast<uint32_t>(value & 0x00000000FFFFFFFF)),
+                                                 upper(static_cast<uint32_t>((value >> 32) & 0x00000000FFFFFFFF)) {}
 
         /**
          * @brief Constructor that initializes the bfs_64 object with a bfs_8 object and three boolean positions.
@@ -104,11 +101,7 @@ namespace udt
          * std::cout << std::hex << copy.get(); // Output: 123456789ABCDEF0
          * @endcode
          */
-        bfs_64(const bfs_64 &other) noexcept
-        {
-            lower = other.lower;
-            upper = other.upper;
-        }
+        bfs_64(const bfs_64 &other) noexcept : lower(other.lower), upper(other.upper) {}
 
         /**
          * @brief Sets all flags in the bfs_64 object to 1.
@@ -151,7 +144,7 @@ namespace udt
          * }
          * @endcode
          */
-        void set(int position);
+        void set(size_t position);
 
         /**
          * @brief Resets all flags in the bfs_64 object to 0.
@@ -183,7 +176,7 @@ namespace udt
          * bfs.reset(5); // Reset flag at position 5
          * @endcode
          */
-        void reset(int position);
+        void reset(size_t position);
 
         /**
          * @brief Gets the value of the lower 32 bits.
@@ -227,7 +220,7 @@ namespace udt
          * bool bit5 = bfs.get(5); // Get value of flag at position 5
          * @endcode
          */
-        bool get(int position) const;
+        bool get(size_t position) const;
 
         /**
          * @brief Gets the value of the flag at the specified position using array-like syntax.
@@ -438,11 +431,11 @@ namespace udt
         upper.set_all();
     }
 
-    void bfs_64::set(int position)
+    void bfs_64::set(size_t position)
     {
-        if (position < 1 || position > 64)
+        if (position > 64)
             throw std::out_of_range("Position out of range");
-        if (position >= 1 || position <= 32)
+        if (position <= 32)
             lower.set(position);
         else
             upper.set(position - 32);
@@ -460,11 +453,11 @@ namespace udt
         upper.reset_all();
     }
 
-    void bfs_64::reset(int position)
+    void bfs_64::reset(size_t position)
     {
-        if (position < 1 || position > 64)
+        if (position > 64)
             throw std::out_of_range("Position out of range");
-        if (position >= 1 || position <= 32)
+        if (position <= 32)
             lower.reset(position);
         else
             upper.reset(position - 32);
@@ -479,11 +472,11 @@ namespace udt
         return (static_cast<uint64_t>(upper.get()) << 32) | lower.get();
     }
 
-    bool bfs_64::get(int position) const
+    bool bfs_64::get(size_t position) const
     {
-        if (position < 1 || position > 64)
+        if (position > 64)
             throw std::out_of_range("Position out of range");
-        if (position >= 1 || position <= 32)
+        if (position <= 32)
             return lower.get(position);
         else
             return upper.get(position - 32);

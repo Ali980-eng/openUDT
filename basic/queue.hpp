@@ -1,11 +1,8 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <initializer_list>
+#include "metaCore/lite/io.hpp"
 
 #pragma once
-#ifndef OPENUDT___BASIC___queue_HPP
-#define OPENUDT___BASIC___queue_HPP
+#ifndef OPENUDT___BASIC___QUEUE_HPP
+#define OPENUDT___BASIC___QUEUE_HPP
 
 namespace udt
 {
@@ -14,164 +11,162 @@ namespace udt
     class queue
     {
     private:
-        struct node
-        {
-            T item;
-            node *next;
-        };
-        node *front_ptr;
-        node *rear_ptr;
+        size_t rear;
+        size_t front;
         int length;
+        T *arr;
+        int maxSize;
 
     public:
-        queue()
+        queue(int ArrSize)
         {
-            front_ptr = rear_ptr = nullptr;
+            if (ArrSize < 0)
+                throw invalid_argument("the size have to be bigger then zero");
+            front = 0;
+            arr = new T[ArrSize];
+            maxSize = ArrSize;
+            rear = maxSize - 1;
             length = 0;
         }
 
-        queue(T element)
-        {
-            front_ptr = new node;
-            front_ptr->item = element;
-            front_ptr->next = nullptr;
-            rear_ptr = front_ptr;
-            length++;
-        }
+        queue(initializer_list<T> &vec) noexcept : arr(vec) {};
 
-        queue(std::initializer_list<T> list)
-        {
-            for (T element : list)
-                enqueue(element);
-        }
+        inline constexpr bool empty() const noexcept { return length == 0; }
 
-        inline bool is_empty() const noexcept
-        {
-            if (rear_ptr == nullptr)
-                return true;
-            return false;
-        }
+        inline constexpr bool full() const noexcept { return length == maxSize; }
 
-        void enqueue(T element) noexcept
+        void que(T element) noexcept
         {
-            if (is_empty())
-            {
-                front_ptr = new node;
-                front_ptr->item = element;
-                front_ptr->next = nullptr;
-                rear_ptr = front_ptr;
-            }
+            if (full())
+                meta::lite::io::println_error("Queue Full Can't Enqueue");
             else
             {
-                node *new_ptr = new node;
-                new_ptr->item = element;
-                new_ptr->next = nullptr;
-                rear_ptr->next = new_ptr;
-                rear_ptr = new_ptr;
+                rear = (rear + 1) % maxSize;
+                arr[rear] = element;
+                length++;
             }
-            length++;
         }
 
-        void dequeue()
+        void dque() noexcept
         {
-            if (is_empty())
-            {
-                throw std::invalid_argument("empty queue can\'t dequeue");
-            }
+            if (empty())
+                meta::lite::io::println_error("Empty Queue Can't Dequeue");
             else
             {
-                node *temp_ptr = front_ptr;
-                if (front_ptr == rear_ptr)
-                {
-                    rear_ptr = nullptr;
-                    front_ptr = nullptr;
-                    length--;
-                }
-                else
-                {
-                    front_ptr = front_ptr->next;
-                    length--;
-                }
-                temp_ptr->next = nullptr;
-                delete temp_ptr;
+                front = (front + 1) % maxSize;
+                length--;
             }
         }
 
-        inline T get_front() const
+        T get_front() const
         {
-            if (is_empty())
-                throw std::invalid_argument("empty queue");
-            return front_ptr->item;
-        }
-
-        inline T get_rear() const
-        {
-            if (is_empty())
-                throw std::invalid_argument("empty queue");
-            return rear_ptr->item;
-        }
-
-        void clear()
-        {
-            node *current;
-            while (front_ptr != nullptr)
+            if (empty())
             {
-                current = front_ptr;
-                front_ptr = front_ptr->next;
-                delete current;
+                meta::lite::io::println_error("the queue is empty, no elements to get");
+                throw std::invalid_argument("Queue is empty, no front element available.");
             }
-            rear_ptr = nullptr;
-            length = 0;
+            return arr[front];
         }
 
-        void operator=(const std::vector<T> &elements)
+        void get_front(T &element) const noexcept
         {
-            clear();
-            for (const T &element : elements)
-                enqueue(element);
+            if (empty())
+            {
+                meta::lite::io::println_error("the queue is empty, no elements to get");
+                return;
+            }
+            element = arr[front];
         }
 
-        void operator=(const std::string &s)
+        T get_rear() const
         {
-            clear();
-            for (const char &c : s)
-                enqueue(static_cast<T>(c));
+            if (empty())
+            {
+                meta::lite::io::println_error("the queue is empty, no elements to get");
+                throw std::invalid_argument("Queue is empty, no rear element available.");
+            }
+            return arr[rear];
         }
 
-        inline void operator<<(T element) { enqueue(element); }
-
-        inline void operator<<(std::vector<T> &elements)
+        void print() const noexcept
         {
-            enqueue(elements[elements.size() - 1]);
-            elements.pop_back();
+            if (empty())
+            {
+                meta::lite::io::println_error("the queue is empty, no elements to print");
+                return;
+            }
+            std::cout << "Queue elements: ";
+            for (size_t i = 0; i < length; i++)
+                cout << arr[(front + i) % maxSize] << " ";
+            std::cout << '\n';
         }
 
-        inline void operator<<(std::string &s)
+        T search(T element) const noexcept
         {
-            enqueue(s[s.size() - 1]);
-            s.pop_back();
+            if (!empty())
+            {
+                for (int i = front; i != rear; i = (i + 1) % maxSize)
+                {
+                    if (arr[i] == element)
+                        return i;
+                }
+                if (arr[rear] == element)
+                    return rear;
+            }
+            else
+                meta::lite::io::println_error("Q is empty ! ");
+            return -1;
         }
 
-        inline void operator>>(T &element)
+        void operator=(const vector<T> &vec)
         {
+            if (!vec.empty())
+            {
+                for (int i = 0; i < vec.size(); i++)
+                    addQueue(vec[i]);
+            }
+            else
+                meta::lite::io::println_error("Empty Error");
+        }
+
+        void operator=(const queue &other) noexcept
+        {
+            if (this != &other)
+            {
+                front = other.front;
+                rear = other.rear;
+                length = other.length;
+                for (size_t i = 0; i < maxSize; i++)
+                    arr[i] = other.arr[i];
+            }
+        }
+
+        T operator>>(T &element)
+        {
+            if (empty())
+            {
+                meta::lite::io::println_error("the queue is empty, no elements to read");
+                throw std::invalid_argument("Queue is empty, no elements to read.");
+            }
             element = get_front();
-            dequeue();
+            deleteQueue();
+            return element;
         }
 
-        inline void operator>>(std::vector<T> &elements)
+        T operator<<(const T &element)
         {
-            elements.push_back(get_front());
-            dequeue();
+            if (full())
+            {
+                meta::lite::io::println_error("Queue Full Can't Enqueue");
+                throw std::out_of_range("Queue is full, cannot add more elements.");
+            }
+            addQueue(element);
+            return element;
         }
 
-        inline void operator>>(std::string &s)
-        {
-            s += static_cast<char>(get_front());
-            dequeue();
-        }
-
-        ~queue() { clear(); }
+        ~queue() = default;
     };
+
 }
 
-#endif // OPENUDT___BASIC___queue_HPP
+#endif // OPENUDT___BASIC___QUEUE_HPP

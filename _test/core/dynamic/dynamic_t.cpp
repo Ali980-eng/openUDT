@@ -568,9 +568,6 @@ bool utest_85()
 
 int main()
 {
-    meta::lite::io::NewLines(5);
-    bool bresult;
-    float fresult;
     meta::lite::test_stream UTS;
     UTS << utest_1;
     UTS << utest_2;
@@ -657,12 +654,11 @@ int main()
     UTS << utest_83;
     UTS << utest_84;
     UTS << utest_85;
-    UTS >> bresult;
-    meta::lite::io::print<std::string>("All test result: ");
-    meta::lite::io::println(meta::lite::test::test_message(bresult));
+    UTS.print_summary();
     udt::dynamic_t d;
-    meta::lite::io::print("The size of the dynamic_t data type in bytes: ");
-    meta::lite::io::println(meta::lite::benchmark::mata_data(d));
+    meta::lite::io::println(
+        "The size of the dynamic_t data type in bytes: ",
+        meta::lite::benchmark::mata_data(d));
     meta::lite::benchmark_stream<false> UTB = 6;
     UTB << utest_1;
     UTB << utest_2;
@@ -749,9 +745,6 @@ int main()
     UTB << utest_83;
     UTB << utest_84;
     UTB << utest_85;
-    UTB >> fresult;
-    meta::lite::io::print<std::string>(
-        "The average time for all unit test: " +
-        std::to_string(fresult) + " us");
+    UTB.print_summary();
     return 0;
 }

@@ -44,11 +44,7 @@ namespace udt
          * Use this constructor to obtain a dynamic_f object that starts as a double with
          * a zero-initialized value and no other active type flags.
          */
-        dynamic_f()
-        {
-            d_float = float();
-            flag.set(0);
-        };
+        dynamic_f() noexcept : d_float(0.0f) { flag.set(0); }
 
         /**
          * Move Constructor
@@ -67,11 +63,7 @@ namespace udt
          * @param value The boolean value to store
          * @noexcept This constructor does not throw exceptions
          */
-        dynamic_f(bool value) noexcept
-        {
-            d_float = static_cast<float>(value);
-            flag.set(1);
-        }
+        dynamic_f(bool value) noexcept : d_float(static_cast<float>(value)) { flag.set(1); }
 
         /**
          * Construct a dynamic_f object from a character.
@@ -85,11 +77,7 @@ namespace udt
          *
          * @param value  Character value to initialize the dynamic_f instance from.
          */
-        dynamic_f(char value) noexcept
-        {
-            d_float = static_cast<float>(value);
-            flag.set(2);
-        }
+        dynamic_f(char value) noexcept : d_float(static_cast<float>(value)) { flag.set(2); }
 
         /**
          * Construct a dynamic_f object from a short integer.
@@ -97,11 +85,7 @@ namespace udt
          * This constructor is noexcept and does not throw exceptions.
          * @param value The short integer value to initialize the dynamic_f instance with.
          */
-        dynamic_f(short value) noexcept
-        {
-            d_float = static_cast<float>(value);
-            flag.set(3);
-        }
+        dynamic_f(short value) noexcept : d_float(static_cast<float>(value)) { flag.set(3); }
 
         /**
          * Constructs a dynamic_f object representing the given integer value.
@@ -115,11 +99,7 @@ namespace udt
          *
          * @param value The integer value to initialize the dynamic_f object with.
          */
-        dynamic_f(int value) noexcept
-        {
-            d_float = static_cast<float>(value);
-            flag.set(4);
-        }
+        dynamic_f(int value) noexcept : d_float(static_cast<float>(value)) { flag.set(4); }
 
         /**
          * @brief Constructs a dynamic_f object from a long integer value.
@@ -128,11 +108,7 @@ namespace udt
          * @param value The long integer value to initialize the dynamic_f instance with.
          * @note This constructor allows for implicit conversion from long to dynamic_f, enabling seamless assignment of long integer values to dynamic_f objects. The internal state is updated accordingly to reflect the new type and value.
          */
-        dynamic_f(long value) noexcept
-        {
-            d_float = static_cast<float>(value);
-            flag.set(5);
-        }
+        dynamic_f(long value) noexcept : d_float(static_cast<float>(value)) { flag.set(5); }
 
         /**
          * @brief Constructs a dynamic_f object from a long long integer value.
@@ -141,11 +117,7 @@ namespace udt
          * @param value The long long integer value to initialize the dynamic_f instance with.
          * @note This constructor allows for implicit conversion from long long to dynamic_f, enabling seamless assignment of long long integer values to dynamic_f objects. The internal state is updated accordingly to reflect the new type and value.
          */
-        dynamic_f(long long value) noexcept
-        {
-            d_float = static_cast<float>(value);
-            flag.set(5);
-        }
+        dynamic_f(long long value) noexcept : d_float(static_cast<float>(value)) { flag.set(5); }
 
         /**
          * @brief Constructs a dynamic_f object from a float value.
@@ -161,11 +133,7 @@ namespace udt
          * @post ftype == true
          * @post btype == false, ctype == false, itype == false, dtype == false, bvalue == false
          */
-        dynamic_f(float value) noexcept
-        {
-            d_float = static_cast<float>(value);
-            flag.set(6);
-        }
+        dynamic_f(float value) noexcept : d_float(static_cast<float>(value)) { flag.set(6); }
 
         /**
          * @brief Constructs a dynamic_f object holding a float value.
@@ -176,11 +144,7 @@ namespace udt
          * @param value The double value to store.
          * @note This constructor is noexcept and does not throw exceptions.
          */
-        dynamic_f(double value) noexcept
-        {
-            d_float = static_cast<float>(value);
-            flag.set(0);
-        }
+        dynamic_f(double value) noexcept : d_float(static_cast<float>(value)) { flag.set(0); }
 
         /**
          * @brief Copy constructor for dynamic.
@@ -198,11 +162,8 @@ namespace udt
          *
          * @param other The dynamic object to copy from.
          */
-        dynamic_f(const dynamic_f &other) noexcept
-        {
-            d_float = other.d_float;
-            flag = other.flag;
-        }
+        dynamic_f(const dynamic_f &other) noexcept : d_float(other.d_float),
+                                                     flag(other.flag) {}
 
         /**
          * Set the object to represent a boolean value.

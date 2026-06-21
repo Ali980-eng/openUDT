@@ -17,15 +17,15 @@ namespace udt
 
     public:
         /// @brief Default constructor initializes all flags to 0.
-        bfs_8() noexcept { flag_container = 0; }
+        bfs_8() noexcept : flag_container(0) {}
 
         /// @brief Constructor that initializes all flags to a specified value.
         /// @param initial_value The initial value for the flag container.
-        bfs_8(uint8_t initial_value) noexcept { flag_container = initial_value; }
+        bfs_8(uint8_t initial_value) noexcept : flag_container(initial_value) {}
 
         /// @brief Copy constructor.
         /// @param other The bfs_8 object to copy from.
-        bfs_8(const bfs_8 &other) noexcept { flag_container = other.flag_container; }
+        bfs_8(const bfs_8 &other) noexcept : flag_container(other.flag_container) {}
 
         /**
          * @brief Sets the flag at position 1 to 1.
@@ -127,7 +127,7 @@ namespace udt
          * bfs.set(5); // Set bit 5 to 1
          * @endcode
          */
-        constexpr void set(int position) noexcept
+        constexpr void set(size_t position) noexcept
         {
             if (position == 1)
                 set_flag1();
@@ -156,9 +156,9 @@ namespace udt
         /// @brief Gets the value of a specific flag based on position.
         /// @param position the position of the flag to get (1-8).
         /// @return the value of the specified flag (0 or 1).
-        bool get(int position) const
+        bool get(size_t position) const
         {
-            if (position < 1 || position > 8)
+            if (position > 8)
                 throw std::out_of_range(
                     "Error: Position " +
                     std::to_string(position) +
@@ -259,7 +259,7 @@ namespace udt
          * bfs.reset(5); // Reset bit 5 to 0
          * @endcode
          */
-        constexpr void reset(int position) noexcept
+        constexpr void reset(size_t position) noexcept
         {
             if (position == 1)
                 reset_flag1();
@@ -291,7 +291,7 @@ namespace udt
          * bool value = bfs[3]; // Get value of flag at position 3
          * @endcode
          */
-        bool operator[](int position) const
+        bool operator[](size_t position) const
         {
             if (position > 8 || position < 1)
                 std::cerr << "out of rang error\n";

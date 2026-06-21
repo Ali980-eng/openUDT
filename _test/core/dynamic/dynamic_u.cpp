@@ -1,5 +1,6 @@
 #include "metaCore/lite/stream.hpp"
 #include "core/dynamic/dynamic_u.hpp"
+
 /// @brief This function test the empty constructor and empty function in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_1()
@@ -7,62 +8,71 @@ bool utest_1()
     udt::dynamic_u d;
     return meta::lite::test::basic<bool>(d.empty(), true);
 }
+
 /// @brief This function test the int constructor and type function in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_2()
 {
     udt::dynamic_u d(8);
-    return meta::lite::test::basic(d.type(), "int");
+    return meta::lite::test::basic<std::string>(d.type(), "int");
 }
+
 /// @brief This function test the double constructor and type function in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_3()
 {
     udt::dynamic_u d(8.8);
-    return meta::lite::test::basic(d.type(), "double");
+    return meta::lite::test::basic<std::string>(d.type(), "double");
 }
+
 /// @brief This function test the char constructor and type function in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_4()
 {
     udt::dynamic_u d('c');
-    return meta::lite::test::basic(d.type(), "char");
+    return meta::lite::test::basic<std::string>(d.type(), "char");
 }
+
 /// @brief This function test the float constructor and type function in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_5()
 {
     udt::dynamic_u d(float(9.88));
-    return meta::lite::test::basic(d.type(), "float");
+    return meta::lite::test::basic<std::string>(d.type(), "float");
 }
+
 /// @brief This function test the operator = `int` and type function in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_6()
 {
     udt::dynamic_u d = 8;
-    return meta::lite::test::basic(d.type(), "int");
+    return meta::lite::test::basic<std::string>(d.type(), "int");
 }
+
 /// @brief This function test the operator = `double` and type function in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_7()
 {
     udt::dynamic_u d = 8.8;
-    return meta::lite::test::basic(d.type(), "double");
+    return meta::lite::test::basic<std::string>(d.type(), "double");
 }
+
 /// @brief This function test the operator = `char` and type function in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_8()
 {
     udt::dynamic_u d = 'c';
-    return meta::lite::test::basic(d.type(), "char");
+    return meta::lite::test::basic<std::string>(d.type(), "char");
 }
+
 /// @brief This function test the operator = `float` and type function in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_9()
 {
     udt::dynamic_u d = float(7.99);
-    return meta::lite::test::basic(d.type(), "float");
+    return meta::lite::test::basic<std::string>(d.type(), "float");
 }
+
 /// @brief This function test the set_int function and get_int function in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_10()
@@ -71,6 +81,7 @@ bool utest_10()
     d.set_int(99);
     return meta::lite::test::basic<int>(d.get_int(), 99);
 }
+
 /// @brief This function test the set_char function and get_char function in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_11()
@@ -79,6 +90,7 @@ bool utest_11()
     d.set_char('U');
     return meta::lite::test::basic<char>(d.get_char(), 'U');
 }
+
 /// @brief This function test the set_double function and get_double function in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_12()
@@ -87,6 +99,7 @@ bool utest_12()
     d.set_double(9.22);
     return meta::lite::test::basic<double>(d.get_double(), 9.22);
 }
+
 /// @brief This function test the set_float function and get_float function in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_13()
@@ -95,38 +108,43 @@ bool utest_13()
     d.set_float(7.77f);
     return meta::lite::test::basic<float>(d.get_float(), 7.77f);
 }
+
 /// @brief This function test the set_value function and type function in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_14()
 {
     udt::dynamic_u d;
     d.set_value(10);
-    return meta::lite::test::basic(d.type(), "int");
+    return meta::lite::test::basic<std::string>(d.type(), "int");
 }
+
 /// @brief This function test the set_value function and type function in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_15()
 {
     udt::dynamic_u d;
     d.set_value(9.88);
-    return meta::lite::test::basic(d.type(), "double");
+    return meta::lite::test::basic<std::string>(d.type(), "double");
 }
+
 /// @brief This function test the set_value function and type function in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_16()
 {
     udt::dynamic_u d;
     d.set_value(float(8.15));
-    return meta::lite::test::basic(d.type(), "float");
+    return meta::lite::test::basic<std::string>(d.type(), "float");
 }
+
 /// @brief This function test the set_value function and type function in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_17()
 {
     udt::dynamic_u d;
     d.set_value('i');
-    return meta::lite::test::basic(d.type(), "char");
+    return meta::lite::test::basic<std::string>(d.type(), "char");
 }
+
 /// @brief This function test the function is_complex in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_18()
@@ -134,6 +152,7 @@ bool utest_18()
     udt::dynamic_u d;
     return meta::lite::test::basic<bool>(d.is_complex(), false);
 }
+
 /// @brief This function test the function is_complex in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_19()
@@ -142,6 +161,7 @@ bool utest_19()
     d.complex();
     return meta::lite::test::basic<bool>(d.is_complex(), true);
 }
+
 /// @brief This function test the Behavior of the object dynamic_u in complex style.
 /// @return The basic test value (should be true).
 bool utest_20()
@@ -157,15 +177,17 @@ bool utest_20()
            meta::lite::test::basic<int>(d.get_int(), 10) &&
            meta::lite::test::basic<char>(d.get_char(), 'o');
 }
+
 /// @brief This function test the function is_pure_numeric in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_21()
 {
     udt::dynamic_u d;
     d.complex();
-    return meta::lite::test::basic(d.type(), "complex") &&
+    return meta::lite::test::basic<std::string>(d.type(), "complex") &&
            meta::lite::test::basic<bool>(d.is_pure_numeric(), false);
 }
+
 /// @brief This function test the function is_pure_numeric in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_22()
@@ -177,6 +199,7 @@ bool utest_22()
     d = float(11.2);
     return meta::lite::test::basic<bool>(d.is_pure_numeric(), true);
 }
+
 /// @brief This function test the functions has_int and has_float and has_double and has_char in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_23()
@@ -190,6 +213,7 @@ bool utest_23()
            meta::lite::test::basic<bool>(d.has_double(), false) &&
            meta::lite::test::basic<bool>(d.has_char(), true);
 }
+
 /// @brief This function test the has function in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_24()
@@ -203,6 +227,7 @@ bool utest_24()
            meta::lite::test::basic<bool>(d.has("double"), true) &&
            meta::lite::test::basic<bool>(d.has("char"), false);
 }
+
 /// @brief This function test the functions is_complex and get_int in the object dynamic_u.
 /// @return The result of the all basic tests.
 bool utest_25()
@@ -220,6 +245,7 @@ bool utest_25()
     result &= meta::lite::test::basic<bool>(d.is_complex(), false);
     return result;
 }
+
 /// @brief This function test the has function in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_26()
@@ -231,6 +257,7 @@ bool utest_26()
            meta::lite::test::basic<bool>(d.has("char"), true) &&
            meta::lite::test::basic<bool>(d.is_complex(), true);
 }
+
 /// @brief This function test the operator == and != int in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_27()
@@ -239,6 +266,7 @@ bool utest_27()
     return meta::lite::test::basic<bool>(d == 99, true) &&
            meta::lite::test::basic<bool>(d != 38, true);
 }
+
 /// @brief This function test the operator == and != int in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_28()
@@ -247,6 +275,7 @@ bool utest_28()
     return meta::lite::test::basic<bool>(d == 23, false) &&
            meta::lite::test::basic<bool>(d != 82, false);
 }
+
 /// @brief This function test the operator == and != float in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_29()
@@ -255,6 +284,7 @@ bool utest_29()
     return meta::lite::test::basic<bool>(d == 2.2f, true) &&
            meta::lite::test::basic<bool>(d != 1.7f, true);
 }
+
 /// @brief This function test the operator == and != float in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_30()
@@ -271,6 +301,7 @@ bool utest_31()
     return meta::lite::test::basic<bool>(d == 'C', true) &&
            meta::lite::test::basic<bool>(d != '[', true);
 }
+
 /// @brief This function test the operator == and != char in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_32()
@@ -279,6 +310,7 @@ bool utest_32()
     return meta::lite::test::basic<bool>(d == 'c', false) &&
            meta::lite::test::basic<bool>(d != 'a', false);
 }
+
 /// @brief This function test the operator += and + int in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_33()
@@ -288,6 +320,7 @@ bool utest_33()
     int result = d + 11;
     return meta::lite::test::basic<int>(result, 30);
 }
+
 /// @brief This function test the operator -= and - int in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_34()
@@ -297,6 +330,7 @@ bool utest_34()
     int result = d - 4;
     return meta::lite::test::basic<int>(result, 5);
 }
+
 /// @brief This function test the operator *= and * int in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_35()
@@ -306,6 +340,7 @@ bool utest_35()
     int result = d * 6;
     return meta::lite::test::basic<int>(result, 300);
 }
+
 /// @brief This function test the operator /= and / int in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_36()
@@ -315,6 +350,7 @@ bool utest_36()
     int result = d / 3;
     return meta::lite::test::basic<int>(result, 30);
 }
+
 /// @brief This function test the function has_bool in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_37()
@@ -322,6 +358,7 @@ bool utest_37()
     udt::dynamic_u d = true;
     return meta::lite::test::basic<bool>(d.has_bool(), true);
 }
+
 /// @brief This function test the function get_bool in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_38()
@@ -329,6 +366,7 @@ bool utest_38()
     udt::dynamic_u d = false;
     return meta::lite::test::basic<bool>(d.get_bool(), false);
 }
+
 /// @brief This function test the operator += and + double in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_39()
@@ -338,6 +376,7 @@ bool utest_39()
     double result = d + 4.3;
     return meta::lite::test::basic<double>(result, 15.3);
 }
+
 /// @brief This function test the operator -= and - double in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_40()
@@ -347,6 +386,7 @@ bool utest_40()
     double result = d - 1.5;
     return meta::lite::test::basic<int>(10 * result, 55);
 }
+
 /// @brief This function test the operator *= and * double in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_41()
@@ -356,6 +396,7 @@ bool utest_41()
     double result = d * 1.5;
     return meta::lite::test::basic<double>(result, 9);
 }
+
 /// @brief This function test the operator /= and / double in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_42()
@@ -365,6 +406,7 @@ bool utest_42()
     double result = d / 2; // 1.6
     return meta::lite::test::basic<double>(result, 1.6);
 }
+
 /// @brief This function test the operator += and + float in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_43()
@@ -374,6 +416,7 @@ bool utest_43()
     float result = d + 1.5f;
     return meta::lite::test::basic<float>(result, 15.6);
 }
+
 /// @brief This function test the operator -= and - float in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_44()
@@ -383,6 +426,7 @@ bool utest_44()
     float result = d - 0.5;
     return meta::lite::test::basic<float>(result, 1.5);
 }
+
 /// @brief This function test the operator *= and * float in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_45()
@@ -392,6 +436,7 @@ bool utest_45()
     float result = d * 0.15;
     return meta::lite::test::basic<float>(result, 1.5);
 }
+
 /// @brief This function test the operator /= and / float in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_46()
@@ -401,6 +446,7 @@ bool utest_46()
     float result = d / 0.5; //
     return meta::lite::test::basic<float>(result, 56.2);
 }
+
 /// @brief This function test the operator += and + char in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_47()
@@ -410,6 +456,7 @@ bool utest_47()
     char result = d + 10;
     return meta::lite::test::basic<char>(result, 'o');
 }
+
 /// @brief This function test the operator -= and - char in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_48()
@@ -419,6 +466,7 @@ bool utest_48()
     char result = d - 3;
     return meta::lite::test::basic<char>(result, 'd');
 }
+
 /// @brief This function test the operator ^= and ^ int in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_49()
@@ -428,6 +476,7 @@ bool utest_49()
     int result = d ^ 3;
     return meta::lite::test::basic<int>(result, std::pow(10, 6));
 }
+
 /// @brief This function test the operator % int in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_50()
@@ -435,6 +484,7 @@ bool utest_50()
     udt::dynamic_u d = 10;
     return meta::lite::test::basic<int>(d % 2, 0);
 }
+
 /// @brief This function test the operator %= int in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_51()
@@ -443,6 +493,7 @@ bool utest_51()
     d %= 2;
     return meta::lite::test::basic<int>(d.get_int(), 0);
 }
+
 /// @brief This function test the operator ^= double in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_52()
@@ -451,6 +502,7 @@ bool utest_52()
     d ^= 5;
     return meta::lite::test::basic<double>(d.get_double(), 97.65625);
 }
+
 /// @brief This function test the operator && bool in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_53()
@@ -458,6 +510,7 @@ bool utest_53()
     udt::dynamic_u d = true;
     return meta::lite::test::basic<bool>(d && false, false);
 }
+
 /// @brief This function test the operator && bool in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_54()
@@ -465,6 +518,7 @@ bool utest_54()
     udt::dynamic_u d = true;
     return meta::lite::test::basic<bool>(d && true, true);
 }
+
 /// @brief This function test the operator && bool in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_55()
@@ -472,6 +526,7 @@ bool utest_55()
     udt::dynamic_u d = false;
     return meta::lite::test::basic<bool>(d && true, false);
 }
+
 /// @brief This function test the operator && bool in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_56()
@@ -479,6 +534,7 @@ bool utest_56()
     udt::dynamic_u d = false;
     return meta::lite::test::basic<bool>(d && false, false);
 }
+
 /// @brief This function test the operator || bool in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_57()
@@ -486,6 +542,7 @@ bool utest_57()
     udt::dynamic_u d = true;
     return meta::lite::test::basic<bool>(d || false, true);
 }
+
 /// @brief This function test the operator || bool in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_58()
@@ -493,6 +550,7 @@ bool utest_58()
     udt::dynamic_u d = true;
     return meta::lite::test::basic<bool>(d || true, true);
 }
+
 /// @brief This function test the operator || bool in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_59()
@@ -500,6 +558,7 @@ bool utest_59()
     udt::dynamic_u d = false;
     return meta::lite::test::basic<bool>(d || true, true);
 }
+
 /// @brief This function test the operator || bool in the object dynamic_u.
 /// @return The basic test value (should be true).
 bool utest_60()
@@ -507,11 +566,9 @@ bool utest_60()
     udt::dynamic_u d = false;
     return meta::lite::test::basic<bool>(d || false, false);
 }
+
 int main()
 {
-    meta::lite::io::NewLines(5);
-    bool bresult;
-    float fresult;
     meta::lite::test_stream UTS;
     UTS << utest_1;
     UTS << utest_2;
@@ -573,9 +630,7 @@ int main()
     UTS << utest_58;
     UTS << utest_59;
     UTS << utest_60;
-    UTS >> bresult;
-    meta::lite::io::print<std::string>("All test result: ");
-    meta::lite::io::println(meta::lite::test::test_message(bresult));
+    UTS.print_summary();
     udt::dynamic_u d;
     meta::lite::io::print("The size of the dynamic_u data type in bytes: ");
     meta::lite::io::println(meta::lite::benchmark::mata_data(d));
@@ -640,9 +695,6 @@ int main()
     UTB << utest_58;
     UTB << utest_59;
     UTB << utest_60;
-    UTB >> fresult;
-    meta::lite::io::print<std::string>(
-        "The average time for all unit test: " +
-        std::to_string(fresult) + " us");
+    UTB.print_summary();
     return 0;
 }

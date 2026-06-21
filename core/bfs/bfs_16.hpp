@@ -21,46 +21,31 @@ namespace udt
 
     public:
         /// @brief Default constructor initializes all flags to 0.
-        bfs_16() noexcept
-        {
-            lower_byte = 0;
-            upper_byte = 0;
-        }
+        bfs_16() noexcept : lower_byte(0), upper_byte(0) {}
 
         /// @brief Constructor that initializes the bfs_16 object with a uint16_t value.
         /// @param value The uint16_t value to initialize the bfs_16 object with.
-        bfs_16(const uint16_t &value) noexcept
-        {
-            lower_byte = static_cast<uint8_t>(value & 0x00FF);
-            upper_byte = static_cast<uint8_t>((value >> 8) & 0x00FF);
-        }
+        bfs_16(const uint16_t &value) noexcept : lower_byte(static_cast<uint8_t>(value & 0x00FF)),
+                                                 upper_byte(static_cast<uint8_t>((value >> 8) & 0x00FF)) {}
 
         /// @brief Constructor that initializes the bfs_16 object with two uint8_t values.
         /// @param upper_v The upper 8 bits value to initialize the bfs_16 object with.
         /// @param lower_v The lower 8 bits value to initialize the bfs_16 object with.
-        bfs_16(const uint8_t &upper_v, const uint8_t &lower_v) noexcept
-        {
-            upper_byte = upper_v;
-            lower_byte = lower_v;
-        }
+        bfs_16(const uint8_t &upper_v,
+               const uint8_t &lower_v) noexcept : upper_byte(upper_v), lower_byte(lower_v) {}
 
         /// @brief Constructor that initializes the bfs_16 object with two int values.
         /// @param upper_val The upper 8 bits value to initialize the bfs_16 object with.
         /// @param lower_val The lower 8 bits value to initialize the bfs_16 object with.
-        bfs_16(const int &upper_val, const int &lower_val) noexcept
-        {
-            upper_byte = static_cast<uint8_t>(upper_val);
-            lower_byte = static_cast<uint8_t>(lower_val);
-        }
+        bfs_16(const int &upper_val,
+               const int &lower_val) noexcept : upper_byte(static_cast<uint8_t>(upper_val)),
+                                                lower_byte(static_cast<uint8_t>(lower_val)) {}
 
         /// @brief Constructor that initializes the bfs_16 object with two bfs_8 objects.
         /// @param upper_v The upper 8 bits value to initialize the bfs_16 object with.
         /// @param lower_v The lower 8 bits value to initialize the bfs_16 object with.
-        bfs_16(const bfs_8 &upper_v, const bfs_8 &lower_v) noexcept
-        {
-            upper_byte = upper_v;
-            lower_byte = lower_v;
-        }
+        bfs_16(const bfs_8 &upper_v,
+               const bfs_8 &lower_v) noexcept : upper_byte(upper_v), lower_byte(lower_v) {}
 
         /// @brief Constructor that initializes the bfs_16 object with a bfs_8 object and a position.
         /// @param other The bfs_8 object to initialize the bfs_16 object with.
@@ -75,9 +60,9 @@ namespace udt
 
         /// @brief Constructor that initializes the bfs_16 object with a position.
         /// @param position The position (1-16) to set the flag.
-        bfs_16(int position)
+        bfs_16(size_t position)
         {
-            if (position < 1 || position > 16)
+            if (position > 16)
                 throw std::out_of_range("Position out of range");
             if (position >= 1 && position <= 8)
                 lower_byte.set(position);
@@ -87,11 +72,8 @@ namespace udt
 
         /// @brief Copy constructor for bfs_16.
         /// @param other The bfs_16 object to copy from.
-        bfs_16(const bfs_16 &other) noexcept
-        {
-            lower_byte = other.lower_byte;
-            upper_byte = other.upper_byte;
-        }
+        bfs_16(const bfs_16 &other) noexcept : lower_byte(other.lower_byte),
+                                               upper_byte(other.upper_byte) {}
 
         /// @brief Sets all flags to 1.
         constexpr void set_all() noexcept
@@ -117,9 +99,9 @@ namespace udt
 
         /// @brief Sets the flag at the specified position.
         /// @param position The position (1-16) to set the flag.
-        void set(int position)
+        void set(size_t position)
         {
-            if (position < 1 || position > 16)
+            if (position > 16)
                 throw std::out_of_range("Position out of range");
             if (position >= 1 && position <= 8)
                 lower_byte.set(position);
@@ -166,9 +148,9 @@ namespace udt
          * }
          * @endcode
          */
-        void reset(int position)
+        void reset(size_t position)
         {
-            if (position > 16 || position < 1)
+            if (position > 16)
                 throw std::out_of_range("Position is out of BFS bit range");
             if (position <= 8 && position >= 1)
                 lower_byte.reset_all();
@@ -208,9 +190,9 @@ namespace udt
          * }
          * @endcode
          */
-        bool get(int position) const
+        bool get(size_t position) const
         {
-            if (position < 1 || position > 16)
+            if (position > 16)
                 throw std::out_of_range("Position out of range");
             if (position >= 1 && position <= 8)
                 return lower_byte.get(position);

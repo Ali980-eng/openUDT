@@ -682,7 +682,8 @@ namespace udt
         {
             if (index >= flatten_2dvec().size())
                 throw std::out_of_range("Flatten row index out of range");
-            return flatten_2dvec()[index];
+            auto temp = flatten_2dvec();
+            return temp[index];
         }
 
         /**
