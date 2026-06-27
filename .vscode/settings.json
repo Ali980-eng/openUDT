@@ -6,7 +6,7 @@
     // --- C++ Configurations ---
     "C_Cpp.clang_format_style": "file",
     "C_Cpp.updateChannel": "Insiders",
-    "cmake.sourceDirectory": "E:/Projects/openUDT",
+    "cmake.sourceDirectory": "C:\\Users\\User\\OneDrive\\Documents\\GitHub\\openUDT",
     "files.associations": {
         "*.tpp": "cpp",
         "*.ipp": "cpp",

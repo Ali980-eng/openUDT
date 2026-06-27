@@ -8,6 +8,7 @@
 #include "core/multidimensional.hpp"
 #include "core/pair.hpp"
 #include "core/tree.hpp"
+#include "core/string.hpp"
 #include "core/triple.hpp"
 #include "core/virtual.hpp"
 

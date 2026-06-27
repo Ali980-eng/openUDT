@@ -1,4 +1,4 @@
-#include "metaCore/lite/io.hpp"
+#include "meta/lite/io.hpp"
 
 #pragma once
 #ifndef OPENUDT___BASIC___QUEUE_HPP

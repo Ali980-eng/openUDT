@@ -33,10 +33,10 @@ param(
 )
 
 # ===================== Global Settings =====================
-$script:Version = "beta 0.0.5"
-$script:LicenseFile = Join-Path -Path $PSScriptRoot -ChildPath "_docs/lic.txt"
-$script:DocRoot = "_docs/text"
-$script:briefFile = "_docs/brief.txt"
+$script:Version = "beta 0.0.6"
+$script:LicenseFile = Join-Path -Path $PSScriptRoot -ChildPath "documentation/lic.txt"
+$script:HelpRoot = "help"
+$script:briefFile = "documentation/brief.txt"
 
 # ===================== Helper Functions =====================
 
@@ -51,7 +51,7 @@ function Show-License {
     }
     else {
         Write-Error "License file not found: $script:LicenseFile"
-        Write-Host "Please create a lic.txt file in the '_docs' folder." -ForegroundColor Red
+        Write-Host "Please create a lic.txt file in the 'documentation' folder." -ForegroundColor Red
     }
 }
 
@@ -62,7 +62,7 @@ function Show-Brief {
     }
     else {
         Write-Error "Brief file not found: $script:briefFile"
-        Write-Host "Please create a brief.txt file in the '_docs' folder." -ForegroundColor Red
+        Write-Host "Please create a brief.txt file in the 'documentation' folder." -ForegroundColor Red
     }
 }
 
@@ -80,26 +80,26 @@ Usage:
 
 Options:
     --version               : Show script version.
-    --license               : Show license content (from _docs/lic.txt).
+    --license               : Show license content (from documentation/lic.txt).
     --help                  : Show this help message.
     --help <path>           : Show documentation for a specific library.
                               <path> is the library file path (e.g., core/bfs.h).
                               The script looks for documentation at:
-                              _docs/text/<path_without_extension>.txt
+                              help/<path_without_extension>.txt
 
 Examples:
     .\udt.ps1 --help core/bfs.hpp
     .\udt.ps1 --help basic/index.h
 
 Note:
-    - The documentation root folder is '_docs/text' relative to the script location.
+    - The documentation root folder is 'help' relative to the script location.
     - Path separators can be '/' or '\' and are handled correctly.
     - Any file extension is removed and replaced with .txt.
 "@
     Write-Host $helpText -ForegroundColor White
 }
 
-function Show-Documentation {
+function Search-Help {
     param([string]$LibraryPath)
 
     # Normalize path separators to Windows backslash
@@ -108,8 +108,8 @@ function Show-Documentation {
     # Remove extension (everything after the last dot)
     $withoutExt = $normalizedPath -replace '\.[^.]*$', ''
     
-    # Build the documentation file path inside _docs/textDoc
-    $docFileRelative = Join-Path -Path $script:DocRoot -ChildPath "$withoutExt.txt"
+    # Build the documentation file path inside helpDoc
+    $docFileRelative = Join-Path -Path $script:HelpRoot -ChildPath "$withoutExt.txt"
     
     # Get absolute path (based on script location)
     $docFullPath = Join-Path -Path $PSScriptRoot -ChildPath $docFileRelative
@@ -144,7 +144,7 @@ elseif ($Command -eq "--brief") {
 }
 elseif ($Command -eq "--help") {
     if ($Path) {
-        Show-Documentation -LibraryPath $Path
+        Search-Help -LibraryPath $Path
     }
     else {
         Show-Help
