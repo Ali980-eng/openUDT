@@ -15,34 +15,35 @@ namespace udt
 {
     namespace Virtual
     {
-        typedef std::vector<uint8_t> data;
+        using data = std::vector<uint8_t>;
+        using segments = hash_map<str, std::pair<size_t, data>>;
 
-        struct machine_8
+        class machine_8
         {
-            std::unordered_map<std::string, uint8_t> registers;
-            std::unordered_map<std::string, std::pair<size_t, data>> segments;
-            std::unordered_map<std::string, ptr_8> segments_indexs;
+            hash_map<str, uint8_t> registers;
+            hash_map<str, std::pair<size_t, data>> segments;
+            hash_map<str, ptr_8> segments_indexs;
         };
 
-        struct machine_16
+        class machine_16
         {
-            std::unordered_map<std::string, uint16_t> registers;
-            std::unordered_map<std::string, std::pair<size_t, data>> segments;
-            std::unordered_map<std::string, ptr_32> segments_indexs;
+            hash_map<str, uint16_t> registers;
+            hash_map<str, std::pair<size_t, data>> segments;
+            hash_map<str, ptr_32> segments_indexs;
         };
 
-        struct machine_32
+        class machine_32
         {
-            std::unordered_map<std::string, uint32_t> registers;
-            std::unordered_map<std::string, std::pair<size_t, data>> segments;
-            std::unordered_map<std::string, ptr_32> segments_indexs;
+            hash_map<str, uint32_t> registers;
+            hash_map<str, std::pair<size_t, data>> segments;
+            hash_map<str, ptr_32> segments_indexs;
         };
 
-        struct machine_64
+        class machine_64
         {
-            std::unordered_map<std::string, uint64_t> registers;
-            std::unordered_map<std::string, std::pair<size_t, data>> segments;
-            std::unordered_map<std::string, ptr_64> segments_indexs;
+            hash_map<str, uint64_t> registers;
+            hash_map<str, std::pair<size_t, data>> segments;
+            hash_map<str, ptr_64> segments_indexs;
         };
     }
 }

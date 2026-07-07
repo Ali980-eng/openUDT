@@ -1,5 +1,5 @@
-#include "metaCore/lite/stream.hpp"
-#include "core/pair/pair_t.hpp"
+#include "meta/lite/stream.hpp"
+#include "udt/core/pair/pair_t.hpp"
 
 bool utest_1()
 {

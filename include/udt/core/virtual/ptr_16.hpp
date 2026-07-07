@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <stdexcept>
 #include <sstream>
+#include "cfrost/structure.h"
 
 #pragma once
 #ifndef OPENUDT___CORE___VIRTUAL_PTR_16_HPP
@@ -66,11 +67,11 @@ namespace udt
              * @return A string containing the hexadecimal representation followed by 'h' suffix.
              *         For example, value 65535 returns "ffffh"
              */
-            std::string get_str() const noexcept
+            str get_str() const noexcept
             {
                 std::stringstream ss;
                 ss << std::hex << ptr;
-                std::string hexadecimal_result = ss.str();
+                str hexadecimal_result = ss.str();
                 return hexadecimal_result + "h";
             }
 

@@ -7,6 +7,10 @@ namespace udt
     namespace tree
     {
 
+        /// @brief Represents a tree where each node may have multiple named child branches.
+        ///
+        /// This container is useful for hierarchical data structures where each child is
+        /// identified by a string name rather than by a fixed positional index.
         template <typename T>
         class multiBranch
         {
@@ -61,9 +65,16 @@ namespace udt
         public:
             multiBranch() = default;
             ~multiBranch() { clear(root); }
+
+            /// @brief Constructs a tree with the provided root element.
+            ///
+            /// @param element The initial value stored at the root node.
             multiBranch(const T &element) : root(new node{nullptr, {}, element}),
                                             current(root), nodeNumber(1) {}
 
+            /// @brief Initializes the root node when the tree is still empty.
+            ///
+            /// @param element The value assigned to the root node.
             void set(const T &element) noexcept
             {
                 if (root != nullptr)
@@ -73,6 +84,10 @@ namespace udt
                 nodeNumber++;
             }
 
+            /// @brief Adds a child node under the current node.
+            ///
+            /// @param name The name used to identify the child.
+            /// @param element The value stored in the new child node.
             void add(const std::string &name, const T &element) noexcept
             {
                 if (root == nullptr)
@@ -91,12 +106,17 @@ namespace udt
                 nodeNumber++;
             }
 
+            /// @brief Adds a child node whose subtree is copied from another multiBranch instance.
+            ///
+            /// @param name The name used to identify the child.
+            /// @param other The tree whose root value is used to create the child subtree.
             void add(const std::string &name,
                      const multiBranch<T> &other) noexcept
             {
                 add(name, other.root);
             }
 
+            /// @brief Removes the current node from the tree and repositions the cursor to its parent.
             void remove() noexcept
             {
                 node *temp = current;
@@ -107,6 +127,9 @@ namespace udt
                 clear(temp);
             }
 
+            /// @brief Removes a named child from the current node.
+            ///
+            /// @param name The child name to remove.
             void remove_child(const std::string &name)
             {
                 if (root != nullptr)
@@ -126,8 +149,10 @@ namespace udt
                 }
             }
 
+            /// @brief Clears the entire tree.
             void clear() noexcept { clear(root); }
 
+            /// @brief Removes all children from the current node.
             void clear_childs() noexcept
             {
                 if (current->childs.empty())
@@ -136,6 +161,9 @@ namespace udt
                 current->childs.clear();
             }
 
+            /// @brief Moves the current node to the root or to its parent.
+            ///
+            /// @param toRoot When true, moves to the root; otherwise moves to the parent.
             void move(bool toRoot)
             {
                 if (root != nullptr && toRoot)
@@ -149,6 +177,9 @@ namespace udt
                 }
             }
 
+            /// @brief Moves the current node to a child identified by name.
+            ///
+            /// @param name The name of the child node to select.
             void move(const std::string &name)
             {
                 if (current->childs.contains(name))
@@ -162,6 +193,7 @@ namespace udt
                 }
             }
 
+            /// @brief Prints the current node's child names and associated values.
             void list() noexcept
             {
                 if (root == nullptr || current == nullptr)
@@ -175,20 +207,44 @@ namespace udt
                 }
             }
 
+            /// @brief Checks whether the current node is the root node.
             constexpr bool in_root() noexcept { return current == root ? true : false; }
+
+            /// @brief Checks whether the current node has any children.
             constexpr bool has_childs() noexcept { return !(current->childs.empty()); }
+
+            /// @brief Checks whether the current node has a parent node.
             constexpr bool has_parent() noexcept { return current->parent != nullptr; }
+
+            /// @brief Checks whether the tree has no root node.
             constexpr bool empty() noexcept { return root == nullptr; }
+
+            /// @brief Checks whether the current node contains a named child.
+            ///
+            /// @param name The child name to search for.
             bool contains_child(const std::string &name) { return current->childs.contains(name); }
+
+            /// @brief Checks whether the specified value exists anywhere in the tree.
+            ///
+            /// @param element The value to search for.
             bool exist(const T &element) { return exist(root, element); }
+
+            /// @brief Replaces every matching value in the tree with a new value.
+            ///
+            /// @param oldEle The old value to replace.
+            /// @param newEle The new value used as a replacement.
             void replace(const T &oldEle, const T &newEle) { replace(root, oldEle, newEle); }
 
+            /// @brief Assigns a set of named values to the tree by inserting them as children.
+            ///
+            /// @param list A mapping of child names to values.
             void operator=(const std::map<std::string, T> &list)
             {
                 for (auto element : list)
                     add(element.first, element.second);
             }
 
+            /// @brief Adds a value to the current node's stored element.
             template <typename U = T>
             constexpr arithmetic_condition<U, void>
             operator+=(const T &element) noexcept { current->element += element; }

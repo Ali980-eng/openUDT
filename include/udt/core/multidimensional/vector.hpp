@@ -1,10 +1,8 @@
-#include <functional>
-#include <vector>
 #include <stdexcept>
 #include <cmath>
 #include <iostream>
-#include <string>
 #include "meta/adva/function.hpp"
+#include "cfrost/structure.h"
 
 #pragma once
 #ifndef OPENUDT___CORE___VECTOR_MULTIDIMENSIONAL_VECTOR_HPP
@@ -14,7 +12,7 @@ namespace udt
 {
 
     /**
-     * A simple wrapper over std::vector to provide list-like operations,
+     * A simple wrapper over vec to provide list-like operations,
      * such as push_front, pop_front, insert before/after, and reverse view.
      *
      * @tparam T The type of elements stored in the list.
@@ -25,7 +23,7 @@ namespace udt
     private:
         size_t max_size = 0; // Default size to -1 to indicate uninitialized
         bool fixed_size = false;
-        std::vector<T> list;
+        vec<T> list;
 
     public:
         /**
@@ -76,11 +74,11 @@ namespace udt
          * Initializes the internal list with the provided 2D vector.
          * Optionally checks against a fixed size if one is defined.
          *
-         * @param vec2d Input 2D vector used to initialize the object.
+         * @param input2d Input 2D vector used to initialize the object.
          * @param i Optional parameter (currently unused, defaults to 0).
          * @throws std::length_error if vec2d.size() exceeds max_size when max_size != -1.
          */
-        vector(const std::vector<std::vector<T>> &vec2d, unsigned int i = 0)
+        vector(const vec<vec<T>> &input2d, unsigned int i = 0)
         {
             if (vec2d.size() > max_size && max_size != -1)
                 throw std::length_error("unmatched to the fixed size of the vector");
@@ -133,7 +131,7 @@ namespace udt
          * Constructor that initializes the list with a vector
          * @param NewList Vector to initialize the list
          */
-        vector(const std::vector<T> &NewList) { list = NewList; }
+        vector(const vec<T> &NewList) { list = NewList; }
 
         /**
          * Constructor that initializes the list with a vector and a specified size
@@ -141,7 +139,7 @@ namespace udt
          * @param s Size of the list
          * @throws runtime_error if s is negative
          */
-        void set(const std::vector<T> &NewList) noexcept { ist = NewList; }
+        void set(const vec<T> &NewList) noexcept { ist = NewList; }
 
         /**
          * Sets the list with a vector and a specified size
@@ -171,7 +169,7 @@ namespace udt
                 throw std::runtime_error("size can not be negative");
             if (max_size != -1 && list.size() > s)
             {
-                std::vector<T> temp = list;
+                vec<T> temp = list;
                 list.clear();
                 for (size_t i = 0; i < s; i++)
                     list.push_back(temp[i]);
@@ -187,14 +185,14 @@ namespace udt
          * Gets the current size of the vector
          * @return The size of the vector
          */
-        const std::vector<T> &get() const noexcept { return list; }
+        const vec<T> &get() const noexcept { return list; }
 
         /**
          * Gets a copy of the current vector
          * @return A copy of the vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        std::vector<T> get_copy() const noexcept { return list; }
+        vec<T> get_copy() const noexcept { return list; }
 
         /**
          * Gets the size of the vector
@@ -249,11 +247,11 @@ namespace udt
          * @return A vector containing the elements of the list in reverse order
          * @throws runtime_error if the list is empty
          */
-        std::vector<T> reverse() const
+        vec<T> reverse() const
         {
             if (list.empty())
                 throw std::runtime_error("empty list can not do this operation");
-            std::vector<T> reversed;
+            vec<T> reversed;
             for (auto it = list.rbegin(); it != list.rend(); ++it)
                 reversed.push_back(*it);
             return reversed;
@@ -265,7 +263,7 @@ namespace udt
          * @return A vector containing the elements of the specified portion of the list in reverse order
          * @throws runtime_error if the list is empty or if the begin index is out of range
          */
-        std::vector<T> reverse(int begin) const
+        vec<T> reverse(int begin) const
         {
             if (list.empty())
                 throw std::runtime_error("empty list can not do this operation");
@@ -275,7 +273,7 @@ namespace udt
                 return {};
             if (begin == 0)
                 return reverse();
-            std::vector<T> reversed;
+            vec<T> reversed;
             for (auto it = list.rbegin() + (list.size() - begin - 1); it != list.rend(); ++it)
                 reversed.push_back(*it);
             return reversed;
@@ -288,7 +286,7 @@ namespace udt
          * @return A vector containing the elements of the specified portion of the list in reverse order
          * @throws runtime_error if the list is empty or if the begin or end index is out of range
          */
-        std::vector<T> reverse(int begin, int end) const
+        vec<T> reverse(int begin, int end) const
         {
             if (list.empty())
                 throw std::runtime_error("empty list can not do this operation");
@@ -298,7 +296,7 @@ namespace udt
                 return reverse();
             if (begin == end)
                 return {};
-            std::vector<T> reversed;
+            vec<T> reversed;
             for (auto it = list.rbegin() + (list.size() - end); it != list.rbegin() + (list.size() - begin + 1); ++it)
                 reversed.push_back(*it);
             return reversed;
@@ -374,7 +372,7 @@ namespace udt
         {
             if (max_size != -1 && static_cast<int>(list.size()) >= max_size)
                 throw std::runtime_error("List size limit reached, cannot push front");
-            std::vector<T> temp;
+            vec<T> temp;
             temp.push_back(value);
             for (size_t i = 0; i < list.size(); i++)
                 temp.push_back(list[i]);
@@ -390,7 +388,7 @@ namespace udt
          * @throw runtime_error if the list size limit is reached
          * @note The function fx is applied to each element in the list, and the first
          */
-        void push_front(std::function<bool(T)> fx, T value)
+        void push_front(func<bool(T)> fx, T value)
         {
             if (max_size != -1 && static_cast<int>(list.size()) >= max_size)
                 throw std::runtime_error("List size limit reached, cannot push front");
@@ -423,7 +421,7 @@ namespace udt
         {
             if (list.empty())
                 throw std::runtime_error("List is empty, cannot pop front");
-            std::vector<T> temp;
+            vec<T> temp;
             for (size_t i = 1; i < list.size(); i++)
                 temp.push_back(list[i]);
             list.clear();
@@ -485,7 +483,7 @@ namespace udt
          * @return True if an element satisfying the condition is found, false otherwise
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        bool find(std::function<bool(T)> fx) const noexcept
+        bool find(func<bool(T)> fx) const noexcept
         {
             for (size_t i = 0; i < list.size(); i++)
             {
@@ -515,7 +513,7 @@ namespace udt
          * @return The index of the element satisfying the condition, or -1 if not found
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        int find_index(std::function<bool(T)> fx) const noexcept
+        int find_index(func<bool(T)> fx) const noexcept
         {
             for (size_t i = 0; i < list.size(); i++)
             {
@@ -533,7 +531,7 @@ namespace udt
         {
             if (index < 0 || index >= static_cast<int>(list.size()))
                 throw std::runtime_error("Index out of range");
-            std::vector<T> temp;
+            vec<T> temp;
             for (size_t i = 0; i < list.size(); i++)
             {
                 if (static_cast<int>(i) == index)
@@ -553,7 +551,7 @@ namespace udt
          */
         void erase(T Key) noexcept
         {
-            std::vector<T> temp;
+            vec<T> temp;
             for (size_t i = 0; i < list.size(); i++)
             {
                 if (Key == list[i])
@@ -572,9 +570,9 @@ namespace udt
          * @note This function is noexcept, meaning it does not throw exceptions.
          * The function fx is applied to each element in the list, and elements for which
          */
-        void erase(std::function<bool(T)> fx) noexcept
+        void erase(func<bool(T)> fx) noexcept
         {
-            std::vector<T> temp;
+            vec<T> temp;
             for (size_t i = 0; i < list.size(); i++)
             {
                 if (fx(list[i]))
@@ -615,7 +613,7 @@ namespace udt
          */
         void add_before(T Node, T Key) noexcept
         {
-            std::vector<T> temp;
+            vec<T> temp;
             for (size_t i = 0; i < list.size(); i++)
             {
                 if (list[i] == Node)
@@ -639,7 +637,7 @@ namespace udt
          */
         void add_after(T Node, T Key) noexcept
         {
-            std::vector<T> temp;
+            vec<T> temp;
             for (size_t i = 0; i < list.size(); i++)
             {
                 if (list[i] == Node)
@@ -702,13 +700,13 @@ namespace udt
 
         /**
          * Assignment operator for vector
-         * @param vec Vector to assign to the vector
+         * @param input Vector to assign to the vector
          * @post Replaces the current vector with the input vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        void operator=(const std::vector<T> &vec)
+        void operator=(const vec<T> &input)
         {
-            if (vec.size() > max_size && max_size != -1)
+            if (input.size() > max_size && max_size != -1)
                 throw std::runtime_error("List size limit reached, cannot assign vector");
             if (vec.empty())
                 list = {};
@@ -717,11 +715,11 @@ namespace udt
 
         /**
          * Equality operator for VecList
-         * @param vec Vector to compare with the list
+         * @param input Vector to compare with the list
          * @return True if the list is equal to the vector, false otherwise
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        bool operator==(const std::vector<T> &vec) const noexcept
+        bool operator==(const vec<T> &input) const noexcept
         {
             if (vec.empty() && list.empty())
                 return true;
@@ -729,10 +727,10 @@ namespace udt
                 return false;
             else if (list.empty())
                 return false;
-            else if (list.size() != vec.size())
+            else if (list.size() != input.size())
                 return false;
-            for (size_t i = 0; i < vec.size(); i++)
-                if (vec[i] != list[i])
+            for (size_t i = 0; i < input.size(); i++)
+                if (input[i] != list[i])
                     return false;
             return true;
         }
@@ -755,38 +753,38 @@ namespace udt
 
         /**
          * Adds a vector to the list
-         * @param vec Vector to add
+         * @param input Vector to add
          * @post Adds the vector to the list
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        void operator+(const std::vector<T> &vec)
+        void operator+(const vec<T> &input)
         {
             if (vec.empty() || list.empty())
                 return;
             auto temp = list;
             list.clear();
-            if (vec.size() == temp.size())
+            if (input.size() == temp.size())
             {
                 for (size_t i = 0; i < temp.size(); i++)
-                    list.push_back(temp[i] + vec[i]);
+                    list.push_back(temp[i] + input[i]);
             }
-            else if (temp.size() > vec.size())
+            else if (temp.size() > input.size())
             {
                 if (static_cast<int>(temp.size()) > max_size && max_size != -1)
                     throw std::runtime_error("List size limit reached, cannot add vector");
-                for (size_t i = 0; i < vec.size(); i++)
-                    list.push_back(temp[i] + vec[i]);
-                for (size_t j = vec.size(); j < temp.size(); j++)
+                for (size_t i = 0; i < input.size(); i++)
+                    list.push_back(temp[i] + input[i]);
+                for (size_t j = input.size(); j < temp.size(); j++)
                     list.push_back(temp[j]);
             }
             else
             {
-                if (static_cast<int>(vec.size()) > max_size && max_size != -1)
+                if (static_cast<int>(input.size()) > max_size && max_size != -1)
                     throw std::runtime_error("List size limit reached, cannot add vector");
                 for (size_t i = 0; i < temp.size(); i++)
-                    list.push_back(temp[i] + vec[i]);
-                for (size_t j = temp.size(); j < vec.size(); j++)
-                    list.push_back(vec[j]);
+                    list.push_back(temp[i] + input[i]);
+                for (size_t j = temp.size(); j < input.size(); j++)
+                    list.push_back(input[j]);
             }
         }
 
@@ -808,38 +806,38 @@ namespace udt
 
         /**
          * Subtracts a vector from the list
-         * @param vec Vector to subtract
+         * @param input Vector to subtract
          * @post Subtracts the vector from the list
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        void operator-(const std::vector<T> &vec)
+        void operator-(const vec<T> &input)
         {
-            if (vec.empty() || list.empty())
+            if (input.empty() || list.empty())
                 return;
             auto temp = list;
             list.clear();
-            if (vec.size() == temp.size())
+            if (input.size() == temp.size())
             {
                 for (size_t i = 0; i < temp.size(); i++)
-                    list.push_back(temp[i] - vec[i]);
+                    list.push_back(temp[i] - input[i]);
             }
-            else if (temp.size() > vec.size())
+            else if (temp.size() > input.size())
             {
                 if (static_cast<int>(temp.size()) > max_size && max_size != -1)
                     throw std::runtime_error("List size limit reached, cannot subtract vector");
-                for (size_t i = 0; i < vec.size(); i++)
-                    list.push_back(temp[i] - vec[i]);
-                for (size_t j = vec.size(); j < temp.size(); j++)
+                for (size_t i = 0; i < input.size(); i++)
+                    list.push_back(temp[i] - input[i]);
+                for (size_t j = input.size(); j < temp.size(); j++)
                     list.push_back(temp[j]);
             }
             else
             {
-                if (static_cast<int>(vec.size()) > max_size && max_size != -1)
+                if (static_cast<int>(input.size()) > max_size && max_size != -1)
                     throw std::runtime_error("List size limit reached, cannot subtract vector");
                 for (size_t i = 0; i < temp.size(); i++)
-                    list.push_back(temp[i] - vec[i]);
-                for (size_t j = temp.size(); j < vec.size(); j++)
-                    list.push_back(vec[j]);
+                    list.push_back(temp[i] - input[i]);
+                for (size_t j = temp.size(); j < input.size(); j++)
+                    list.push_back(input[j]);
             }
         }
 

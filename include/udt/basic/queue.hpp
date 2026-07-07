@@ -11,11 +11,11 @@ namespace udt
     class queue
     {
     private:
+        T *arr;
         size_t rear;
         size_t front;
-        int length;
-        T *arr;
-        int maxSize;
+        size_t length;
+        size_t maxSize;
 
     public:
         queue(int ArrSize)

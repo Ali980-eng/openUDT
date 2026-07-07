@@ -1,10 +1,8 @@
-#include <functional>
-#include <vector>
 #include <stdexcept>
 #include <cmath>
 #include <iostream>
-#include <string>
 #include "meta/adva/function.hpp"
+#include "cfrost/structure.h"
 
 #pragma once
 #ifndef OPENUDT___CORE___VECTOR_MULTIDIMENSIONAL_VECTOR_2D_HPP
@@ -27,7 +25,7 @@ namespace udt
     {
     private:
         int n = -1, m = -1;
-        std::vector<std::vector<T>> vec_2D;
+        vec<vec<T>> vec_2D;
 
     protected:
         /**
@@ -38,14 +36,12 @@ namespace udt
          * or
          *   - The provided 2D vector `vec` when passed as an argument
          *
-         * @param vec Optional external 2D vector to evaluate (uses internal vector if
-         * empty)
-         * @return `true` if the matrix has exactly 2 rows and each row contains
-         * exactly 2 columns, `false` otherwise
+         * @param input Optional external 2D vector to evaluate (uses internal vector if empty)
+         * @return `true` if the matrix has exactly 2 rows and each row contains exactly 2 columns, `false` otherwise
          */
-        bool square2X2(const std::vector<std::vector<T>> &vec = {})
+        bool square2X2(const vec<vec<T>> &input = {})
         {
-            const auto &target = vec.empty() ? vec_2D : vec;
+            const auto &target = input.empty() ? vec_2D : input;
             if (target.size() != 2)
                 return false;
             return target[0].size() == 2 && target[1].size() == 2;
@@ -59,14 +55,14 @@ namespace udt
          * or
          *   - The provided 2D vector `vec` when specified
          *
-         * @param vec Optional external matrix to check (defaults to internal vector
+         * @param input Optional external matrix to check (defaults to internal vector
          * if empty)
          * @return `true` if the matrix has exactly 3 rows and each row contains
          * exactly 3 columns, `false` otherwise
          */
-        bool square3X3(const std::vector<std::vector<T>> &vec = {})
+        bool square3X3(const vec<vec<T>> &input = {})
         {
-            const auto &target = vec.empty() ? vec_2D : vec;
+            const auto &target = input.empty() ? vec_2D : input;
             if (target.size() != 3)
                 return false;
             return target[0].size() == 3 && target[1].size() == 3 &&
@@ -81,14 +77,14 @@ namespace udt
          * or
          *   - The provided 2D vector `vec` when specified
          *
-         * @param vec Optional external matrix to evaluate (uses internal vector if
+         * @param input Optional external matrix to evaluate (uses internal vector if
          * empty)
          * @return `true` if the matrix is square (all rows have same length as total
          * rows), `false` otherwise
          */
-        bool squareNXN(const std::vector<std::vector<T>> &vec = {})
+        bool squareNXN(const vec<vec<T>> &input = {})
         {
-            const auto &target = vec.empty() ? vec_2D : vec;
+            const auto &target = input.empty() ? vec_2D : input;
             for (const auto &row : target)
             {
                 if (row.size() != target.size())
@@ -135,7 +131,7 @@ namespace udt
          * @return `true` if the matrix is square (2×2, 3×3, or general N×N), `false`
          * otherwise
          */
-        bool is_square_matrix(const std::vector<std::vector<T>> &mat = {})
+        bool is_square_matrix(const vec<vec<T>> &mat = {})
         {
             if (mat.empty())
                 return square2X2() || square3X3() || squareNXN();
@@ -157,7 +153,7 @@ namespace udt
          *           - All non-diagonal elements are zero
          *         `false` otherwise
          */
-        bool is_diagonal_matrix(const std::vector<std::vector<T>> &mat = {})
+        bool is_diagonal_matrix(const vec<vec<T>> &mat = {})
         {
             const auto &target = mat.empty() ? vec_2D : mat;
             if (!is_square_matrix(target))
@@ -193,7 +189,7 @@ namespace udt
          *           - All non-diagonal elements equal 0
          *         `false` otherwise
          */
-        bool is_identity_matrix(const std::vector<std::vector<T>> &mat = {})
+        bool is_identity_matrix(const vec<vec<T>> &mat = {})
         {
             const auto &target = mat.empty() ? vec_2D : mat;
             if (!is_square_matrix(target))
@@ -229,7 +225,7 @@ namespace udt
          *           - All elements below the main diagonal are zero
          *         `false` otherwise
          */
-        bool is_upper_triangular(const std::vector<std::vector<T>> &mat = {})
+        bool is_upper_triangular(const vec<vec<T>> &mat = {})
         {
             const auto &target = mat.empty() ? vec_2D : mat;
             if (!is_square_matrix(target))
@@ -260,7 +256,7 @@ namespace udt
          *           - All elements above the main diagonal are zero
          *         `false` otherwise
          */
-        bool is_lower_triangular(const std::vector<std::vector<T>> &mat = {})
+        bool is_lower_triangular(const vec<vec<T>> &mat = {})
         {
             const auto &target = mat.empty() ? vec_2D : mat;
             if (!is_square_matrix(target))
@@ -291,7 +287,7 @@ namespace udt
          * empty)
          * @return String name of the matrix type or "Unknown Form" if no match found
          */
-        std::string matrix_type(const std::vector<std::vector<T>> &mat = {})
+        str matrix_type(const vec<vec<T>> &mat = {})
         {
             const auto &target = mat.empty() ? vec_2D : mat;
             if (is_identity_matrix(target))
@@ -308,15 +304,15 @@ namespace udt
         /**
          * Calculates the determinant of a 2×2 matrix
          *
-         * @param vec Optional external matrix (uses internal matrix if empty)
+         * @param input Optional external matrix (uses internal matrix if empty)
          * @return The determinant value as long double
          * @throws When:
          *           - The matrix is empty, OR
          *           - The matrix is not 2×2
          */
-        long double determinant2X2(const std::vector<std::vector<T>> &vec = {})
+        long double determinant2X2(const vec<vec<T>> &input = {})
         {
-            const auto &target = vec.empty() ? vec_2D : vec;
+            const auto &target = input.empty() ? vec_2D : input;
             if (target.empty())
                 throw std::invalid_argument("Empty matrix");
             if (!square2X2(target))
@@ -327,15 +323,15 @@ namespace udt
         /**
          * Calculates the determinant of a 3×3 matrix using Rule of Sarrus
          *
-         * @param vec Optional external matrix (uses internal matrix if empty)
+         * @param input Optional external matrix (uses internal matrix if empty)
          * @return The determinant value as long double
          * @throws When:
          *           - The matrix is empty, OR
          *           - The matrix is not 3×3
          */
-        long double determinant3X3(const std::vector<std::vector<T>> &vec = {})
+        long double determinant3X3(const vec<vec<T>> &input = {})
         {
-            const auto &target = vec.empty() ? vec_2D : vec;
+            const auto &target = input.empty() ? vec_2D : input;
             if (target.empty())
                 throw std::invalid_argument("Empty matrix");
             if (!square3X3(target))
@@ -351,21 +347,21 @@ namespace udt
         /**
          * Calculates the determinant of an N×N matrix using Gaussian elimination with
          * partial pivoting
-         * @param vec Optional external matrix (uses internal matrix if empty)
+         * @param input Optional external matrix (uses internal matrix if empty)
          * @return The determinant value as long double
          * @throws invalid_argument if:
          *          - The matrix is empty
          *          - The matrix is not square
          */
-        long double determinantNXN(const std::vector<std::vector<T>> &vec = {})
+        long double determinantNXN(const vec<vec<T>> &input = {})
         {
-            const auto &target_ref = vec.empty() ? vec_2D : vec;
+            const auto &target_ref = input.empty() ? vec_2D : input;
             if (target_ref.empty())
                 throw std::invalid_argument("Empty matrix");
             if (!squareNXN(target_ref))
                 throw std::invalid_argument("Matrix is not square");
             size_t n = target_ref.size();
-            std::vector<std::vector<long double>> mat;
+            vec<vec<long double>> mat;
             mat.reserve(n);
             // Copy with casting to long double
             for (const auto &row : target_ref)
@@ -410,15 +406,15 @@ namespace udt
         /**
          * Flattens a 2D matrix into a 1D vector
          *
-         * @param vec Optional external matrix to flatten (uses internal matrix if
+         * @param input Optional external matrix to flatten (uses internal matrix if
          * empty)
          * @note Results are stored in member variable `flatten_vec`
          * @warning Will skip operation if input matrix is empty
          */
-        std::vector<T> flatten(const std::vector<std::vector<T>> &vec = {}) const
+        vec<T> flatten(const vec<vec<T>> &input = {}) const
         {
-            const auto &target = vec.empty() ? vec_2D : vec;
-            std::vector<T> flatten_vec;
+            const auto &target = input.empty() ? vec_2D : input;
+            vec<T> flatten_vec;
             if (target.empty())
                 throw std::invalid_argument("The 2D vector is empty");
             for (const auto &row : target)
@@ -432,15 +428,15 @@ namespace udt
         /**
          * Computes the transpose of a matrix
          *
-         * @param vec Optional external matrix to transpose (uses internal matrix if
+         * @param input Optional external matrix to transpose (uses internal matrix if
          * empty)
          * @note Results are stored in member variable `transpose_2D`
          * @warning Will skip operation if input matrix is empty
          */
-        std::vector<std::vector<T>> transpose(const std::vector<std::vector<T>> &vec = {}) const
+        vec<vec<T>> transpose(const vec<vec<T>> &input = {}) const
         {
-            const auto &target = vec.empty() ? vec_2D : vec;
-            std::vector<std::vector<T>> transpose_2D;
+            const auto &target = input.empty() ? vec_2D : input;
+            vec<vec<T>> transpose_2D;
             if (target.empty() || target[0].empty())
                 throw std::invalid_argument("The 2D vector is empty");
             for (size_t i = 0; i < target[0].size(); i++)
@@ -464,7 +460,7 @@ namespace udt
          * @throws std::invalid_argument if the input and internal vector are empty,
          *         if the matrix is not 2x2 square, or if the determinant is zero (non-invertible).
          */
-        std::vector<std::vector<T>> inverse2X2(const std::vector<std::vector<T>> &v = {})
+        vec<vec<T>> inverse2X2(const vec<vec<T>> &v = {})
         {
             if (v.empty() && vec_2D.empty())
                 throw std::invalid_argument("Empty Error: all input vector is empty");
@@ -474,10 +470,10 @@ namespace udt
                 throw std::invalid_argument("the target vector is not a square matrix with size 2");
             if (d == 0)
                 throw std::invalid_argument("the matrix is not invertible matrix");
-            std::vector<std::vector<T>> result_v = {
+            vec<vec<T>> result_v = {
                 {target[1][1], -target[0][1]},
                 {-target[1][0], target[0][0]}};
-            for (std::vector<T> &v : result_v)
+            for (vec<T> &v : result_v)
             {
                 for (T &element : v)
                     element /= d;
@@ -499,7 +495,7 @@ namespace udt
          * @throws std::invalid_argument if the input and internal vector are empty,
          *         if the matrix is not 3x3 square, or if the determinant is zero (non-invertible).
          */
-        std::vector<std::vector<T>> inverse3X3(const std::vector<std::vector<T>> &v = {})
+        vec<vec<T>> inverse3X3(const vec<vec<T>> &v = {})
         {
             if (v.empty() && vec_2D.empty())
                 throw std::invalid_argument("Empty Error: all input vector is empty");
@@ -510,7 +506,7 @@ namespace udt
             if (d == 0)
                 throw std::invalid_argument("the matrix is not invertible matrix");
 
-            std::vector<std::vector<T>> cof(3, std::vector<T>(3));
+            vec<vec<T>> cof(3, vec<T>(3));
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
@@ -583,7 +579,7 @@ namespace udt
          *
          * @param init Initializer list of vectors to create the matrix
          */
-        vector_2d(std::initializer_list<std::vector<T>> init) : vec_2D(init)
+        vector_2d(std::initializer_list<vec<T>> init) : vec_2D(init)
         {
             size_t nnum, mnum;
             nnum = static_cast<size_t>(vec_2D.size());
@@ -604,7 +600,7 @@ namespace udt
          * @param init Initializer list of vectors to create the matrix
          * @param num Number of rows (must be > 0)
          */
-        vector_2d(size_t num, std::initializer_list<std::vector<T>> init) : vec_2D(init)
+        vector_2d(size_t num, std::initializer_list<vec<T>> init) : vec_2D(init)
         {
             if (num > 0)
             {
@@ -625,7 +621,7 @@ namespace udt
          * @param Nnum Number of rows (must be > 0)
          * @param Mnum Number of columns (must be > 0)
          */
-        vector_2d(int Nnum, int Mnum, std::initializer_list<std::vector<T>> init)
+        vector_2d(int Nnum, int Mnum, std::initializer_list<vec<T>> init)
             : vec_2D(init)
         {
             if (Nnum <= 0 || Mnum <= 0)
@@ -646,7 +642,7 @@ namespace udt
          *
          * @param vec2d 2D vector to copy into the matrix
          */
-        vector_2d(const std::vector<std::vector<T>> &vec2d) { vec_2D = vec2d; }
+        vector_2d(const vec<vec<T>> &vec2d) { vec_2D = vec2d; }
 
         /**
          * Copy constructor from another vector_2d object
@@ -677,15 +673,15 @@ namespace udt
          *         - n != -1 and the outer size of vec3d does not match n.
          *         - m != -1 and any inner 1D vector does not have size equal to m.
          */
-        vector_2d(const std::vector<std::vector<std::vector<T>>> &vec3d, int i = 0)
+        vector_2d(const vec<vec<vec<T>>> &vec3d, int i = 0)
         {
             if (n != -1 && m != -1)
             {
                 if (n != vec3d.size())
                     throw std::length_error("unmatched size");
-                for (const std::vector<std::vector<T>> &vec2d : vec3d)
+                for (const vec<vec<T>> &vec2d : vec3d)
                 {
-                    for (const std::vector<T> &vec : vec2d)
+                    for (const vec<T> &vec : vec2d)
                     {
                         if (vec.size() != m)
                             throw std::length_error("unmatched size");
@@ -710,7 +706,7 @@ namespace udt
          * empty)
          * @return String name of the matrix classification
          */
-        std::string general_matrix_type(const std::vector<std::vector<T>> &mat = {})
+        str general_matrix_type(const vec<vec<T>> &mat = {})
         {
             const auto &target = mat.empty() ? vec_2D : mat;
             if (target.empty())
@@ -739,7 +735,7 @@ namespace udt
          * @param vec2d The new 2D vector to store as the main matrix
          * @note Overwrites any existing content in vec_2D
          */
-        void set(const std::vector<std::vector<T>> &vec2d) noexcept { vec_2D = vec2d; }
+        void set(const vec<vec<T>> &vec2d) noexcept { vec_2D = vec2d; }
 
         /**
          * Sets the fixed dimensions for the matrix
@@ -786,14 +782,14 @@ namespace udt
          * @return Const reference to vec_2D, or empty vector if matrix is empty
          * @warning Returned reference becomes invalid if matrix is modified
          */
-        const std::vector<std::vector<T>> &get() const noexcept { return vec_2D; }
+        const vec<vec<T>> &get() const noexcept { return vec_2D; }
 
         /**
          * Returns a deep copy of the internal 2D vector
          *
          * @return Copy of vec_2D, or empty vector if matrix is empty
          */
-        std::vector<std::vector<T>> get_copy_2dvec() const noexcept { return vec_2D; }
+        vec<vec<T>> get_copy_2dvec() const noexcept { return vec_2D; }
 
         /**
          * Returns a const reference to a specific row vector
@@ -802,7 +798,7 @@ namespace udt
          * @return Const reference to the requested row vector
          * @throws out_of_range if index is invalid
          */
-        const std::vector<T> &get(size_t index) const
+        const vec<T> &get(size_t index) const
         {
             if (index >= vec_2D.size())
                 throw std::out_of_range("Index is out of range.");
@@ -816,7 +812,7 @@ namespace udt
          * @return Copy of the requested row vector
          * @throws out_of_range if index is invalid
          */
-        std::vector<T> get_copy(size_t index)
+        vec<T> get_copy(size_t index)
         {
             if (index >= vec_2D.size())
                 throw std::out_of_range("Index is out of range.");
@@ -846,7 +842,7 @@ namespace udt
          * @return Const reference to transpose_2D
          * @note Reference is invalid if matrix is modified
          */
-        std::vector<std::vector<T>> get_transpose(const std::vector<std::vector<T>> &v2d = {}) const { return transpose(); }
+        vec<vec<T>> get_transpose(const vec<vec<T>> &v2d = {}) const { return transpose(); }
 
         /**
          * Returns a const reference to a row in the transposed matrix
@@ -855,7 +851,7 @@ namespace udt
          * @return Const reference to the requested row
          * @throws out_of_range if index is invalid
          */
-        const std::vector<T> &get_transpose(size_t index, const std::vector<std::vector<T>> &v2d = {}) const
+        const vec<T> &get_transpose(size_t index, const vec<vec<T>> &v2d = {}) const
         {
             if (index >= transpose(v2d).size())
                 throw std::out_of_range("Index is out of range.");
@@ -870,7 +866,7 @@ namespace udt
          * @return Copy of the requested row
          * @throws out_of_range if index is invalid
          */
-        std::vector<T> get_copy_transpose(size_t index, const std::vector<std::vector<T>> &v2d = {}) const
+        vec<T> get_copy_transpose(size_t index, const vec<vec<T>> &v2d = {}) const
         {
             if (index >= transpose().size())
                 throw std::out_of_range("Index is out of range.");
@@ -885,7 +881,7 @@ namespace udt
          * @return The element at [ind1][ind2] in transpose_2D
          * @throws out_of_range if either index is invalid
          */
-        T get_transpose(size_t ind1, size_t ind2, const std::vector<std::vector<T>> &v2d = {})
+        T get_transpose(size_t ind1, size_t ind2, const vec<vec<T>> &v2d = {})
         {
             if (ind1 >= transpose().size())
                 throw std::out_of_range("Row index is out of range.");
@@ -900,7 +896,7 @@ namespace udt
          * @return Const reference to flatten_vec
          * @note Reference is invalid if matrix is modified
          */
-        std::vector<T> get_flatten(const std::vector<std::vector<T>> &v2d = {}) const { return flatten(v2d); }
+        vec<T> get_flatten(const vec<vec<T>> &v2d = {}) const { return flatten(v2d); }
 
         /**
          * Accesses an element in the flattened vector
@@ -909,7 +905,7 @@ namespace udt
          * @return The element at specified position
          * @throws out_of_range if index is invalid
          */
-        T get_flatten(size_t index, const std::vector<std::vector<T>> &v2d = {}) const
+        T get_flatten(size_t index, const vec<vec<T>> &v2d = {}) const
         {
             if (index >= flatten().size())
                 throw std::out_of_range("Index is out of range.");
@@ -920,14 +916,14 @@ namespace udt
          * @brief Accesses an entire row of the 2D vector.
          *
          * @param i The row index.
-         * @return std::vector<T> A copy of the row at index @p i.
+         * @return vec<T> A copy of the row at index @p i.
          *
          * @note This method returns the row by value (copy). For large datasets,
          *       consider using references to avoid extra copies.
          * @warning No bounds checking is performed. Using an out-of-range index
          *          leads to undefined behavior.
          */
-        std::vector<T> at(size_t i) const
+        vec<T> at(size_t i) const
         {
             if (i >= vec_2D.size())
                 throw std::out_of_range("i parameter is bigger than the vector size or less than zero");
@@ -957,19 +953,19 @@ namespace udt
         /**
          * Appends a vector to the end of the 2D matrix
          *
-         * @param vec Vector to append
+         * @param input Vector to append
          * @throws Error if:
          *           - Matrix has fixed size and is full (n×m reached), OR
          *           - Input vector dimensions don't match matrix columns
          */
-        void push(const std::vector<T> &vec)
+        void push(const vec<T> &input)
         {
             if (n != -1 && vec_2D.size() == n)
                 throw std::length_error("Capacity Error: Cannot exceed fixed row count");
-            else if (m != -1 && vec.size() != m)
+            else if (m != -1 && input.size() != m)
                 throw std::length_error("Dimension Error: Vector size must match column count");
             else
-                vec_2D.push_back(vec);
+                vec_2D.push_back(input);
         }
 
         /**
@@ -979,8 +975,7 @@ namespace udt
          * 2D vector (`vec_2D`). It validates dimensions if the container
          * is configured with fixed sizes.
          *
-         * @param vec A custom vector<T> object to be added. The underlying
-         *            std::vector<T> is extracted using vec.get().
+         * @param input A custom vector<T> object to be added. The underlying vec<T> is extracted using vec.get().
          *
          * @throws std::length_error if:
          *         - n != -1 and the current row count already reached n
@@ -988,14 +983,14 @@ namespace udt
          *         - m != -1 and the size of vec does not equal m
          *           (dimension mismatch).
          */
-        void push(const vector<T> &vec)
+        void push(const vector<T> &input)
         {
             if (n != -1 && vec_2D.size() == n)
                 throw std::length_error("Capacity Error: Cannot exceed fixed row count");
-            else if (m != -1 && vec.size() != m)
+            else if (m != -1 && input.size() != m)
                 throw std::length_error("Dimension Error: Vector size must match column count");
             else
-                vec_2D.push_back(vec.get());
+                vec_2D.push_back(input.get());
         }
 
         /**
@@ -1124,7 +1119,7 @@ namespace udt
          *   - 3x3 matrices (using Rule of Sarrus)
          *   - NxN matrices (using Gaussian-Jordan elimination)
          *
-         * @param vec Optional external matrix (uses internal matrix if empty)
+         * @param input Optional external matrix (uses internal matrix if empty)
          * @return The determinant value as long double
          * @throws When:
          *           - Input matrix is empty, OR
@@ -1136,9 +1131,9 @@ namespace udt
          * @see determinant2X2()
          * @see determinant3X3()
          */
-        long double determinant(const std::vector<std::vector<T>> &vec = {})
+        long double determinant(const vec<vec<T>> &input = {})
         {
-            const auto &target = vec.empty() ? vec_2D : vec;
+            const auto &target = input.empty() ? vec_2D : input;
             if (target.empty())
                 throw std::invalid_argument("Empty matrix");
             if (is_numeric_type<T>::value)
@@ -1161,16 +1156,16 @@ namespace udt
          * - 2x2 matrices use inverse2X2
          * - 3x3 matrices use inverse3X3
          *
-         * @param vec Optional matrix to invert. If empty, vec_2D is used.
+         * @param input Optional matrix to invert. If empty, vec_2D is used.
          * @return A 2x2 or 3x3 matrix representing the inverse.
          * @throws std::invalid_argument if both vec and vec_2D are empty.
          * @throws std::runtime_error if the matrix is not 2x2 or 3x3 (unsupported size).
          */
-        std::vector<std::vector<T>> inverse(const std::vector<std::vector<T>> &vec = {})
+        vec<vec<T>> inverse(const vec<vec<T>> &input = {})
         {
-            if (vec.empty() && vec_2D.empty())
+            if (input.empty() && vec_2D.empty())
                 throw std::invalid_argument("Empty Error");
-            const auto &target = vec.empty() ? vec_2D : vec;
+            const auto &target = input.empty() ? vec_2D : input;
             if (square2X2(target))
                 return inverse2X2(target);
             if (square3X3(target))
@@ -1193,7 +1188,7 @@ namespace udt
          * @brief Returns an iterator to the beginning of the outer vector.
          *
          * Useful for iterating over the first-level elements (each element
-         * is itself a std::vector<T>).
+         * is itself a vec<T>).
          *
          * @return Iterator to the first element of vec_2D.
          */
@@ -1299,7 +1294,7 @@ namespace udt
          * @param vec2d 2D vector to assign to the internal storage
          * @post Replaces current vec_2D with the input vector
          */
-        void operator=(const std::vector<std::vector<T>> &vec2d) noexcept { vec_2D = vec2d; }
+        void operator=(const vec<vec<T>> &vec2d) noexcept { vec_2D = vec2d; }
 
         /**
          * Assignment operator for vector_2d object
@@ -1321,7 +1316,7 @@ namespace udt
          * @return Reference to the requested row vector
          * @warning No bounds checking - use with valid indices
          */
-        std::vector<T> &operator[](size_t i) noexcept { return vec_2D[i]; }
+        vec<T> &operator[](size_t i) noexcept { return vec_2D[i]; }
 
         /**
          * Subscript operator for row access (const)
@@ -1330,7 +1325,7 @@ namespace udt
          * @return Const reference to the requested row vector
          * @warning No bounds checking - use with valid indices
          */
-        const std::vector<T> &operator[](size_t i) const noexcept { return vec_2D[i]; }
+        const vec<T> &operator[](size_t i) const noexcept { return vec_2D[i]; }
 
         /**
          * Equality operator for matrix comparison
@@ -1341,7 +1336,7 @@ namespace udt
          *           - All elements are equal
          *         false otherwise
          */
-        bool operator==(const std::vector<std::vector<T>> &vec2d) const noexcept
+        bool operator==(const vec<vec<T>> &vec2d) const noexcept
         {
             if (vec2d.size() != vec_2D.size())
                 return false;
@@ -1390,7 +1385,7 @@ namespace udt
          * @post Performs element-wise addition
          * @note Matrices must have identical dimensions
          */
-        void operator+=(const std::vector<std::vector<T>> &vec2d)
+        void operator+=(const vec<vec<T>> &vec2d)
         {
             if (vec2d.size() != vec_2D.size())
                 throw std::invalid_argument("Incompatible matrix dimensions");
@@ -1451,7 +1446,7 @@ namespace udt
          * @post Performs element-wise subtraction
          * @note Matrices must have identical dimensions
          */
-        void operator-=(const std::vector<std::vector<T>> &vec2d)
+        void operator-=(const vec<vec<T>> &vec2d)
         {
             if (!is_numeric_type<T>::value)
                 throw std::invalid_argument("Element type is not numeric");
@@ -1507,7 +1502,7 @@ namespace udt
         {
             if (vec_2D.empty())
                 throw std::invalid_argument("Empty Error");
-            for (std::vector<T> &vec : vec_2D)
+            for (vec<T> &vec : vec_2D)
             {
                 for (T &value : vec)
                     value = std::pow(value, element);
@@ -1521,7 +1516,7 @@ namespace udt
          * @post Raises elements to corresponding powers
          * @note Matrices must have identical dimensions
          */
-        void operator^=(const std::vector<std::vector<T>> &vec2d)
+        void operator^=(const vec<vec<T>> &vec2d)
         {
             if (vec2d.size() != vec_2D.size())
                 throw std::invalid_argument("Incompatible matrix dimensions");

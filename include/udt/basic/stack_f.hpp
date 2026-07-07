@@ -10,8 +10,10 @@ namespace udt
     template <typename T, size_t MaxSize>
     class stack_f
     {
-        int top;
+    private:
+        size_t top;
         T item[MaxSize]; // T can be int, double, string, etc.
+
     public:
         stack_f() : top(-1) {}
         void push(T element)

@@ -1,24 +1,24 @@
-#include "metaCore/lite/stream.hpp"
-#include "basic/string.hpp"
+#include "meta/lite/stream.hpp"
+#include "udt/core/string.hpp"
 
 bool utest_1()
 {
-    udt::string es = "YouTube";
+    udt::str es = "YouTube";
     std::string ss = "YouTube";
     return meta::lite::test::basic(es.gss(), ss);
 }
 
 bool utest_2()
 {
-    udt::string s(4);
+    udt::str s(4);
     s = "abcd";
     return meta::lite::test::basic<size_t>(s.length(), 4);
 }
 
 bool utest_3()
 {
-    udt::string s1 = "hello all";
-    udt::string s2 = s1;
+    udt::str s1 = "hello all";
+    udt::str s2 = s1;
     return meta::lite::test::basic(s2.gss(), s1.gss());
 }
 

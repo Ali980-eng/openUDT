@@ -1,7 +1,7 @@
-#include "core/multidimensional/vector_2d.hpp"
-#include "core/pair/pair_v.hpp"
-#include "core/pair/pair__v.hpp"
-#include "metaCore/lite.hpp"
+#include "udt/core/multidimensional/vector_2d.hpp"
+#include "udt/core/pair/pair_v.hpp"
+#include "udt/core/pair/pair__v.hpp"
+#include "meta/lite.hpp"
 
 bool utest_1()
 {

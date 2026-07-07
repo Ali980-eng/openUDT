@@ -1,5 +1,5 @@
-#include "metaCore/lite/stream.hpp"
-#include "core/triple/triple_t.hpp"
+#include "meta/lite/stream.hpp"
+#include "udt/core/triple/triple_t.hpp"
 
 /// @brief This function test the function get_first in the object triple_t.
 /// @return The basic test value (should be true).

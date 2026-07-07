@@ -1,5 +1,5 @@
-#include "core/multidimensional/vector.hpp"
-#include "metaCore/lite/stream.hpp"
+#include "udt/core/multidimensional/vector.hpp"
+#include "meta/lite/stream.hpp"
 
 bool utest_1()
 {

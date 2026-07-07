@@ -21,7 +21,7 @@ namespace udt
         };
         node *front_ptr;
         node *rear_ptr;
-        int length;
+        size_t length;
 
     public:
         que()

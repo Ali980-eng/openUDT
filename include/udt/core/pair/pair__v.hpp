@@ -1,9 +1,8 @@
-#include <vector>
 #include <stdexcept>
 #include <cmath>
 #include <iostream>
-#include <string>
 #include "meta/adva/function.hpp"
+#include "cfrost/structure.h"
 
 #pragma once
 #ifndef OPENUDT___CORE___PAIR_PAIR__V_HPP
@@ -22,8 +21,8 @@ namespace udt
     class pair__v
     {
     private:
-        std::vector<T1> vec1;
-        std::vector<T2> vec2;
+        vec<T1> vec1;
+        vec<T2> vec2;
 
     public:
         /**
@@ -40,7 +39,7 @@ namespace udt
          * @param v1 First vector
          * @param v2 Second vector
          */
-        pair__v(const std::vector<T1> &v1, const std::vector<T2> &v2)
+        pair__v(const vec<T1> &v1, const vec<T2> &v2)
         {
             vec1 = v1;
             vec2 = v2;
@@ -106,7 +105,7 @@ namespace udt
          * @param v1 First vector
          * @param v2 Second vector
          */
-        void set(const std::vector<T1> &v1, const std::vector<T2> &v2) noexcept
+        void set(const vec<T1> &v1, const vec<T2> &v2) noexcept
         {
             vec1 = v1;
             vec2 = v2;
@@ -116,41 +115,41 @@ namespace udt
          * Sets the first vector
          * @param v1 First vector
          */
-        void set_v1(const std::vector<T1> &v1) noexcept { vec1 = v1; }
+        void set_v1(const vec<T1> &v1) noexcept { vec1 = v1; }
 
         /**
          * Sets the second vector
          * @param v2 Second vector
          */
-        void set_v2(const std::vector<T2> &v2) noexcept { vec2 = v2; }
+        void set_v2(const vec<T2> &v2) noexcept { vec2 = v2; }
 
         /**
          * Gets the first vector
          * @return A const reference to the first vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        const std::vector<T1> &get_vec1() const noexcept { return vec1; }
+        const vec<T1> &get_vec1() const noexcept { return vec1; }
 
         /**
          * Gets a copy of the first vector
          * @return A copy of the first vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        std::vector<T1> get_copy_vec1() const noexcept { return vec1; }
+        vec<T1> get_copy_vec1() const noexcept { return vec1; }
 
         /**
          * Gets the second vector
          * @return A const reference to the second vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        const std::vector<T2> &get_vec2() const noexcept { return vec2; }
+        const vec<T2> &get_vec2() const noexcept { return vec2; }
 
         /**
          * Gets a copy of the second vector
          * @return A copy of the second vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        std::vector<T2> get_copy_vec2() const noexcept { return vec2; }
+        vec<T2> get_copy_vec2() const noexcept { return vec2; }
 
         /**
          * Multiplies all elements of the first vector by a given number
@@ -337,8 +336,8 @@ namespace udt
          */
         void swap_vecs() noexcept
         {
-            std::vector<T1> temp1 = vec1;
-            std::vector<T2> temp2 = vec2;
+            vec<T1> temp1 = vec1;
+            vec<T2> temp2 = vec2;
             vec1.clear();
             vec2.clear();
             for (size_t i = 0; i < temp1.size(); i++)
@@ -374,93 +373,93 @@ namespace udt
         }
 
         /**
-         * @brief Assignment operator for assigning a std::vector<T1> to vec1.
+         * @brief Assignment operator for assigning a vec<T1> to vec1.
          *
          * Replaces the contents of the internal vec1 member with the elements from the provided vector.
          * This operation is noexcept and does not affect other members of the class.
          *
-         * @param vec The std::vector<T1> whose contents will be assigned to vec1.
+         * @param input The vec<T1> whose contents will be assigned to vec1.
          */
-        void operator=(const std::vector<T1> &vec) noexcept
+        void operator=(const vec<T1> &input) noexcept
         {
             vec1 = vec;
         }
 
         /**
-         * @brief Assignment operator for assigning a std::vector<T2> to vec2.
+         * @brief Assignment operator for assigning a vec<T2> to vec2.
          *
          * Replaces the contents of the internal vec2 member with the elements from the provided vector.
          * This operation is noexcept and does not affect other members of the class.
          *
-         * @param vec The std::vector<T2> whose contents will be assigned to vec2.
+         * @param input The vec<T2> whose contents will be assigned to vec2.
          */
-        void operator=(const std::vector<T2> &vec) noexcept
+        void operator=(const vec<T2> &input) noexcept
         {
             vec2 = vec;
         }
 
         /**
          * Equality operator for pair_v
-         * @param vec Pair-vector to compare
+         * @param input Pair-vector to compare
          * @return true if either vec1 is equal to vec, false otherwise
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        bool operator==(const std::vector<T1> &vec) const noexcept
+        bool operator==(const vec<T1> &input) const noexcept
         {
             return same_vec(vec, vec1);
         }
 
         /**
          * Equality operator for pair_v
-         * @param vec Pair-vector to compare
+         * @param input Pair-vector to compare
          * @return true if either vec2 is equal to vec, false otherwise
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        bool operator==(const std::vector<T2> &vec) const noexcept
+        bool operator==(const vec<T2> &input) const noexcept
         {
             return same_vec(vec, vec2);
         }
 
         /**
          * Addition assignment operator for pair_v
-         * @param vec Pair-vector to add
+         * @param input Pair-vector to add
          * @post Adds the contents of vec to the first vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        void operator+=(const std::vector<T1> &vec) noexcept
+        void operator+=(const vec<T1> &input) noexcept
         {
-            if (vec.empty() || vec1.empty())
+            if (input.empty() || vec1.empty())
                 return;
             if (vec1.empty())
             {
-                for (size_t i = 0; i < vec.size(); i++)
+                for (size_t i = 0; i < input.size(); i++)
                     vec2.push_back(vec[i]);
             }
             else
             {
-                for (size_t i = 0; i < vec.size(); i++)
+                for (size_t i = 0; i < input.size(); i++)
                     vec1.push_back(vec[i]);
             }
         }
 
         /**
          * Addition assignment operator for pair_v
-         * @param vec Pair-vector to add
+         * @param input Pair-vector to add
          * @post Adds the contents of vec to the second vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        void operator+=(const std::vector<T2> &vec) noexcept
+        void operator+=(const vec<T2> &input) noexcept
         {
-            if (vec.empty() || vec2.empty())
+            if (input.empty() || vec2.empty())
                 return;
             if (vec2.empty())
             {
-                for (size_t i = 0; i < vec.size(); i++)
+                for (size_t i = 0; i < input.size(); i++)
                     vec1.push_back(vec[i]);
             }
             else
             {
-                for (size_t i = 0; i < vec.size(); i++)
+                for (size_t i = 0; i < input.size(); i++)
                     vec2.push_back(vec[i]);
             }
         }
@@ -501,73 +500,73 @@ namespace udt
 
         /**
          * Adds a vector to the first vector
-         * @param vec Vector to add
+         * @param input Vector to add
          * @post Adds the contents of vec to the first vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        void operator+(const std::vector<T1> &vec) noexcept
+        void operator+(const vec<T1> &input) noexcept
         {
-            if (vec.empty() || vec1.empty())
+            if (input.empty() || vec1.empty())
                 return;
-            auto temp1 = vec1;
-            vec1.clear();
-            if (temp1.size() == vec.size())
+            auto temp1 = input;
+            input.clear();
+            if (temp1.size() == input.size())
             {
-                for (size_t i = 0; i < vec.size(); i++)
+                for (size_t i = 0; i < input.size(); i++)
                     vec1.push_back(temp1[i] + vec[i]);
             }
-            else if (temp1.size() > vec.size())
+            else if (temp1.size() > input.size())
             {
-                for (size_t i = 0; i < vec.size(); i++)
+                for (size_t i = 0; i < input.size(); i++)
                     vec1.push_back(temp1[i] + vec[i]);
-                for (size_t j = vec.size(); j < temp1.size(); j++)
+                for (size_t j = input.size(); j < temp1.size(); j++)
                     vec1.push_back(temp1[j]);
             }
             else
             {
                 for (size_t i = 0; i < temp1.size(); i++)
                     vec1.push_back(temp1[i] + vec[i]);
-                for (size_t j = temp1.size(); j < vec.size(); j++)
+                for (size_t j = temp1.size(); j < input.size(); j++)
                     vec1.push_back(vec[j]);
             }
         }
 
         /**
          * Adds a vector to the second vector
-         * @param vec Vector to add
+         * @param input Vector to add
          * @post Adds the contents of vec to the second vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        void operator+(const std::vector<T2> &vec) noexcept
+        void operator+(const vec<T2> &input) noexcept
         {
-            if (vec.empty() || vec2.empty())
+            if (input.empty() || vec2.empty())
                 return;
             auto temp2 = vec2;
             vec2.clear();
-            if (temp2.size() == vec.size())
+            if (temp2.size() == input.size())
             {
-                for (size_t i = 0; i < vec.size(); i++)
+                for (size_t i = 0; i < input.size(); i++)
                     vec2.push_back(temp2[i] + vec[i]);
             }
-            else if (temp2.size() > vec.size())
+            else if (temp2.size() > input.size())
             {
-                for (size_t i = 0; i < vec.size(); i++)
+                for (size_t i = 0; i < input.size(); i++)
                     vec2.push_back(temp2[i] + vec[i]);
-                for (size_t j = vec.size(); j < temp2.size(); j++)
+                for (size_t j = input.size(); j < temp2.size(); j++)
                     vec2.push_back(temp2[j]);
             }
             else
             {
                 for (size_t i = 0; i < temp2.size(); i++)
                     vec2.push_back(temp2[i] + vec[i]);
-                for (size_t j = temp2.size(); j < vec.size(); j++)
+                for (size_t j = temp2.size(); j < input.size(); j++)
                     vec2.push_back(vec[j]);
             }
         }
 
         /**
          * Subtraction operator for pair_v
-         * @param vec Pair-vector to subtract
+         * @param input Pair-vector to subtract
          * @post Subtracts the contents of vec from the first vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
@@ -583,7 +582,7 @@ namespace udt
 
         /**
          * Subtraction operator for pair_v
-         * @param vec Pair-vector to subtract
+         * @param input Pair-vector to subtract
          * @post Subtracts the contents of vec from the second vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
@@ -599,66 +598,66 @@ namespace udt
 
         /**
          * Subtracts a vector from the first vector
-         * @param vec Vector to subtract
+         * @param input Vector to subtract
          * @post Subtracts the contents of vec from the first vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        void operator-(const std::vector<T1> &vec) noexcept
+        void operator-(const vec<T1> &input) noexcept
         {
-            if (vec.empty() || vec1.empty())
+            if (input.empty() || vec1.empty())
                 return;
             auto temp1 = vec1;
             vec1.clear();
-            if (temp1.size() == vec.size())
+            if (temp1.size() == input.size())
             {
-                for (size_t i = 0; i < vec.size(); i++)
+                for (size_t i = 0; i < input.size(); i++)
                     vec1.push_back(temp1[i] - vec[i]);
             }
-            else if (temp1.size() > vec.size())
+            else if (temp1.size() > input.size())
             {
-                for (size_t i = 0; i < vec.size(); i++)
+                for (size_t i = 0; i < input.size(); i++)
                     vec1.push_back(temp1[i] - vec[i]);
-                for (size_t j = vec.size(); j < temp1.size(); j++)
+                for (size_t j = input.size(); j < temp1.size(); j++)
                     vec1.push_back(temp1[j]);
             }
             else
             {
                 for (size_t i = 0; i < temp1.size(); i++)
                     vec1.push_back(temp1[i] - vec[i]);
-                for (size_t j = temp1.size(); j < vec.size(); j++)
+                for (size_t j = temp1.size(); j < input.size(); j++)
                     vec1.push_back(vec[j]);
             }
         }
 
         /**
          * Subtracts a vector from the second vector
-         * @param vec Vector to subtract
+         * @param input Vector to subtract
          * @post Subtracts the contents of vec from the second vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        void operator-(const std::vector<T2> &vec) noexcept
+        void operator-(const vec<T2> &input) noexcept
         {
-            if (vec.empty() || vec2.empty())
+            if (input.empty() || vec2.empty())
                 return;
             auto temp2 = vec2;
             vec2.clear();
-            if (temp2.size() == vec.size())
+            if (temp2.size() == input.size())
             {
-                for (size_t i = 0; i < vec.size(); i++)
+                for (size_t i = 0; i < input.size(); i++)
                     vec2.push_back(temp2[i] - vec[i]);
             }
-            else if (temp2.size() > vec.size())
+            else if (temp2.size() > input.size())
             {
-                for (size_t i = 0; i < vec.size(); i++)
+                for (size_t i = 0; i < input.size(); i++)
                     vec2.push_back(temp2[i] - vec[i]);
-                for (size_t j = vec.size(); j < temp2.size(); j++)
+                for (size_t j = input.size(); j < temp2.size(); j++)
                     vec2.push_back(temp2[j]);
             }
             else
             {
                 for (size_t i = 0; i < temp2.size(); i++)
                     vec2.push_back(temp2[i] - vec[i]);
-                for (size_t j = temp2.size(); j < vec.size(); j++)
+                for (size_t j = temp2.size(); j < input.size(); j++)
                     vec2.push_back(vec[j]);
             }
         }
@@ -732,7 +731,5 @@ namespace udt
          */
         ~pair__v() = default;
     };
-
 }
-
 #endif // OPENUDT___CORE___PAIR_PAIR__V_HPP

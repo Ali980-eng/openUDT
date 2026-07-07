@@ -1,9 +1,11 @@
 <#
 .SYNOPSIS
-    udtCore - Retrieve version, license, help, or library documentation.
+    udt - Retrieve version, license, help, or library documentation.
 
 .DESCRIPTION
     This script accepts a command and an optional path.
+    --author          : Display the author name.
+    --brief           : Display a brief text about the project.
     --version         : Display the script version.
     --license         : Display the content of the license file.
     --help            : Display general usage help.
@@ -16,6 +18,8 @@
     Optional library path for --help command
 
 .EXAMPLE
+    .\udt.ps1 --author
+    .\udt.ps1 --brief
     .\udt.ps1 --version
     .\udt.ps1 --license
     .\udt.ps1 --help
@@ -33,7 +37,7 @@ param(
 )
 
 # ===================== Global Settings =====================
-$script:Version = "beta 0.0.6"
+$script:Version = "beta 0.0.7"
 $script:LicenseFile = Join-Path -Path $PSScriptRoot -ChildPath "documentation/lic.txt"
 $script:HelpRoot = "help"
 $script:briefFile = "documentation/brief.txt"
@@ -73,12 +77,16 @@ function Show-Help {
 ===========================================
 
 Usage:
+    .\udt.ps1 --author
+    .\udt.ps1 --brief
     .\udt.ps1 --version
     .\udt.ps1 --license
     .\udt.ps1 --help
     .\udt.ps1 --help <path>
 
 Options:
+    --author                : Show the author name.
+    --brief                 : Show a brief text about the project.
     --version               : Show script version.
     --license               : Show license content (from documentation/lic.txt).
     --help                  : Show this help message.

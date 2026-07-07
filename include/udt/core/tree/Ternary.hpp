@@ -8,6 +8,10 @@ namespace udt
 {
     namespace tree
     {
+        /// @brief Represents a ternary tree where each node may have up to three children.
+        ///
+        /// The class supports navigation through left, middle, right, and parent links,
+        /// and provides basic insertion and lookup helpers for tree traversal.
         template <typename T, bool BTT>
         class Ternary
         {
@@ -80,12 +84,19 @@ namespace udt
 
         public:
             Ternary() = default;
+
+            /// @brief Constructs a ternary tree with the provided root element.
+            ///
+            /// @param element The value assigned to the root node.
             Ternary(const T &element)
             {
                 root = new node{nullptr, nullptr, nullptr, nullptr, element};
                 current = root;
             }
 
+            /// @brief Sets or resets the root node to the supplied value.
+            ///
+            /// @param element The value stored in the root node.
             void set(const T &element) noexcept
             {
                 if (root != nullptr &&
@@ -102,6 +113,9 @@ namespace udt
                 current = root;
             }
 
+            /// @brief Inserts an element into the current node according to BST-style ordering.
+            ///
+            /// @param element The value to insert.
             template <bool B = BTT>
             enableIF<B, void> add(const T &element) noexcept
             {
@@ -117,6 +131,11 @@ namespace udt
                     std::cerr << "invalid argumant: no empty node to but the value of the element.\n";
             }
 
+            /// @brief Inserts an element into a specific child slot in non-BST mode.
+            ///
+            /// @param element The value to insert.
+            /// @param left Selects the left branch when true.
+            /// @param right Selects the right branch when true.
             template <bool B = BTT>
             enableIF<!B, void> add(const T &element, bool left, bool right) noexcept
             {
@@ -148,8 +167,13 @@ namespace udt
                 }
             }
 
+            /// @brief Checks whether the current node is the root node.
             constexpr bool in_root() noexcept { return current == root; }
 
+            /// @brief Moves the current pointer to a child or back to the parent.
+            ///
+            /// @param left Selects the left branch when true.
+            /// @param right Selects the right branch when true.
             void move(bool left = true, bool right = false) noexcept
             {
                 if (is_middle(left, right))
@@ -162,6 +186,9 @@ namespace udt
                     current = current->prev;
             }
 
+            /// @brief Returns the value stored at the current node.
+            ///
+            /// @return The current node's value.
             T get() const noexcept
             {
                 if (current == nullptr)
@@ -174,16 +201,25 @@ namespace udt
                 return current->item;
             }
 
+            /// @brief Checks whether the supplied value exists somewhere in the tree.
+            ///
+            /// @param element The value to locate.
             bool exsit(const T &element)
             {
                 return exsit(root, element);
             }
 
+            /// @brief Replaces the value of every matching node in the tree.
+            ///
+            /// @param element The replacement value.
             void replace(const T &element) noexcept
             {
                 replace(root, element);
             }
 
+            /// @brief Assigns a new value to the current node.
+            ///
+            /// @param element The value to assign.
             void operator=(const T &element)
             {
                 if (current == nullptr)
@@ -195,6 +231,7 @@ namespace udt
                 current->item = element;
             }
 
+            /// @brief Compares the current node value with another value for equality.
             template <typename U = T>
             constexpr arithmetic_condition<U, bool> operator==(const T &item)
             {
@@ -206,6 +243,7 @@ namespace udt
                 return current->item == item;
             }
 
+            /// @brief Compares the current node value with another value for inequality.
             template <typename U = T>
             constexpr arithmetic_condition<U, bool> operator!=(const T &item)
             {

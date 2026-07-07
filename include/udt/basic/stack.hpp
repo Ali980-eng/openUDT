@@ -17,6 +17,7 @@ namespace udt
             node *next;
         };
         node *top, *cur;
+        size_t size;
 
     public:
         inline constexpr stack() { top = nullptr; }

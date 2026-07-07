@@ -402,6 +402,10 @@ namespace udt
                 lower_p -= static_cast<uint64_t>(num);
         }
 
+        /// @brief Subtracts an int value from the current value.
+        ///
+        /// @param num The value to subtract.
+        /// @throw std::underflow_error if the result would be below zero.
         void operator-=(int num)
         {
             if (upper_p == 0 && lower_p == 0)
@@ -416,6 +420,10 @@ namespace udt
                 lower_p -= static_cast<uint64_t>(num);
         }
 
+        /// @brief Subtracts a long value from the current value.
+        ///
+        /// @param num The value to subtract.
+        /// @throw std::underflow_error if the result would be below zero.
         void operator-=(long num)
         {
             if (upper_p == 0 && lower_p == 0)
@@ -430,6 +438,10 @@ namespace udt
                 lower_p -= static_cast<uint64_t>(num);
         }
 
+        /// @brief Subtracts a long long value from the current value.
+        ///
+        /// @param num The value to subtract.
+        /// @throw std::underflow_error if the result would be below zero.
         void operator-=(long long num)
         {
             if (upper_p == 0 && lower_p == 0)
@@ -444,6 +456,10 @@ namespace udt
                 lower_p -= static_cast<uint64_t>(num);
         }
 
+        /// @brief Subtracts a floating-point value from the current value.
+        ///
+        /// @param num The value to subtract.
+        /// @throw std::underflow_error if the result would be below zero.
         void operator-=(float num)
         {
             if (upper_p == 0 && lower_p == 0)
@@ -458,6 +474,10 @@ namespace udt
                 lower_p -= static_cast<uint64_t>(num);
         }
 
+        /// @brief Subtracts a double-precision value from the current value.
+        ///
+        /// @param num The value to subtract.
+        /// @throw std::underflow_error if the result would be below zero.
         void operator-=(double num)
         {
             if (upper_p == 0 && lower_p == 0)
@@ -472,6 +492,10 @@ namespace udt
                 lower_p -= static_cast<uint64_t>(num);
         }
 
+        /// @brief Multiplies the current value by a character.
+        ///
+        /// @param c The multiplier.
+        /// @throw std::overflow_error if the result exceeds the representable range.
         void operator*=(char c)
         {
             if (lower_p == UINT64_MAX && upper_p == UINT64_MAX)
@@ -490,6 +514,10 @@ namespace udt
             upper_p = temp_upper;
         }
 
+        /// @brief Multiplies the current value by a short integer.
+        ///
+        /// @param num The multiplier.
+        /// @throw std::overflow_error if the result exceeds the representable range.
         void operator*=(short num)
         {
             if (lower_p == UINT64_MAX && upper_p == UINT64_MAX)
@@ -508,6 +536,10 @@ namespace udt
             upper_p = temp_upper;
         }
 
+        /// @brief Multiplies the current value by an int.
+        ///
+        /// @param num The multiplier.
+        /// @throw std::overflow_error if the result exceeds the representable range.
         void operator*=(int num)
         {
             if (lower_p == UINT64_MAX && upper_p == UINT64_MAX)
@@ -526,6 +558,10 @@ namespace udt
             upper_p = temp_upper;
         }
 
+        /// @brief Multiplies the current value by a long integer.
+        ///
+        /// @param num The multiplier.
+        /// @throw std::overflow_error if the result exceeds the representable range.
         void operator*=(long num)
         {
             if (lower_p == UINT64_MAX && upper_p == UINT64_MAX)
@@ -544,6 +580,10 @@ namespace udt
             upper_p = temp_upper;
         }
 
+        /// @brief Multiplies the current value by a long long integer.
+        ///
+        /// @param num The multiplier.
+        /// @throw std::overflow_error if the result exceeds the representable range.
         void operator*=(long long num)
         {
             if (lower_p == UINT64_MAX && upper_p == UINT64_MAX)
@@ -562,6 +602,10 @@ namespace udt
             upper_p = temp_upper;
         }
 
+        /// @brief Multiplies the current value by a floating-point value.
+        ///
+        /// @param num The multiplier.
+        /// @throw std::overflow_error if the result exceeds the representable range.
         void operator*=(float num)
         {
             if (lower_p == UINT64_MAX && upper_p == UINT64_MAX)
@@ -580,6 +624,10 @@ namespace udt
             upper_p = temp_upper;
         }
 
+        /// @brief Multiplies the current value by a double-precision value.
+        ///
+        /// @param num The multiplier.
+        /// @throw std::overflow_error if the result exceeds the representable range.
         void operator*=(double num)
         {
             if (lower_p == UINT64_MAX && upper_p == UINT64_MAX)
@@ -598,6 +646,10 @@ namespace udt
             upper_p = temp_upper;
         }
 
+        /// @brief Divides the current value by a character.
+        ///
+        /// @param c The divisor.
+        /// @throw std::invalid_argument if the divisor is zero.
         void operator/=(char c)
         {
             if (c == 0)
@@ -611,6 +663,10 @@ namespace udt
             upper_p = new_upper;
         }
 
+        /// @brief Divides the current value by a short integer.
+        ///
+        /// @param num The divisor.
+        /// @throw std::invalid_argument if the divisor is zero.
         void operator/=(short num)
         {
             if (num == 0)
@@ -624,6 +680,10 @@ namespace udt
             upper_p = new_upper;
         }
 
+        /// @brief Divides the current value by an int.
+        ///
+        /// @param num The divisor.
+        /// @throw std::invalid_argument if the divisor is zero.
         void operator/=(int num)
         {
             if (num == 0)
@@ -637,6 +697,10 @@ namespace udt
             upper_p = new_upper;
         }
 
+        /// @brief Divides the current value by a long integer.
+        ///
+        /// @param num The divisor.
+        /// @throw std::invalid_argument if the divisor is zero.
         void operator/=(long num)
         {
             if (num == 0)
@@ -650,6 +714,10 @@ namespace udt
             upper_p = new_upper;
         }
 
+        /// @brief Divides the current value by a long long integer.
+        ///
+        /// @param num The divisor.
+        /// @throw std::invalid_argument if the divisor is zero.
         void operator/=(long long num)
         {
             if (num == 0)
@@ -663,6 +731,10 @@ namespace udt
             upper_p = new_upper;
         }
 
+        /// @brief Divides the current value by a floating-point value.
+        ///
+        /// @param num The divisor.
+        /// @throw std::invalid_argument if the divisor is zero.
         void operator/=(float num)
         {
             if (num == 0.0f)
@@ -676,6 +748,10 @@ namespace udt
             upper_p = new_upper;
         }
 
+        /// @brief Divides the current value by a double-precision value.
+        ///
+        /// @param num The divisor.
+        /// @throw std::invalid_argument if the divisor is zero.
         void operator/=(double num)
         {
             if (num == 0.0)
@@ -689,9 +765,9 @@ namespace udt
             upper_p = new_upper;
         }
 
-        /// @brief Pre-increment with overflow detection.
-        /// @post Adds 1 with carry
-        /// @throw std::overflow_error at UINT128_MAX
+        /// @brief Increments the current value by one.
+        ///
+        /// @throw std::overflow_error if the value is already at the maximum representable value.
         void operator++()
         {
             if (lower_p == UINT64_MAX && upper_p == UINT64_MAX)
@@ -705,9 +781,9 @@ namespace udt
                 lower_p++;
         }
 
-        /// @brief Pre-decrement with underflow detection.
-        /// @post Subtracts 1 with borrow
-        /// @throw std::underflow_error at 0
+        /// @brief Decrements the current value by one.
+        ///
+        /// @throw std::underflow_error if the value is already zero.
         void operator--()
         {
             if (lower_p == 0 && upper_p == 0)
@@ -718,28 +794,76 @@ namespace udt
                 upper_p--;
         }
 
+        /// @brief Compares this value to another uint128_t instance.
+        ///
+        /// @param other The value to compare with.
+        /// @return true if both parts are equal, false otherwise.
         constexpr bool operator==(const uint128_t &other) const noexcept { return (lower_p == other.lower_p) && (upper_p == other.upper_p); }
 
+        /// @brief Compares this value to a short integer.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if the value is equal to num, false otherwise.
         constexpr bool operator==(short num) const noexcept { return (lower_p == static_cast<uint64_t>(num)) && (upper_p == 0); }
 
+        /// @brief Compares this value to an int.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if the value is equal to num, false otherwise.
         constexpr bool operator==(int num) const noexcept { return (lower_p == static_cast<uint64_t>(num)) && (upper_p == 0); }
 
+        /// @brief Compares this value to a float.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if the value is equal to num, false otherwise.
         constexpr bool operator==(float num) const noexcept { return (lower_p == static_cast<uint64_t>(num)) && (upper_p == 0); }
 
+        /// @brief Compares this value to a double.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if the value is equal to num, false otherwise.
         constexpr bool operator==(double num) const noexcept { return (lower_p == static_cast<uint64_t>(num)) && (upper_p == 0); }
 
+        /// @brief Compares this value to a character.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if the value is equal to num, false otherwise.
         constexpr bool operator==(char num) const noexcept { return (lower_p == static_cast<uint64_t>(num)) && (upper_p == 0); }
 
+        /// @brief Compares this value to a short integer for inequality.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if the value is not equal to num, false otherwise.
         constexpr bool operator!=(short num) const noexcept { return !(*this == num); }
 
+        /// @brief Compares this value to an int for inequality.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if the value is not equal to num, false otherwise.
         constexpr bool operator!=(int num) const noexcept { return !(*this == num); }
 
+        /// @brief Compares this value to a float for inequality.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if the value is not equal to num, false otherwise.
         constexpr bool operator!=(float num) const noexcept { return !(*this == num); }
 
+        /// @brief Compares this value to a double for inequality.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if the value is not equal to num, false otherwise.
         constexpr bool operator!=(double num) const noexcept { return !(*this == num); }
 
+        /// @brief Compares this value to a character for inequality.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if the value is not equal to num, false otherwise.
         constexpr bool operator!=(char num) const noexcept { return !(*this == num); }
 
+        /// @brief Compares this value to a short integer for greater-than.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if this value is greater than num, false otherwise.
         constexpr bool operator>(short num) const noexcept
         {
             if (upper_p > 0)
@@ -749,6 +873,10 @@ namespace udt
             return lower_p > static_cast<uint64_t>(num);
         }
 
+        /// @brief Compares this value to an int for greater-than.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if this value is greater than num, false otherwise.
         constexpr bool operator>(int num) const noexcept
         {
             if (upper_p > 0)
@@ -758,6 +886,10 @@ namespace udt
             return lower_p > static_cast<uint64_t>(num);
         }
 
+        /// @brief Compares this value to a float for greater-than.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if this value is greater than num, false otherwise.
         constexpr bool operator>(float num) const noexcept
         {
             if (upper_p > 0)
@@ -767,6 +899,10 @@ namespace udt
             return lower_p > static_cast<uint64_t>(num);
         }
 
+        /// @brief Compares this value to a double for greater-than.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if this value is greater than num, false otherwise.
         constexpr bool operator>(double num) const noexcept
         {
             if (upper_p > 0)
@@ -776,6 +912,10 @@ namespace udt
             return lower_p > static_cast<uint64_t>(num);
         }
 
+        /// @brief Compares this value to a character for greater-than.
+        ///
+        /// @param c The value to compare with.
+        /// @return true if this value is greater than c, false otherwise.
         constexpr bool operator>(char c) const noexcept
         {
             if (upper_p > 0)
@@ -785,6 +925,10 @@ namespace udt
             return lower_p > static_cast<uint64_t>(c);
         }
 
+        /// @brief Compares this value to a short integer for less-than.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if this value is less than num, false otherwise.
         constexpr bool operator<(short num) const noexcept
         {
             if (upper_p < 0)
@@ -794,6 +938,10 @@ namespace udt
             return lower_p < static_cast<uint64_t>(num);
         }
 
+        /// @brief Compares this value to an int for less-than.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if this value is less than num, false otherwise.
         constexpr bool operator<(int num) const noexcept
         {
             if (upper_p < 0)
@@ -803,6 +951,10 @@ namespace udt
             return lower_p < static_cast<uint64_t>(num);
         }
 
+        /// @brief Compares this value to a float for less-than.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if this value is less than num, false otherwise.
         constexpr bool operator<(float num) const noexcept
         {
             if (upper_p < 0)
@@ -812,6 +964,10 @@ namespace udt
             return lower_p < static_cast<uint64_t>(num);
         }
 
+        /// @brief Compares this value to a double for less-than.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if this value is less than num, false otherwise.
         constexpr bool operator<(double num) const noexcept
         {
             if (upper_p < 0)
@@ -821,6 +977,10 @@ namespace udt
             return lower_p < static_cast<uint64_t>(num);
         }
 
+        /// @brief Compares this value to a character for less-than.
+        ///
+        /// @param c The value to compare with.
+        /// @return true if this value is less than c, false otherwise.
         constexpr bool operator<(char c) const noexcept
         {
             if (upper_p < 0)
@@ -830,24 +990,64 @@ namespace udt
             return lower_p < static_cast<uint64_t>(c);
         }
 
+        /// @brief Compares this value to a short integer for greater-or-equal.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if this value is greater than or equal to num, false otherwise.
         constexpr bool operator>=(short num) const noexcept { return !(*this < num); }
 
+        /// @brief Compares this value to an int for greater-or-equal.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if this value is greater than or equal to num, false otherwise.
         constexpr bool operator>=(int num) const noexcept { return !(*this < num); }
 
+        /// @brief Compares this value to a float for greater-or-equal.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if this value is greater than or equal to num, false otherwise.
         constexpr bool operator>=(float num) const noexcept { return !(*this < num); }
 
+        /// @brief Compares this value to a double for greater-or-equal.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if this value is greater than or equal to num, false otherwise.
         constexpr bool operator>=(double num) const noexcept { return !(*this < num); }
 
+        /// @brief Compares this value to a character for greater-or-equal.
+        ///
+        /// @param c The value to compare with.
+        /// @return true if this value is greater than or equal to c, false otherwise.
         constexpr bool operator>=(char c) const noexcept { return !(*this < c); }
 
+        /// @brief Compares this value to a short integer for less-or-equal.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if this value is less than or equal to num, false otherwise.
         constexpr bool operator<=(short num) const noexcept { return !(*this > num); }
 
+        /// @brief Compares this value to an int for less-or-equal.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if this value is less than or equal to num, false otherwise.
         constexpr bool operator<=(int num) const noexcept { return !(*this > num); }
 
+        /// @brief Compares this value to a float for less-or-equal.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if this value is less than or equal to num, false otherwise.
         constexpr bool operator<=(float num) const noexcept { return !(*this > num); }
 
+        /// @brief Compares this value to a double for less-or-equal.
+        ///
+        /// @param num The value to compare with.
+        /// @return true if this value is less than or equal to num, false otherwise.
         constexpr bool operator<=(double num) const noexcept { return !(*this > num); }
 
+        /// @brief Compares this value to a character for less-or-equal.
+        ///
+        /// @param c The value to compare with.
+        /// @return true if this value is less than or equal to c, false otherwise.
         constexpr bool operator<=(char c) const noexcept { return !(*this > c); }
     };
 }

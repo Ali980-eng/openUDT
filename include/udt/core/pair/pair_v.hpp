@@ -1,9 +1,8 @@
-#include <vector>
 #include <stdexcept>
 #include <cmath>
 #include <iostream>
-#include <string>
 #include "meta/adva/function.hpp"
+#include "cfrost/structure.h"
 
 #pragma once
 #ifndef OPENUDT___CORE___PAIR_PAIR_V_HPP
@@ -11,7 +10,6 @@
 
 namespace udt
 {
-
     /**
      * A Pair-vector container that stores two vectors and their reversed versions.
      * Useful for comparing, printing, summing, and swapping two vectors together.
@@ -23,8 +21,8 @@ namespace udt
     class pair_v
     {
     private:
-        std::vector<T> vec1;
-        std::vector<T> vec2;
+        vec<T> vec1;
+        vec<T> vec2;
 
     public:
         /**
@@ -41,7 +39,7 @@ namespace udt
          * @param v1 First vector
          * @param v2 Second vector
          */
-        pair_v(const std::vector<T> &v1, const std::vector<T> &v2)
+        pair_v(const vec<T> &v1, const vec<T> &v2)
         {
             vec1 = v1;
             vec2 = v2;
@@ -106,7 +104,7 @@ namespace udt
          * @param v1 First vector
          * @param v2 Second vector
          */
-        void set(const std::vector<T> &v1, const std::vector<T> &v2) noexcept
+        void set(const vec<T> &v1, const vec<T> &v2) noexcept
         {
             vec1 = v1;
             vec2 = v2;
@@ -117,42 +115,42 @@ namespace udt
          * @param v1 First vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        void set_v1(const std::vector<T> &v1) noexcept { vec1 = v1; }
+        void set_v1(const vec<T> &v1) noexcept { vec1 = v1; }
 
         /**
          * Sets the values of the second vector
          * @param v2 Second vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        void set_v2(const std::vector<T> &v2) noexcept { vec2 = v2; }
+        void set_v2(const vec<T> &v2) noexcept { vec2 = v2; }
 
         /**
          * Gets the first vector
          * @return A const reference to the first vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        const std::vector<T> &get_vec1() const noexcept { return vec1; }
+        const vec<T> &get_vec1() const noexcept { return vec1; }
 
         /**
          * Gets a copy of the first vector
          * @return A copy of the first vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        std::vector<T> get_copy_vec1() const noexcept { return vec1; }
+        vec<T> get_copy_vec1() const noexcept { return vec1; }
 
         /**
          * Gets the second vector
          * @return A const reference to the second vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        const std::vector<T> &get_vec2() const noexcept { return vec2; }
+        const vec<T> &get_vec2() const noexcept { return vec2; }
 
         /**
          * Gets a copy of the second vector
          * @return A copy of the second vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        std::vector<T> get_copy_vec2() const noexcept { return vec2; }
+        vec<T> get_copy_vec2() const noexcept { return vec2; }
 
         /**
          * Multiplies all elements of the first vector by a given number
@@ -364,11 +362,11 @@ namespace udt
 
         /**
          * Assignment operator for pair_v
-         * @param vec Pair-vector to assign
+         * @param input Pair-vector to assign
          * @post Replaces current vec1 and vec2 with the input vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        void operator=(const std::vector<T> &vec) noexcept
+        void operator=(const vec<T> &input) noexcept
         {
             if (vec1.empty())
                 vec1 = vec;
@@ -392,112 +390,112 @@ namespace udt
 
         /**
          * Equality operator for pair_v
-         * @param vec Pair-vector to compare
+         * @param input Pair-vector to compare
          * @return true if either vec1 or vec2 is equal to vec, false otherwise
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        bool operator==(const std::vector<T> &vec) const noexcept
+        bool operator==(const vec<T> &input) const noexcept
         {
             return same_v(vec, vec1) || same_v(vec, vec2);
         }
 
         /**
          * Addition assignment operator for pair_v
-         * @param vec Pair-vector to add
+         * @param input Pair-vector to add
          * @post Adds the contents of vec to the first or second vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        void operator+=(const std::vector<T> &vec) noexcept
+        void operator+=(const vec<T> &input) noexcept
         {
-            if (vec.empty() || (vec1.empty() && vec2.empty()))
+            if (input.empty() || (vec1.empty() && vec2.empty()))
                 return;
             auto temp1 = vec1, temp2 = vec2;
             vec1.clear();
             vec2.clear();
             if (temp1.empty())
             {
-                if (temp2.size() == vec.size())
+                if (temp2.size() == input.size())
                 {
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec2.push_back(temp2[i] + vec[i]);
                 }
-                else if (temp2.size() > vec.size())
+                else if (temp2.size() > input.size())
                 {
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec2.push_back(temp2[i] + vec[i]);
-                    for (size_t j = vec.size(); j < temp2.size(); j++)
+                    for (size_t j = input.size(); j < temp2.size(); j++)
                         vec2.push_back(temp2[j]);
                 }
                 else
                 {
                     for (size_t i = 0; i < temp2.size(); i++)
                         vec2.push_back(temp2[i] + vec[i]);
-                    for (size_t j = temp2.size(); j < vec.size(); j++)
+                    for (size_t j = temp2.size(); j < input.size(); j++)
                         vec2.push_back(vec[j]);
                 }
             }
             else if (temp2.empty())
             {
-                if (temp1.size() == vec.size())
+                if (temp1.size() == input.size())
                 {
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec1.push_back(temp1[i] + vec[i]);
                 }
-                else if (temp1.size() > vec.size())
+                else if (temp1.size() > input.size())
                 {
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec1.push_back(temp1[i] + vec[i]);
-                    for (size_t j = vec.size(); j < temp1.size(); j++)
+                    for (size_t j = input.size(); j < temp1.size(); j++)
                         vec1.push_back(temp1[j]);
                 }
                 else
                 {
                     for (size_t i = 0; i < temp1.size(); i++)
                         vec1.push_back(temp1[i] + vec[i]);
-                    for (size_t j = temp1.size(); j < vec.size(); j++)
+                    for (size_t j = temp1.size(); j < input.size(); j++)
                         vec1.push_back(vec[j]);
                 }
             }
             else
             {
-                if (vec.size() == temp1.size() && vec.size() == temp2.size())
+                if (input.size() == temp1.size() && input.size() == temp2.size())
                 {
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec1.push_back(temp1[i] + vec[i]);
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec1.push_back(temp2[i] + vec[i]);
                 }
-                else if (vec.size() < temp1.size() && vec.size() < temp2.size())
+                else if (input.size() < temp1.size() && input.size() < temp2.size())
                 {
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec1.push_back(temp1[i] + vec[i]);
-                    for (size_t j = vec.size(); j < temp1.size(); j++)
+                    for (size_t j = input.size(); j < temp1.size(); j++)
                         vec1.push_back(temp1[j]);
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec2.push_back(temp2[i] + vec[i]);
-                    for (size_t j = vec.size(); j < temp2.size(); j++)
+                    for (size_t j = input.size(); j < temp2.size(); j++)
                         vec2.push_back(temp2[j]);
                 }
-                else if (vec.size() < temp1.size() && vec.size() > temp2.size())
+                else if (input.size() < temp1.size() && input.size() > temp2.size())
                 {
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec1.push_back(temp1[i] + vec[i]);
-                    for (size_t j = vec.size(); j < temp1.size(); j++)
+                    for (size_t j = input.size(); j < temp1.size(); j++)
                         vec1.push_back(temp1[j]);
                     for (size_t i = 0; i < temp2.size(); i++)
                         vec2.push_back(temp2[i] + vec[i]);
-                    for (size_t j = temp2.size(); j < vec.size(); j++)
+                    for (size_t j = temp2.size(); j < input.size(); j++)
                         vec2.push_back(vec[j]);
                 }
                 else
                 {
                     for (size_t i = 0; i < temp1.size(); i++)
                         vec1.push_back(temp1[i] + vec[i]);
-                    for (size_t j = temp1.size(); j < vec.size(); j++)
+                    for (size_t j = temp1.size(); j < input.size(); j++)
                         vec1.push_back(vec[j]);
                     for (size_t i = 0; i < temp2.size(); i++)
                         vec2.push_back(temp2[i] + vec[i]);
-                    for (size_t j = temp2.size(); j < vec.size(); j++)
+                    for (size_t j = temp2.size(); j < input.size(); j++)
                         vec2.push_back(vec[j]);
                 }
             }
@@ -533,101 +531,101 @@ namespace udt
 
         /**
          * Adds a vector to the first or second vector
-         * @param vec Vector to add
+         * @param input Vector to add
          * @post Adds the contents of vec to the first or second vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        void operator+(const std::vector<T> &vec) noexcept
+        void operator+(const vec<T> &input) noexcept
         {
-            if (vec.empty() || (vec1.empty() && vec2.empty()))
+            if (input.empty() || (vec1.empty() && vec2.empty()))
                 return;
             auto temp1 = vec1, temp2 = vec2;
             vec1.clear();
             vec2.clear();
             if (temp1.empty())
             {
-                if (temp2.size() == vec.size())
+                if (temp2.size() == input.size())
                 {
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec2.push_back(temp2[i] + vec[i]);
                 }
-                else if (temp2.size() > vec.size())
+                else if (temp2.size() > input.size())
                 {
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec2.push_back(temp2[i] + vec[i]);
-                    for (size_t j = vec.size(); j < temp2.size(); j++)
+                    for (size_t j = input.size(); j < temp2.size(); j++)
                         vec2.push_back(temp2[j]);
                 }
                 else
                 {
                     for (size_t i = 0; i < temp2.size(); i++)
                         vec2.push_back(temp2[i] + vec[i]);
-                    for (size_t j = temp2.size(); j < vec.size(); j++)
+                    for (size_t j = temp2.size(); j < input.size(); j++)
                         vec2.push_back(vec[j]);
                 }
             }
             else if (temp2.empty())
             {
-                if (temp1.size() == vec.size())
+                if (temp1.size() == input.size())
                 {
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec1.push_back(temp1[i] + vec[i]);
                 }
-                else if (temp1.size() > vec.size())
+                else if (temp1.size() > input.size())
                 {
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec1.push_back(temp1[i] + vec[i]);
-                    for (size_t j = vec.size(); j < temp1.size(); j++)
+                    for (size_t j = input.size(); j < temp1.size(); j++)
                         vec1.push_back(temp1[j]);
                 }
                 else
                 {
                     for (size_t i = 0; i < temp1.size(); i++)
                         vec1.push_back(temp1[i] + vec[i]);
-                    for (size_t j = temp1.size(); j < vec.size(); j++)
+                    for (size_t j = temp1.size(); j < input.size(); j++)
                         vec1.push_back(vec[j]);
                 }
             }
             else
             {
-                if (vec.size() == temp1.size() && vec.size() == temp2.size())
+                if (input.size() == temp1.size() && input.size() == temp2.size())
                 {
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec1.push_back(temp1[i] + vec[i]);
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec2.push_back(temp2[i] + vec[i]);
                 }
-                else if (vec.size() < temp1.size() && vec.size() < temp2.size())
+                else if (input.size() < temp1.size() && input.size() < temp2.size())
                 {
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec1.push_back(temp1[i] + vec[i]);
-                    for (size_t j = vec.size(); j < temp1.size(); j++)
+                    for (size_t j = input.size(); j < temp1.size(); j++)
                         vec1.push_back(temp1[j]);
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec2.push_back(temp2[i] + vec[i]);
-                    for (size_t j = vec.size(); j < temp2.size(); j++)
+                    for (size_t j = input.size(); j < temp2.size(); j++)
                         vec2.push_back(temp2[j]);
                 }
-                else if (vec.size() < temp1.size() && vec.size() > temp2.size())
+                else if (input.size() < temp1.size() && input.size() > temp2.size())
                 {
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec1.push_back(temp1[i] + vec[i]);
-                    for (size_t j = vec.size(); j < temp1.size(); j++)
+                    for (size_t j = input.size(); j < temp1.size(); j++)
                         vec1.push_back(temp1[j]);
                     for (size_t i = 0; i < temp2.size(); i++)
                         vec2.push_back(temp2[i] + vec[i]);
-                    for (size_t j = temp2.size(); j < vec.size(); j++)
+                    for (size_t j = temp2.size(); j < input.size(); j++)
                         vec2.push_back(vec[j]);
                 }
                 else
                 {
                     for (size_t i = 0; i < temp1.size(); i++)
                         vec1.push_back(temp1[i] + vec[i]);
-                    for (size_t j = temp1.size(); j < vec.size(); j++)
+                    for (size_t j = temp1.size(); j < input.size(); j++)
                         vec1.push_back(vec[j]);
                     for (size_t i = 0; i < temp2.size(); i++)
                         vec2.push_back(temp2[i] + vec[i]);
-                    for (size_t j = temp2.size(); j < vec.size(); j++)
+                    for (size_t j = temp2.size(); j < input.size(); j++)
                         vec2.push_back(vec[j]);
                 }
             }
@@ -635,7 +633,7 @@ namespace udt
 
         /**
          * Subtraction operator for pair_v
-         * @param vec Pair-vector to subtract
+         * @param input Pair-vector to subtract
          * @post Subtracts the contents of vec from the first or second vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
@@ -667,101 +665,101 @@ namespace udt
 
         /**
          * Subtracts a vector from the first or second vector
-         * @param vec Vector to subtract
+         * @param input Vector to subtract
          * @post Subtracts the contents of vec from the first or second vector
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        void operator-(const std::vector<T> &vec) noexcept
+        void operator-(const vec<T> &input) noexcept
         {
-            if (vec.empty() || (vec1.empty() && vec2.empty()))
+            if (input.empty() || (vec1.empty() && vec2.empty()))
                 return;
             auto temp1 = vec1, temp2 = vec2;
             vec1.clear();
             vec2.clear();
             if (temp1.empty())
             {
-                if (temp2.size() == vec.size())
+                if (temp2.size() == input.size())
                 {
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec2.push_back(temp2[i] - vec[i]);
                 }
-                else if (temp2.size() > vec.size())
+                else if (temp2.size() > input.size())
                 {
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec2.push_back(temp2[i] - vec[i]);
-                    for (size_t j = vec.size(); j < temp2.size(); j++)
+                    for (size_t j = input.size(); j < temp2.size(); j++)
                         vec2.push_back(temp2[j]);
                 }
                 else
                 {
                     for (size_t i = 0; i < temp2.size(); i++)
                         vec2.push_back(temp2[i] - vec[i]);
-                    for (size_t j = temp2.size(); j < vec.size(); j++)
+                    for (size_t j = temp2.size(); j < input.size(); j++)
                         vec2.push_back(vec[j]);
                 }
             }
             else if (temp2.empty())
             {
-                if (temp1.size() == vec.size())
+                if (temp1.size() == input.size())
                 {
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec1.push_back(temp1[i] - vec[i]);
                 }
-                else if (temp1.size() > vec.size())
+                else if (temp1.size() > input.size())
                 {
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec1.push_back(temp1[i] - vec[i]);
-                    for (size_t j = vec.size(); j < temp1.size(); j++)
+                    for (size_t j = input.size(); j < temp1.size(); j++)
                         vec1.push_back(temp1[j]);
                 }
                 else
                 {
                     for (size_t i = 0; i < temp1.size(); i++)
                         vec1.push_back(temp1[i] - vec[i]);
-                    for (size_t j = temp1.size(); j < vec.size(); j++)
+                    for (size_t j = temp1.size(); j < input.size(); j++)
                         vec1.push_back(vec[j]);
                 }
             }
             else
             {
-                if (vec.size() == temp1.size() && vec.size() == temp2.size())
+                if (input.size() == temp1.size() && input.size() == temp2.size())
                 {
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec1.push_back(temp1[i] - vec[i]);
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec2.push_back(temp2[i] - vec[i]);
                 }
-                else if (vec.size() < temp1.size() && vec.size() < temp2.size())
+                else if (input.size() < temp1.size() && input.size() < temp2.size())
                 {
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec1.push_back(temp1[i] - vec[i]);
-                    for (size_t j = vec.size(); j < temp1.size(); j++)
+                    for (size_t j = input.size(); j < temp1.size(); j++)
                         vec1.push_back(temp1[j]);
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec2.push_back(temp2[i] - vec[i]);
-                    for (size_t j = vec.size(); j < temp2.size(); j++)
+                    for (size_t j = input.size(); j < temp2.size(); j++)
                         vec2.push_back(temp2[j]);
                 }
-                else if (vec.size() < temp1.size() && vec.size() > temp2.size())
+                else if (input.size() < temp1.size() && input.size() > temp2.size())
                 {
-                    for (size_t i = 0; i < vec.size(); i++)
+                    for (size_t i = 0; i < input.size(); i++)
                         vec1.push_back(temp1[i] - vec[i]);
-                    for (size_t j = vec.size(); j < temp1.size(); j++)
+                    for (size_t j = input.size(); j < temp1.size(); j++)
                         vec1.push_back(temp1[j]);
                     for (size_t i = 0; i < temp2.size(); i++)
                         vec2.push_back(temp2[i] - vec[i]);
-                    for (size_t j = temp2.size(); j < vec.size(); j++)
+                    for (size_t j = temp2.size(); j < input.size(); j++)
                         vec2.push_back(vec[j]);
                 }
                 else
                 {
                     for (size_t i = 0; i < temp1.size(); i++)
                         vec1.push_back(temp1[i] - vec[i]);
-                    for (size_t j = temp1.size(); j < vec.size(); j++)
+                    for (size_t j = temp1.size(); j < input.size(); j++)
                         vec1.push_back(vec[j]);
                     for (size_t i = 0; i < temp2.size(); i++)
                         vec2.push_back(temp2[i] - vec[i]);
-                    for (size_t j = temp2.size(); j < vec.size(); j++)
+                    for (size_t j = temp2.size(); j < input.size(); j++)
                         vec2.push_back(vec[j]);
                 }
             }
@@ -836,7 +834,5 @@ namespace udt
          */
         ~pair_v() = default;
     };
-
 }
-
 #endif // OPENUDT___CORE___PAIR_PAIR_V_HPP

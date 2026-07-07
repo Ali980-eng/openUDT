@@ -1,5 +1,5 @@
-#include "metaCore/lite/stream.hpp"
-#include "core/dynamic/dynamic_t.hpp"
+#include "meta/lite/stream.hpp"
+#include "udt/core/dynamic/dynamic_t.hpp"
 
 /// @brief This function test the empty constructor and get_float function in the object dynamic_t.
 /// @return The basic test value (should be true).

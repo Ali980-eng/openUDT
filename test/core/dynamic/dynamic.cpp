@@ -1,5 +1,5 @@
-#include "metaCore/lite/stream.hpp"
-#include "core/dynamic.hpp"
+#include "meta/lite/stream.hpp"
+#include "udt/core/dynamic.hpp"
 
 bool utest_1()
 {

@@ -1,5 +1,5 @@
-#include "metaCore/lite.hpp"
-#include "openUDT/core/bfs/bfs_8.hpp"
+#include "meta/lite.hpp"
+#include "udt/core/bfs/bfs_8.hpp"
 
 bool utest_1()
 {
@@ -215,9 +215,6 @@ bool utest_30()
 
 int main()
 {
-    meta::lite::io::NewLines();
-    bool bresult;
-    float fresult;
     meta::lite::test_stream UTS;
     UTS << utest_1;
     UTS << utest_2;
@@ -249,9 +246,7 @@ int main()
     UTS << utest_28;
     UTS << utest_29;
     UTS << utest_30;
-    UTS >> bresult;
-    meta::lite::io::print<std::string>("All test result: ");
-    meta::lite::io::println(meta::lite::test::test_message(bresult));
+    UTS.print_summary();
     udt::bfs_8 value;
     meta::lite::io::print("The size of the type BFS_8: ", meta::lite::benchmark::mata_data(value), " Byte\n");
     meta::lite::benchmark_stream<false> UTB = 9;
@@ -285,8 +280,6 @@ int main()
     UTB << utest_28;
     UTB << utest_29;
     UTB << utest_30;
-    meta::lite::io::print<std::string>(
-        "The average time for all unit test: " +
-        std::to_string(fresult) + " ns");
+    UTB.print_summary();
     return 0;
 }

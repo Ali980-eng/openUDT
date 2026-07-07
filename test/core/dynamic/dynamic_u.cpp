@@ -1,5 +1,5 @@
-#include "metaCore/lite/stream.hpp"
-#include "core/dynamic/dynamic_u.hpp"
+#include "meta/lite/stream.hpp"
+#include "udt/core/dynamic/dynamic_u.hpp"
 
 /// @brief This function test the empty constructor and empty function in the object dynamic_u.
 /// @return The basic test value (should be true).

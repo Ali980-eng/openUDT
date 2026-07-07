@@ -1,5 +1,5 @@
-#include "metaCore/lite.hpp"
-#include "core/triple/triple_3t.hpp"
+#include "meta/lite.hpp"
+#include "udt/core/triple/triple_3t.hpp"
 
 /// @brief This function test the empty constructor and the function get_third in the object triple_t3.
 /// @return The basic test value (should be true).
