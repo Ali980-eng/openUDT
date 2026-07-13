@@ -10,6 +10,9 @@
 namespace udt
 {
 
+    /// @brief Represents a queue implemented with a singly linked list.
+    ///
+    /// The class supports enqueuing, dequeuing, and inspecting the front and rear items.
     template <typename T>
     class que
     {
@@ -24,6 +27,7 @@ namespace udt
         size_t length;
 
     public:
+        /// @brief Constructs an empty queue.
         que()
         {
             front_ptr = rear_ptr = nullptr;
@@ -45,6 +49,7 @@ namespace udt
                 enque(element);
         }
 
+        /// @brief Checks whether the queue is empty.
         inline bool is_empty() const noexcept
         {
             if (rear_ptr == nullptr)
@@ -52,6 +57,9 @@ namespace udt
             return false;
         }
 
+        /// @brief Adds an element to the rear of the queue.
+        ///
+        /// @param element The value to enqueue.
         void enque(T element) noexcept
         {
             if (is_empty())
@@ -72,6 +80,7 @@ namespace udt
             length++;
         }
 
+        /// @brief Removes the element at the front of the queue.
         void deque()
         {
             if (is_empty())
@@ -97,6 +106,7 @@ namespace udt
             }
         }
 
+        /// @brief Returns the value stored at the front of the queue.
         inline T get_front() const
         {
             if (is_empty())
@@ -104,6 +114,7 @@ namespace udt
             return front_ptr->item;
         }
 
+        /// @brief Returns the value stored at the rear of the queue.
         inline T get_rear() const
         {
             if (is_empty())
@@ -111,6 +122,7 @@ namespace udt
             return rear_ptr->item;
         }
 
+        /// @brief Removes all elements from the queue.
         void clear()
         {
             node *current;

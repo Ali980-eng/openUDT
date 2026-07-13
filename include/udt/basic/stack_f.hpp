@@ -1,4 +1,5 @@
 #include <iostream>
+#include "cfrost/structure.h"
 
 #pragma once
 #ifndef OPENUDT___BASIC___stack_f_F_HPP
@@ -7,6 +8,9 @@
 namespace udt
 {
 
+    /// @brief Represents a fixed-capacity stack implemented on a static array.
+    ///
+    /// This container supports push, pop, and top access operations within a predefined size.
     template <typename T, size_t MaxSize>
     class stack_f
     {
@@ -15,7 +19,12 @@ namespace udt
         T item[MaxSize]; // T can be int, double, string, etc.
 
     public:
+        /// @brief Constructs an empty fixed-capacity stack.
         stack_f() : top(-1) {}
+
+        /// @brief Pushes an element onto the stack.
+        ///
+        /// @param element The value to push.
         void push(T element)
         {
             if (top == MaxSize - 1)
@@ -25,11 +34,15 @@ namespace udt
             }
             item[++top] = element;
         }
+
+        /// @brief Checks whether the stack is empty.
         bool isEmpty()
         {
             return top < 0;
         }
-        void pop()
+
+        /// @brief Removes the top element from the stack.
+        procedure(pop)
         {
             if (isEmpty())
             {
@@ -38,6 +51,10 @@ namespace udt
             }
             top--;
         }
+
+        /// @brief Removes the top element and stores it in the provided reference.
+        ///
+        /// @param element Receives the removed value.
         void pop(T &element)
         {
             if (isEmpty())
@@ -45,6 +62,10 @@ namespace udt
             else
                 element = item[top--];
         }
+
+        /// @brief Copies the top element to the provided reference.
+        ///
+        /// @param stack_fTop Receives the top value.
         void getTop(T &stack_fTop)
         {
             if (isEmpty())
@@ -52,7 +73,9 @@ namespace udt
             else
                 stack_fTop = item[top];
         }
-        void print()
+
+        /// @brief Prints the stack contents to the standard output stream.
+        procedure(print)
         {
             for (int i = top; i >= 0; --i)
             {

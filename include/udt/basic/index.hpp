@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include "cfrost/structure.h"
 
 #pragma once
 #ifndef OPENUDT___BASIC___indHPP
@@ -76,7 +77,7 @@ namespace udt
         /**
          * @brief Marks the index as invalid and clears its stored value.
          */
-        void unvalidate() noexcept
+        procedure(unvalidate) noexcept
         {
             is_valid = false;
             ind = size_t();
@@ -264,7 +265,7 @@ namespace udt
          *
          * @throws std::runtime_error if the index is invalid.
          */
-        void operator++()
+        procedure(operator++)
         {
             if (!is_valid)
             {
@@ -278,7 +279,7 @@ namespace udt
          *
          * @throws std::runtime_error if the index is invalid.
          */
-        void operator--()
+        procedure(operator--)
         {
             if (!is_valid)
             {

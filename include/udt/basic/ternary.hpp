@@ -10,6 +10,8 @@
  * @author Ali Lafi
  */
 
+#include "cfrost/structure.h"
+
 #pragma once
 #ifndef OPENUDT___BASIC___TERNARY_HPP
 #define OPENUDT___BASIC___TERNARY_HPP
@@ -65,7 +67,7 @@ namespace udt
         ternary(const ternary &other) noexcept : value(other.value) {}
 
         /// @brief Resets the value to UNKNOWN.
-        void reset() noexcept { value = UNKNOWN; }
+        procedure(reset) noexcept { value = UNKNOWN; }
 
         /// @brief Sets the value based on a boolean input.
         /// @param b Boolean value to set the ternary logic value.
@@ -77,7 +79,7 @@ namespace udt
 
         /// @brief Sets the value based on an integer input.
         /// @param v Integer value to set the ternary logic value (0 for FALSE,
-        void set() noexcept { value = UNKNOWN; }
+        procedure(set) noexcept { value = UNKNOWN; }
 
         /// @brief Sets the value based on an integer input.
         /// @param v Integer value to set the ternary logic value (0 for FALSE,

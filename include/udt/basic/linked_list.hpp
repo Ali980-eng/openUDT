@@ -1,6 +1,7 @@
 #include <iostream>
 #include <initializer_list>
 #include <vector>
+#include "cfrost/structure.h"
 
 #pragma once
 #ifndef OPENUDT___BASIC___LINKED_LIST_HPP
@@ -9,6 +10,10 @@
 namespace udt
 {
 
+    /// @brief Represents a singly linked list of values.
+    ///
+    /// The list supports insertion, removal, lookup, replacement, and traversal
+    /// operations while preserving the existing implementation semantics.
     template <typename T>
     class linked_list
     {
@@ -26,6 +31,7 @@ namespace udt
         size_t length;
 
     public:
+        /// @brief Constructs an empty linked list.
         linked_list() noexcept
         {
             first = nullptr;
@@ -33,6 +39,9 @@ namespace udt
             length = 0;
         }
 
+        /// @brief Constructs a linked list from an initializer list.
+        ///
+        /// @param list The values to insert in order.
         linked_list(std::initializer_list<T> list) noexcept
         {
             first = nullptr;
@@ -44,6 +53,9 @@ namespace udt
             }
         }
 
+        /// @brief Constructs a linked list from a vector.
+        ///
+        /// @param list The values to insert in order.
         linked_list(const std::vector<T> &list) noexcept
         {
             first = nullptr;
@@ -55,6 +67,9 @@ namespace udt
             }
         }
 
+        /// @brief Copies the contents of another linked list.
+        ///
+        /// @param list The linked list to copy.
         linked_list(const linked_list<T> &list) noexcept
         {
             first = nullptr;
@@ -68,6 +83,10 @@ namespace udt
             }
         }
 
+        /// @brief Copies the contents of another linked list into this one.
+        ///
+        /// @param list The linked list to copy.
+        /// @return A reference to this linked list.
         linked_list<T> &operator=(const linked_list<T> &list) noexcept
         {
             if (this != &list)
@@ -83,6 +102,10 @@ namespace udt
             return *this;
         }
 
+        /// @brief Returns the element at the specified index.
+        ///
+        /// @param index The zero-based position to access.
+        /// @return The value at the given index, or a default value if out of range.
         T at(size_t index) noexcept
         {
             if (index >= length)
@@ -109,14 +132,21 @@ namespace udt
             }
         }
 
+        /// @brief Returns the last element in the list.
         constexpr T last_item() noexcept { return last->item; }
 
+        /// @brief Returns the first element in the list.
         constexpr T first_item() noexcept { return first->item; }
 
+        /// @brief Checks whether the list is empty.
         constexpr bool empty() noexcept { return length == 0; }
 
+        /// @brief Returns the current number of elements in the list.
         constexpr size_t size() noexcept { return length; }
 
+        /// @brief Inserts an element at the front of the list.
+        ///
+        /// @param element The value to insert.
         void insertFirst(T element) noexcept
         {
             node *newNode = new node;
@@ -135,6 +165,9 @@ namespace udt
             length++;
         }
 
+        /// @brief Inserts an element at the end of the list.
+        ///
+        /// @param element The value to insert.
         void insertLast(T element) noexcept
         {
             node *newNode = new node;
@@ -154,6 +187,10 @@ namespace udt
             length++;
         }
 
+        /// @brief Inserts an element at the specified position.
+        ///
+        /// @param pos The zero-based insertion position.
+        /// @param element The value to insert.
         void insert(size_t pos, T element) noexcept
         {
             if (pos > length)
@@ -177,7 +214,8 @@ namespace udt
             }
         }
 
-        void removeFirst() noexcept
+        /// @brief Removes the first element from the list.
+        procedure(remove_first) noexcept
         {
             if (length == 0)
             {
@@ -198,7 +236,8 @@ namespace udt
             }
         }
 
-        void removeLast() noexcept
+        /// @brief Removes the last element from the list.
+        procedure(remove_last) noexcept
         {
             if (length == 0)
             {
@@ -233,6 +272,9 @@ namespace udt
             }
         }
 
+        /// @brief Removes the first occurrence of the specified element.
+        ///
+        /// @param element The value to remove.
         void remove(T element) noexcept
         {
             if (empty())
@@ -270,6 +312,10 @@ namespace udt
             std::cerr << "Error: The element doesn't exist in the list.\n";
         }
 
+        /// @brief Checks whether the specified value exists in the list.
+        ///
+        /// @param element The value to search for.
+        /// @return true if the value is found, false otherwise.
         bool exist(T element) noexcept
         {
             const node *temp = first;
@@ -282,6 +328,10 @@ namespace udt
             return false;
         }
 
+        /// @brief Finds the index of the specified element.
+        ///
+        /// @param element The value to locate.
+        /// @return The zero-based index of the element, or 0 if it was not found.
         size_t where(T element) noexcept
         {
             const node *temp = first;
@@ -297,7 +347,8 @@ namespace udt
             return 0;
         }
 
-        void clear_items() noexcept
+        /// @brief Clears the stored values while keeping the nodes intact.
+        procedure(clear_items) noexcept
         {
             node *temp = first;
             while (temp != nullptr)
@@ -307,7 +358,8 @@ namespace udt
             }
         }
 
-        void clear() noexcept
+        /// @brief Removes all nodes from the list and resets its state.
+        procedure(clear) noexcept
         {
             node *temp = first;
             while (temp != nullptr)
@@ -320,6 +372,9 @@ namespace udt
             length = 0;
         }
 
+        /// @brief Replaces the value stored at the first node.
+        ///
+        /// @param newElement The replacement value.
         void replaceFirst(T newElement) noexcept
         {
             if (empty())
@@ -330,6 +385,9 @@ namespace udt
             first->item = newElement;
         }
 
+        /// @brief Replaces the value stored at the last node.
+        ///
+        /// @param newElement The replacement value.
         void replaceLast(T newElement) noexcept
         {
             if (empty())
@@ -340,6 +398,10 @@ namespace udt
             last->item = newElement;
         }
 
+        /// @brief Replaces the first occurrence of an old value with a new value.
+        ///
+        /// @param oldElement The value to replace.
+        /// @param newElement The replacement value.
         void replace(T oldElement, T newElement) noexcept
         {
             if (empty())
@@ -360,6 +422,10 @@ namespace udt
             std::cerr << "No element found to replace.\n";
         }
 
+        /// @brief Replaces all occurrences of an old value with a new value.
+        ///
+        /// @param oldElement The value to replace.
+        /// @param newElement The replacement value.
         void replace_all(T oldElement, T newElement) noexcept
         {
             if (empty())
@@ -376,8 +442,10 @@ namespace udt
             }
         }
 
-        // The complexity is O(N)
-        void reverse() noexcept
+        /// @brief Reverses the order of the list.
+        ///
+        /// The operation runs in linear time.
+        procedure(reverse) noexcept
         {
             if (empty())
             {
@@ -428,7 +496,8 @@ namespace udt
             return os;
         }
 
-        void print() noexcept
+        /// @brief Prints the list contents to the standard output stream.
+        procedure(print) noexcept
         {
             const node *cur = first;
             while (cur != nullptr)
@@ -439,6 +508,10 @@ namespace udt
             std::cout << char(10);
         }
 
+        /// @brief Returns the element at the given index using array-style access.
+        ///
+        /// @param index The zero-based position to access.
+        /// @return The value stored at the given index, or a default value if out of range.
         T operator[](size_t index) noexcept
         {
             if (index >= length)

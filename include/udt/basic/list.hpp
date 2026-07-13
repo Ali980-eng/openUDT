@@ -2,6 +2,7 @@
 #include <vector>
 #include <initializer_list>
 #include <string>
+#include "cfrost/structure.h"
 
 #pragma once
 #ifndef OPENUDT___BASIC___LIST_HPP
@@ -10,6 +11,10 @@
 namespace udt
 {
 
+    /// @brief Represents a dynamic array-style list container.
+    ///
+    /// The class supports indexed access, insertion, removal, searching,
+    /// and updating of elements using a contiguous storage model.
     template <typename T>
     class list
     {
@@ -20,6 +25,7 @@ namespace udt
         size_t length;
 
     public:
+        /// @brief Constructs an empty dynamic list with no fixed capacity.
         list()
         {
             max_size = -1;
@@ -27,6 +33,9 @@ namespace udt
             size_set = false;
         }
 
+        /// @brief Constructs a list with a predefined capacity.
+        ///
+        /// @param s The initial capacity.
         list(size_t s)
         {
             max_size = s;
@@ -115,8 +124,10 @@ namespace udt
             size_set = false;
         }
 
+        /// @brief Checks whether the list is empty.
         inline constexpr bool empty() const noexcept { return length == 0; }
 
+        /// @brief Checks whether the list has reached its capacity.
         inline constexpr bool full() const noexcept
         {
             if (max_size == -1)
@@ -124,10 +135,16 @@ namespace udt
             return length == max_size;
         }
 
+        /// @brief Returns the current number of stored elements.
         inline constexpr int size() const noexcept { return length; }
 
+        /// @brief Returns the list capacity.
         inline constexpr size_t capacity() const noexcept { return max_size; }
 
+        /// @brief Inserts an element at the specified position.
+        ///
+        /// @param pos The zero-based insertion position.
+        /// @param element The value to insert.
         void insert(int pos, T element)
         {
             if (full())
@@ -141,6 +158,9 @@ namespace udt
             length++;
         }
 
+        /// @brief Removes the element at the specified position.
+        ///
+        /// @param pos The zero-based index of the element to remove.
         void remove(int pos)
         {
             if (empty())
@@ -153,6 +173,10 @@ namespace udt
             length--;
         }
 
+        /// @brief Searches for the first occurrence of an element.
+        ///
+        /// @param element The value to locate.
+        /// @return The index of the element, or -1 if it was not found.
         int search(T element) const noexcept
         {
             for (size_t i = 0; i < length; i++)
@@ -163,6 +187,9 @@ namespace udt
             return -1;
         }
 
+        /// @brief Appends an element to the end of the list.
+        ///
+        /// @param element The value to append.
         void push_back(T element)
         {
             if (full())
@@ -178,6 +205,10 @@ namespace udt
                 insert(pos, element);
         }
 
+        /// @brief Updates the value stored at the specified position.
+        ///
+        /// @param pos The zero-based index to update.
+        /// @param element The replacement value.
         void update(int pos, T element)
         {
             if (pos < 0 || pos >= length)
@@ -186,6 +217,9 @@ namespace udt
                 arr[pos] = element;
         }
 
+        /// @brief Returns the element stored at the specified position.
+        ///
+        /// @param pos The zero-based index.
         int get(int pos) const
         {
             if (pos < 0 || pos > length)
@@ -193,9 +227,10 @@ namespace udt
             return arr[pos];
         }
 
-        inline constexpr void clear() noexcept { length = 0; }
+        /// @brief Clears all stored elements from the list.
+        inline constexpr procedure(clear) noexcept { length = 0; }
 
-        ~LIST() noexcept { delete[] arr; }
+        ~list() noexcept { delete[] arr; }
     };
 
 }

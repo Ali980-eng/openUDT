@@ -2,6 +2,7 @@
 #include <initializer_list>
 #include <vector>
 #include <string>
+#include "cfrost/structure.h"
 
 #pragma once
 #ifndef OPENUDT___BASIC___LINKEDLIST_HPP
@@ -10,6 +11,10 @@
 namespace udt
 {
 
+    /// @brief Represents a doubly linked list container.
+    ///
+    /// The class provides insertion, removal, lookup, and replacement operations
+    /// while keeping the underlying node-based implementation intact.
     template <typename T>
     class linkedList
     {
@@ -25,14 +30,21 @@ namespace udt
         size_t length = 0;
 
     public:
+        /// @brief Constructs an empty linked list.
         linked_list() = default;
 
+        /// @brief Constructs a linked list from an initializer list.
+        ///
+        /// @param list The values to insert in order.
         linked_list(std::initializer_list<T> list)
         {
             for (const T &value : list)
                 insert_last(value);
         }
 
+        /// @brief Constructs a linked list from a vector.
+        ///
+        /// @param v The values to insert in order.
         linked_list(const std::vector<T> &v)
         {
             for (const T &value : v)
@@ -49,11 +61,13 @@ namespace udt
             }
         }
 
+        /// @brief Checks whether the list contains any elements.
         constexpr bool empty() const noexcept
         {
             return length == 0;
         }
 
+        /// @brief Returns the number of elements stored in the list.
         constexpr size_t size() const noexcept
         {
             return length;
@@ -69,6 +83,9 @@ namespace udt
             return first->item;
         }
 
+        /// @brief Inserts an element at the front of the list.
+        ///
+        /// @param element The value to insert.
         void insert_first(const T &element)
         {
             node *newNode = new node{nullptr, nullptr, element};
@@ -85,6 +102,9 @@ namespace udt
             length++;
         }
 
+        /// @brief Inserts an element at the end of the list.
+        ///
+        /// @param element The value to insert.
         void insert_last(const T &element)
         {
             node *newNode = new node{nullptr, nullptr, element};
@@ -159,7 +179,8 @@ namespace udt
             std::cerr << "no element exist like this element: " << element;
         }
 
-        void pop_first()
+        /// @brief Removes the first element from the list.
+        procedure(pop_first)
         {
             if (empty())
             {
@@ -182,7 +203,8 @@ namespace udt
             length--;
         }
 
-        void pop_last()
+        /// @brief Removes the last element from the list.
+        procedure(pop_last)
         {
             if (empty())
             {
@@ -205,6 +227,10 @@ namespace udt
             length--;
         }
 
+        /// @brief Replaces the first matching element in the list.
+        ///
+        /// @param oldEle The value to replace.
+        /// @param newEle The replacement value.
         void replace(T oldEle, T newEle)
         {
             if (empty())
@@ -305,7 +331,7 @@ namespace udt
             }
         }
 
-        void clear()
+        procedure(clear)
         {
             node *curr = first;
             while (curr != nullptr)
@@ -319,6 +345,9 @@ namespace udt
             length = 0;
         }
 
+        /// @brief Checks whether the specified element exists in the list.
+        ///
+        /// @param element The value to search for.
         bool exist(T element)
         {
             if (empty())
@@ -338,6 +367,9 @@ namespace udt
             return false;
         }
 
+        /// @brief Returns the index of the specified element if it exists.
+        ///
+        /// @param element The value to locate.
         size_t where(T element)
         {
             if (empty())
@@ -364,7 +396,8 @@ namespace udt
             return 0;
         }
 
-        void print()
+        /// @brief Prints the list contents to the standard output stream.
+        procedure(print)
         {
             if (empty())
             {
