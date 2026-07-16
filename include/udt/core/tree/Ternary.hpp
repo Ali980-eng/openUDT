@@ -1,8 +1,10 @@
-#include "using_keys.hpp"
+#include <iostream>
+#include "cfrost/structure.h"
+#include <stdexcept>
 
 #pragma once
-#ifndef OPENUDT___CORE___TREE_TERNARY_HPP
-#define OPENUDT___CORE___TREE_TERNARY_HPP
+#ifndef OPENUDT___CORE___TREE_ternary_HPP
+#define OPENUDT___CORE___TREE_ternary_HPP
 
 namespace udt
 {
@@ -13,7 +15,7 @@ namespace udt
         /// The class supports navigation through left, middle, right, and parent links,
         /// and provides basic insertion and lookup helpers for tree traversal.
         template <typename T, bool BTT>
-        class Ternary
+        class ternary
         {
         private:
             struct node
@@ -83,12 +85,12 @@ namespace udt
             }
 
         public:
-            Ternary() = default;
+            ternary() = default;
 
             /// @brief Constructs a ternary tree with the provided root element.
             ///
             /// @param element The value assigned to the root node.
-            Ternary(const T &element)
+            ternary(const T &element)
             {
                 root = new node{nullptr, nullptr, nullptr, nullptr, element};
                 current = root;
@@ -294,4 +296,4 @@ namespace udt
     }
 }
 
-#endif // OPENUDT___CORE___TREE_TERNARY_HPP
+#endif // OPENUDT___CORE___TREE_ternary_HPP

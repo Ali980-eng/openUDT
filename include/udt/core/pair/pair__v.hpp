@@ -50,7 +50,7 @@ namespace udt
          * @param list1 Initializer list for the first vector
          * @param list2 Initializer list for the second vector
          */
-        pair__v(std::initializer_list<T1> list1, std::initializer_list<T2> list2) noexcept
+        pair__v(initList<T1> list1, initList<T2> list2) noexcept
         {
             vec1 = list1;
             vec2 = list2;

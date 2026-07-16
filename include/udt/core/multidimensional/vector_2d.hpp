@@ -579,7 +579,7 @@ namespace udt
          *
          * @param init Initializer list of vectors to create the matrix
          */
-        vector_2d(std::initializer_list<vec<T>> init) : vec_2D(init)
+        vector_2d(initList<vec<T>> init) : vec_2D(init)
         {
             size_t nnum, mnum;
             nnum = static_cast<size_t>(vec_2D.size());
@@ -600,7 +600,7 @@ namespace udt
          * @param init Initializer list of vectors to create the matrix
          * @param num Number of rows (must be > 0)
          */
-        vector_2d(size_t num, std::initializer_list<vec<T>> init) : vec_2D(init)
+        vector_2d(size_t num, initList<vec<T>> init) : vec_2D(init)
         {
             if (num > 0)
             {
@@ -621,7 +621,7 @@ namespace udt
          * @param Nnum Number of rows (must be > 0)
          * @param Mnum Number of columns (must be > 0)
          */
-        vector_2d(int Nnum, int Mnum, std::initializer_list<vec<T>> init)
+        vector_2d(int Nnum, int Mnum, initList<vec<T>> init)
             : vec_2D(init)
         {
             if (Nnum <= 0 || Mnum <= 0)

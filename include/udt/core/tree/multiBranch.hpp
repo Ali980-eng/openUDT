@@ -1,3 +1,7 @@
+#include <iostream>
+#include "cfrost/structure.h"
+#include <stdexcept>
+
 #pragma once
 #ifndef OPENUDT___CORE___TREE_MULTIBRANCH_HPP
 #define OPENUDT___CORE___TREE_MULTIBRANCH_HPP

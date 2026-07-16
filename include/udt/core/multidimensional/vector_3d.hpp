@@ -276,7 +276,7 @@ namespace udt
          *     {{5,6}, {7,8}}
          *   };
          */
-        vector_3d(std::initializer_list<vec<vec<T>>> init) : input_3D(init)
+        vector_3d(initList<vec<vec<T>>> init) : input_3D(init)
         {
             size_t wnum, nnum, mnum;
             wnum = static_cast<size_t>(vec_3D.size());
@@ -1115,7 +1115,7 @@ namespace udt
          *
          * @param init An initializer list containing vec<vec<T>> elements to assign to the internal 3D vector.
          */
-        void operator=(std::initializer_list<vec<vec<T>>> init) noexcept { vec_3D = init; }
+        void operator=(initList<vec<vec<T>>> init) noexcept { vec_3D = init; }
 
         /**
          * @brief Adds a scalar element to all elements of the 3D vector.

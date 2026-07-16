@@ -49,7 +49,7 @@ namespace udt
          * @brief Constructs a pair_v from an initializer list
          * @param list An initializer list for the first vector
          */
-        pair_v(const std::initializer_list<T> &list)
+        pair_v(const initList<T> &list)
         {
             if (vec1.empty())
                 vec1 = list;
@@ -62,7 +62,7 @@ namespace udt
          * @param list1 Initializer list for the first vector
          * @param list2 Initializer list for the second vector
          */
-        pair_v(const std::initializer_list<T> &list1, const std::initializer_list<T> &list2)
+        pair_v(const initList<T> &list1, const initList<T> &list2)
         {
             vec1 = list1;
             vec2 = list2;
@@ -380,7 +380,7 @@ namespace udt
          * @post Replaces current vec1 and vec2 with the input initializer list
          * @note This function is noexcept, meaning it does not throw exceptions.
          */
-        void operator=(std::initializer_list<T> list) noexcept
+        void operator=(initList<T> list) noexcept
         {
             if (vec1.empty())
                 vec1 = list;

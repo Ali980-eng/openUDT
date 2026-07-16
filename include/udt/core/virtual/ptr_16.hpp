@@ -79,7 +79,7 @@ namespace udt
              * @brief Resets the virtual pointer to 0.
              * @post ptr == 0
              */
-            constexpr void clear() noexcept { ptr = 0; }
+            constexpr procedure(clear) noexcept { ptr = 0; }
 
             /**
              * @brief Checks if the virtual pointer is empty (zero).

@@ -1,4 +1,5 @@
 #include "meta/lite/io.hpp"
+#include "cfrost/structure.h"
 
 #pragma once
 #ifndef OPENUDT___BASIC___QUEUE_HPP
@@ -29,13 +30,13 @@ namespace udt
             length = 0;
         }
 
-        queue(initializer_list<T> &vec) noexcept : arr(vec) {};
+        queue(initList<T> &vec) noexcept : arr(vec) {};
 
         inline constexpr bool empty() const noexcept { return length == 0; }
 
         inline constexpr bool full() const noexcept { return length == maxSize; }
 
-        void que(T element) noexcept
+        void eque(T element) noexcept
         {
             if (full())
                 meta::lite::io::println_error("Queue Full Can't Enqueue");
@@ -47,7 +48,7 @@ namespace udt
             }
         }
 
-        void dque() noexcept
+        procedure(dque) noexcept
         {
             if (empty())
                 meta::lite::io::println_error("Empty Queue Can't Dequeue");
@@ -88,7 +89,7 @@ namespace udt
             return arr[rear];
         }
 
-        void print() const noexcept
+        procedure(print) const noexcept
         {
             if (empty())
             {

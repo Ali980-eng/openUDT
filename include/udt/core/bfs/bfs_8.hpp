@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <exception>
 #include <string>
+#include "cfrost/structure.h"
 
 #pragma once
 #ifndef OPENUDT___CORE___BFS_BFS8_HPP
@@ -37,7 +38,7 @@ namespace udt
          * bfs.set_flag1(); // Set bit 1 to 1
          * @endcode
          */
-        constexpr void set_flag1() noexcept { flag_container |= 1; }
+        constexpr procedure(set_flag1) noexcept { flag_container |= 1; }
 
         /**
          * @brief Sets the flag at position 2 to 1.
@@ -45,7 +46,7 @@ namespace udt
          * @exception This method does not throw any exceptions.
          * @note This is a constexpr function and can be evaluated at compile time.
          */
-        constexpr void set_flag2() noexcept { flag_container |= 2; }
+        constexpr procedure(set_flag2) noexcept { flag_container |= 2; }
 
         /**
          * @brief Sets the flag at position 3 to 1.
@@ -53,7 +54,7 @@ namespace udt
          * @exception This method does not throw any exceptions.
          * @note This is a constexpr function and can be evaluated at compile time.
          */
-        constexpr void set_flag3() noexcept { flag_container |= 4; }
+        constexpr procedure(set_flag3) noexcept { flag_container |= 4; }
 
         /**
          * @brief Sets the flag at position 4 to 1.
@@ -61,7 +62,7 @@ namespace udt
          * @exception This method does not throw any exceptions.
          * @note This is a constexpr function and can be evaluated at compile time.
          */
-        constexpr void set_flag4() noexcept { flag_container |= 8; }
+        constexpr procedure(set_flag4) noexcept { flag_container |= 8; }
 
         /**
          * @brief Sets the flag at position 5 to 1.
@@ -69,7 +70,7 @@ namespace udt
          * @exception This method does not throw any exceptions.
          * @note This is a constexpr function and can be evaluated at compile time.
          */
-        constexpr void set_flag5() noexcept { flag_container |= 16; }
+        constexpr procedure(set_flag5) noexcept { flag_container |= 16; }
 
         /**
          * @brief Sets the flag at position 6 to 1.
@@ -77,7 +78,7 @@ namespace udt
          * @exception This method does not throw any exceptions.
          * @note This is a constexpr function and can be evaluated at compile time.
          */
-        constexpr void set_flag6() noexcept { flag_container |= 32; }
+        constexpr procedure(set_flag6) noexcept { flag_container |= 32; }
 
         /**
          * @brief Sets the flag at position 7 to 1.
@@ -85,7 +86,7 @@ namespace udt
          * @exception This method does not throw any exceptions.
          * @note This is a constexpr function and can be evaluated at compile time.
          */
-        constexpr void set_flag7() noexcept { flag_container |= 64; }
+        constexpr procedure(set_flag7) noexcept { flag_container |= 64; }
 
         /**
          * @brief Sets the flag at position 8 to 1.
@@ -93,7 +94,7 @@ namespace udt
          * @exception This method does not throw any exceptions.
          * @note This is a constexpr function and can be evaluated at compile time.
          */
-        constexpr void set_flag8() noexcept { flag_container |= 128; }
+        constexpr procedure(set_flag8) noexcept { flag_container |= 128; }
 
         /**
          * @brief Sets all flags in the bfs_8 container to 1.
@@ -106,7 +107,7 @@ namespace udt
          * std::cout << std::hex << bfs.get(); // Output: FF
          * @endcode
          */
-        constexpr void set_all() noexcept { flag_container |= 255; }
+        constexpr procedure(set_all) noexcept { flag_container |= 255; }
 
         /**
          * @brief Sets all flags to 1 (alternative to set_all()).
@@ -114,7 +115,7 @@ namespace udt
          * @exception This method does not throw any exceptions.
          * @note This is a constexpr function and can be evaluated at compile time.
          */
-        constexpr void set() noexcept { flag_container |= 255; }
+        constexpr procedure(set) noexcept { flag_container |= 255; }
 
         /**
          * @brief Sets the specified flag to 1 based on position.
@@ -182,7 +183,7 @@ namespace udt
          * std::cout << std::hex << bfs.get(); // Output: 0
          * @endcode
          */
-        constexpr void reset_all() noexcept { flag_container &= 0; }
+        constexpr procedure(reset_all) noexcept { flag_container &= 0; }
 
         /**
          * @brief Resets the flag at position 1 to 0.
@@ -190,7 +191,7 @@ namespace udt
          * @exception This method does not throw any exceptions.
          * @note This is a constexpr function and can be evaluated at compile time.
          */
-        constexpr void reset_flag1() noexcept { flag_container &= ~(1); }
+        constexpr procedure(reset_flag1) noexcept { flag_container &= ~(1); }
 
         /**
          * @brief Resets the flag at position 2 to 0.
@@ -198,7 +199,7 @@ namespace udt
          * @exception This method does not throw any exceptions.
          * @note This is a constexpr function and can be evaluated at compile time.
          */
-        constexpr void reset_flag2() noexcept { flag_container &= ~(2); }
+        constexpr procedure(reset_flag2) noexcept { flag_container &= ~(2); }
 
         /**
          * @brief Resets the flag at position 3 to 0.
@@ -206,7 +207,7 @@ namespace udt
          * @exception This method does not throw any exceptions.
          * @note This is a constexpr function and can be evaluated at compile time.
          */
-        constexpr void reset_flag3() noexcept { flag_container &= ~(4); }
+        constexpr procedure(reset_flag3) noexcept { flag_container &= ~(4); }
 
         /**
          * @brief Resets the flag at position 4 to 0.
@@ -214,7 +215,7 @@ namespace udt
          * @exception This method does not throw any exceptions.
          * @note This is a constexpr function and can be evaluated at compile time.
          */
-        constexpr void reset_flag4() noexcept { flag_container &= ~(8); }
+        constexpr procedure(reset_flag4) noexcept { flag_container &= ~(8); }
 
         /**
          * @brief Resets the flag at position 5 to 0.
@@ -222,7 +223,7 @@ namespace udt
          * @exception This method does not throw any exceptions.
          * @note This is a constexpr function and can be evaluated at compile time.
          */
-        constexpr void reset_flag5() noexcept { flag_container &= ~(16); }
+        constexpr procedure(reset_flag5) noexcept { flag_container &= ~(16); }
 
         /**
          * @brief Resets the flag at position 6 to 0.
@@ -230,7 +231,7 @@ namespace udt
          * @exception This method does not throw any exceptions.
          * @note This is a constexpr function and can be evaluated at compile time.
          */
-        constexpr void reset_flag6() noexcept { flag_container &= ~(32); }
+        constexpr procedure(reset_flag6) noexcept { flag_container &= ~(32); }
 
         /**
          * @brief Resets the flag at position 7 to 0.
@@ -238,7 +239,7 @@ namespace udt
          * @exception This method does not throw any exceptions.
          * @note This is a constexpr function and can be evaluated at compile time.
          */
-        constexpr void reset_flag7() noexcept { flag_container &= ~(64); }
+        constexpr procedure(reset_flag7) noexcept { flag_container &= ~(64); }
 
         /**
          * @brief Resets the flag at position 8 to 0.
@@ -246,7 +247,7 @@ namespace udt
          * @exception This method does not throw any exceptions.
          * @note This is a constexpr function and can be evaluated at compile time.
          */
-        constexpr void reset_flag8() noexcept { flag_container &= ~(128); }
+        constexpr procedure(reset_flag8) noexcept { flag_container &= ~(128); }
 
         /**
          * @brief Resets the flag at a specific position to 0.

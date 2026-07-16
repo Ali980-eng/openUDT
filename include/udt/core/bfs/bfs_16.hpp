@@ -76,14 +76,14 @@ namespace udt
                                                upper_byte(other.upper_byte) {}
 
         /// @brief Sets all flags to 1.
-        constexpr void set_all() noexcept
+        constexpr procedure(set_all) noexcept
         {
             lower_byte.set_all();
             upper_byte.set_all();
         }
 
         /// @brief Sets all flags to 1.
-        constexpr void set() noexcept
+        constexpr procedure(set) noexcept
         {
             lower_byte.set_all();
             upper_byte.set_all();
@@ -110,7 +110,7 @@ namespace udt
         }
 
         /// @brief Resets all flags to 0.
-        constexpr void reset_all() noexcept
+        constexpr procedure(reset_all) noexcept
         {
             lower_byte.reset_all();
             upper_byte.reset_all();
@@ -123,7 +123,7 @@ namespace udt
          * @exception This method does not throw any exceptions.
          * @see bfs_16::reset(int position) for resetting a specific flag based on position.
          */
-        constexpr void reset() noexcept
+        constexpr procedure(reset) noexcept
         {
             lower_byte.reset_all();
             upper_byte.reset_all();

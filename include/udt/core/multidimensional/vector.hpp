@@ -35,7 +35,7 @@ namespace udt
          * Constructor that initializes the list with an initializer list
          * @param init Initializer list to initialize the list
          */
-        vector(std::initializer_list<T> init) : list(init)
+        vector(initList<T> init) : list(init)
         {
             if (fixed_size)
             {
@@ -60,7 +60,7 @@ namespace udt
          * @param init Initializer list to initialize the list
          * @throws runtime_error if num is negative
          */
-        vector(int num, std::initializer_list<T> init) : list(init)
+        vector(int num, initList<T> init) : list(init)
         {
             if (num < 0)
                 throw std::runtime_error("size can not be negative");
